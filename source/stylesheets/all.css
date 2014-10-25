@@ -1,9 +1,19 @@
 @charset "utf-8";
 
 body {
-  background: #ffffff;
+  background: # ffffff;
   text-align: center;
   font-family: sans-serif; 
+}
+
+h2 {
+  position: relative;
+  z-index: 1000;
+  margin-top: 10px;
+}
+
+.negative_top_margin {
+  margin-top: -50px;
 }
 
 .graticule {
@@ -25,6 +35,7 @@ body {
 
 .country_label {
   text-anchor: 'middle';
-  font-size: .675em;
-  stroke: #222;
+  font-size: .6em;
+  font-weight: 100;
+  stroke: #555;
 }

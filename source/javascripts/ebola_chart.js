@@ -1,13 +1,15 @@
-var width = 1200,
-    height = 650;
+// var width = 1200,
+//     height = 650;
+var width = 960,
+    height = 520;
 
-var offsets = {Guinea: {x: 0.15, y: -0.1},
-		Liberia: {x: 0.15, y: 0.1},
-		Spain: {x: 0.15, y: -0.15},
-		Senegal: {x: 0.15, y: -0.15},
-		Nigeria: {x: 0.15, y: 0.15} }
-offsets['Sierra Leone'] = {x: 0.15, y: 0};
-offsets['United States'] = {x: 0.15, y: 0}
+var offsets = {Guinea: {x: 0.0075, y: -0.09},
+		Liberia: {x: 0.05, y: 0.0},
+		Spain: {x: 0.03, y: 0.0275},
+		Senegal: {x: 0.00, y: 0.095},
+		Nigeria: {x: 0.01, y: -0.095} }
+offsets['Sierra Leone'] = {x: 0.0325, y: 0.06};
+offsets['United States'] = {x: 0.09, y: -0.01}
 
 var projection = d3.geo.mercator()
     .scale((width + 1) / 2 / Math.PI)
@@ -144,7 +146,7 @@ function offset_for(country_code) {
 function text_pos_for_country(country_code) {
 	var offset = offset_for(country_code)
 	pos = centroids_by_id[country_code]
-	return  {x: pos.x - offset[0], y: pos.y - offset[1]};
+	return  {x: pos.x - offset.x, y: pos.y - offset.y};
 }
 
 function draw_labels(text_date) {
@@ -160,25 +162,24 @@ function draw_labels(text_date) {
 		.attr("class", "country_label")
 		.style('text-anchor', 'end')
 
-	text.each (function() {
+	text.each (function(d) {
 		text = d3.select(this);
-		pos = text_pos_for_country(d.code)
 		text
 			.append("tspan")
-			.attr('x', function(d) { return pos.x; })
-			.attr('y', function(d) { return pos.y; })
+			.attr('x', function(d) { return text_pos_for_country(d.code).x; })
+			.attr('y', function(d) { return text_pos_for_country(d.code).y; })
 			.text(function(d) { return "Deaths: " + d.deaths; });
 
 		text
 			.append("tspan")
-			.attr('x', function(d) { return pos.x; })
-			.attr('y', function(d) { return pos.y - 11; })
+			.attr('x', function(d) { return text_pos_for_country(d.code).x; })
+			.attr('y', function(d) { return text_pos_for_country(d.code).y - 11; })
 			.text(function(d) { return "Cases: " + d.cases; })		
 
 		text
 			.append("tspan")
-			.attr('x', function(d) { return pos.x; })
-			.attr('y', function(d) { return pos.y - 22; })
+			.attr('x', function(d) { return text_pos_for_country(d.code).x; })
+			.attr('y', function(d) { return text_pos_for_country(d.code).y - 22; })
 			.text(function(d) { return country_name(d.code); })		
 	})
 }
