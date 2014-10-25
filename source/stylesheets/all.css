@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+body {
+  background: #ffffff;
+  text-align: center;
+  font-family: sans-serif; 
+}
+
+.graticule {
+  fill: none;
+  stroke: #999;
+  stroke-opacity: .5;
+  stroke-width: .5px;
+}
+
+.land {
+  stroke: #222;
+  stroke-width: 0.5px;
+  fill: none;
+}
+
+.country {
+  fill: none;  stroke: #222;  stroke-width: .5px;
+}
+
+.country_label {
+  text-anchor: 'middle';
+  font-size: .675em;
+  stroke: #222;
+}
