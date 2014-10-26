@@ -3,13 +3,16 @@
 var width = 960,
     height = 520;
 
-var offsets = {Guinea: {x: 0.0075, y: -0.09},
-		Liberia: {x: 0.05, y: 0.0},
+var offsets = {Guinea: {x: 0.055, y: 0.045},
+		Liberia: {x: 0.025, y: -0.08},
 		Spain: {x: 0.03, y: 0.0275},
-		Senegal: {x: 0.00, y: 0.095},
-		Nigeria: {x: 0.01, y: -0.095} }
-offsets['Sierra Leone'] = {x: 0.0325, y: 0.06};
-offsets['United States'] = {x: 0.09, y: -0.01}
+		Senegal: {x: 0.025, y: 0.095},
+		Nigeria: {x: 0.01, y: -0.105} }
+offsets['Sierra Leone'] = {x: 0.04, y: -0.0225};
+offsets['United States'] = {x: 0.09, y: -0.0175}
+
+var pointer_offset_pixels = 4;
+var text_height_pixels = 10;
 
 var projection = d3.geo.mercator()
     .scale((width + 1) / 2 / Math.PI)
@@ -115,7 +118,7 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 		.style("text-anchor", "middle")
 		.text(text_date_at(0));
 
-	// draw_labels(text_date_at(60));
+	// draw_labels(text_date_at(63));
 	animate_map();
 }
 
@@ -132,6 +135,21 @@ function set_date(date_index) {
 
 function outbreak_data_for(text_date) {
 	return outbreak_data[text_date]
+}
+
+function closer_to_center(center_y, y1, y2) { return (Math.abs(y1 - center_y) <= Math.abs(y2 - center_y)) ? y2 : y1; }
+function further_from_center(center_y, y1, y2) { return (Math.abs(y1 - center_y) <= Math.abs(y2 - center_y)) ? y1 : y2; }
+function label_bottom(y_position) { return y_position + text_height_pixels * 0.25; }
+function label_top(y_position) { return y_position - text_height_pixels * 2.75; }
+
+function calculate_pointer_end(outbreak_datum) {
+	closer = closer_to_center(outbreak_datum.center.y, label_bottom(outbreak_datum.pos_y), label_top(outbreak_datum.pos_y))
+	return {x: outbreak_datum.pos_x + pointer_offset_pixels, y: closer};
+}
+
+function calculate_pointer_mid(outbreak_datum) {
+	further = further_from_center(outbreak_datum.center.y, label_bottom(outbreak_datum.pos_y), label_top(outbreak_datum.pos_y))
+	return {x: outbreak_datum.pos_x + pointer_offset_pixels, y: further};
 }
 
 function position_for_country(country_code) {
@@ -151,37 +169,63 @@ function text_pos_for_country(country_code) {
 
 function draw_labels(text_date) {
 	svg.selectAll('.country_label').remove();
-	svg.selectAll('.country_pointer').remove();
 
 	text = svg.selectAll('.country_label').data(outbreak_data_for(text_date));
 
 	text.enter()
 		.append("text")
-		.attr("x", function(d) { return text_pos_for_country(d.code).x; })
-		.attr("y", function(d) { return text_pos_for_country(d.code).y; })
+		.attr("x", function(d) { 
+			d.center = position_for_country(d.code);
+			d.pos_x = text_pos_for_country(d.code).x; 
+			return d.pos_x;
+		})
+		.attr("y", function(d) { 
+			d.pos_y = text_pos_for_country(d.code).y; 
+			return d.pos_y;
+		})
 		.attr("class", "country_label")
 		.style('text-anchor', 'end')
+		.each(function(d) {
+			d.pointer_end = calculate_pointer_end(d);
+			d.pointer_mid = calculate_pointer_mid(d);
+		});
 
-	text.each (function(d) {
+	add_text_for_labels(text);
+	add_pointer_for_labels(text, text_date);
+}
+
+function add_text_for_labels(text) {
+	text.each (function() {
 		text = d3.select(this);
-		text
-			.append("tspan")
-			.attr('x', function(d) { return text_pos_for_country(d.code).x; })
-			.attr('y', function(d) { return text_pos_for_country(d.code).y; })
+		text.append("tspan")
+			.attr('x', function(d) { return d.pos_x; })
+			.attr('y', function(d) { return d.pos_y; })
 			.text(function(d) { return "Deaths: " + d.deaths; });
 
-		text
-			.append("tspan")
-			.attr('x', function(d) { return text_pos_for_country(d.code).x; })
-			.attr('y', function(d) { return text_pos_for_country(d.code).y - 11; })
-			.text(function(d) { return "Cases: " + d.cases; })		
+		text.append("tspan")
+			.attr('x', function(d) { return d.pos_x; })
+			.attr('y', function(d) { return d.pos_y - text_height_pixels; })
+			.text(function(d) { return "Cases: " + d.cases; });	
 
-		text
-			.append("tspan")
-			.attr('x', function(d) { return text_pos_for_country(d.code).x; })
-			.attr('y', function(d) { return text_pos_for_country(d.code).y - 22; })
-			.text(function(d) { return country_name(d.code); })		
-	})
+		text.append("tspan")
+			.attr('x', function(d) { return d.pos_x; })
+			.attr('y', function(d) { return d.pos_y - text_height_pixels * 2; })
+			.text(function(d) { return country_name(d.code); });
+	});	
+}
+
+function add_pointer_for_labels(text, text_date) {
+	svg.selectAll('.country_pointer').remove();
+	svg.selectAll('.country_pointer').data(outbreak_data_for(text_date))
+		.enter()
+		.append('path')
+		.attr('class', 'country_pointer')
+		.attr('d', function (d) {
+			return 'M' + d.pointer_end.x + ',' + d.pointer_end.y + ' ' +
+				d.pointer_mid.x + ',' + d.pointer_mid.y + ' ' +
+				(d.pointer_end.x + d.pointer_mid.x) * 0.5 + ',' + (d.pointer_end.y + d.pointer_mid.y) * 0.5 + ' ' +
+				d.center.x + ',' + d.center.y;
+		});
 }
 
 function animate_map() {

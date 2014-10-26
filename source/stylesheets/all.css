@@ -39,3 +39,9 @@ h2 {
   font-weight: 100;
   stroke: #555;
 }
+
+.country_pointer {
+  stroke: #555;
+  stroke-width: 1.0px;
+  fill: none;  
+}
