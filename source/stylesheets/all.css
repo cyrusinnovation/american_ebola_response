@@ -51,3 +51,16 @@ h2 {
   stroke: #b22;
   stroke-width: 1.5px;
 }
+
+.time_axis {
+  fill: none;
+  stroke: #222;
+  stroke-width: 1px;
+}
+
+.time_axis text {
+  font-family: sans-serif;
+  font-size: .6em;
+  font-weight: 100;
+  stroke: #222;
+}
