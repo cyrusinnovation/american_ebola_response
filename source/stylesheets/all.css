@@ -45,3 +45,9 @@ h2 {
   stroke-width: 1.0px;
   fill: none;  
 }
+
+.infected_outline {
+  fill: none;
+  stroke: #b22;
+  stroke-width: 2px;
+}
