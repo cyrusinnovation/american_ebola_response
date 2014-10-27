@@ -2,19 +2,25 @@
 = stylesheet_link_tag 'font-awesome.min.css'
 = stylesheet_link_tag 'animation-controls.css'
 
-%title The Spread of Ebola: Information and Disease
+%div.chart
+	%title The Spread of Ebola: Information and Disease
 
-%div
-	%h2 The Spread of Ebola: Information and Disease
-	#ebola_chart.negative_top_margin
+	%div
+		%h2 The Spread of Ebola: Information and Disease
+		#ebola_chart.negative_top_margin
 
 %div.animation-controls
 	.btn-group
-		%botton{class: 'btn btn-sm btn-default', style: 'padding: 5px 15px'}
-			%i{class: 'fa fa-step-backward fa-2x'}		
-		%button{class: 'btn btn-sm btn-default', style: 'padding: 5px 30px'}
-			%i{class: 'fa fa-play fa-2x'}
-		%botton{class: 'btn btn-sm btn-default', style: 'padding: 5px 15px'}
-			%i{class: 'fa fa-step-forward fa-2x'}
+		%botton#prev-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
+			%i{class: 'fa fa-step-backward fa-3x'}	
+		%button#play-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 50px'}
+			%i#play_pause_image{class: 'fa fa-play fa-3x'}
+		%botton#next-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
+			%i{class: 'fa fa-step-forward fa-3x'}
 
-= javascript_include_tag "d3", "queue.v1.min", "topojson.v1.min", "ebola_chart"
+:javascript
+	var Infograph = {};
+	Infograph.animating = false;
+	Infograph.intervalId = null;
+	Infograph.current_date_index = 0;
+= javascript_include_tag "jquery-2.1.1.min", "d3", "queue.v1.min", "topojson.v1.min", "ebola_chart", "animation_controls"

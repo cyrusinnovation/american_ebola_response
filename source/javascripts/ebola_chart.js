@@ -1,12 +1,11 @@
 // var width = 1200,
-//     height = 650;
+//     height = 625;
 var width = 960,
-    height = 520;
+    height = 500;
 
-var controls_width = 168;
 var scale_x_offset = 50;
 var scale_y_offset = 18;
-var scale_length = width - scale_x_offset - controls_width;
+var scale_length = width - scale_x_offset * 2;
 var axis_height = scale_y_offset * 1.25;
 var total_height = height + axis_height;
 
@@ -23,7 +22,7 @@ var text_height_pixels = 10;
 
 var projection = d3.geo.mercator()
     .scale((width + 1) / 2 / Math.PI)
-    .translate([width / 2, height / 1.55])
+    .translate([width / 2, height / 1.6])
     .precision(.1);
 
 var path = d3.geo.path()
@@ -113,9 +112,6 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 	outbreak_data = ebola_outbreak_data
 	build_dates_of_interest();
 
-	d3.select('.animation-controls')
-		.style('margin-left', (controls_width + scale_x_offset - width) + 'px');
-
 	svg.insert("path", ".graticule")
 		.datum(topojson.feature(world, world.objects.land))
 		.attr("class", "land")
@@ -140,11 +136,16 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 			.attr("d", path)
 
 	draw_time_scale();
-	update_map(63);
-	// animate_map(1);
+	if (Infograph.animating) {
+		animate_map();
+	}
+	else {
+		set_current_date(63);
+		update_map(Infograph.current_date_index);
+	}
 }
 
-function axis_position() { return "translate(" + (controls_width - 20) + "," + (total_height - scale_y_offset) + ")" }
+function axis_position() { return "translate(" + scale_x_offset + "," + (total_height - scale_y_offset) + ")" }
 
 function draw_time_scale() {
 	var xAxis = d3.svg.axis()
@@ -316,12 +317,25 @@ function update_map(current_date_index) {
 	draw_labels(text_date_at(current_date_index))
 }
 
-function animate_map(initial_date_index) {
-	var current_date_index = initial_date_index;
-	timer = setInterval(function() {
-		update_map(current_date_index);
-		current_date_index = (current_date_index + 1) % search_data.length;
+function animate_map() {
+	Infograph.intervalId = setInterval(function() {
+		update_map(Infograph.current_date_index);
+		increment_current_date(1);
+		if (Infograph.current_date_index == 0) {
+			pause_animation();
+		}		
 	}, 250)
+}
+
+function set_current_date(date_index) {
+	Infograph.current_date_index = date_index % search_data.length;
+	if (Infograph.current_date_index < 0) {
+		Infograph.current_date_index = search_data.length - 1;
+	}
+}
+
+function increment_current_date(increment) {
+	set_current_date(Infograph.current_date_index + increment);
 }
 
 d3.select(self.frameElement).style("height", height + "px");
