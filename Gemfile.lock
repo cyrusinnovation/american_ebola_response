@@ -88,6 +88,8 @@ GEM
       tilt (~> 1.4.1)
     padrino-support (0.12.4)
       activesupport (>= 3.1)
+    puma (2.9.1)
+      rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-contrib (1.1.0)
       rack (>= 0.9.1)
@@ -127,6 +129,7 @@ PLATFORMS
 DEPENDENCIES
   middleman (~> 3.3.6)
   middleman-livereload (~> 3.1.0)
+  puma
   rack-contrib
   tzinfo-data
   wdm (~> 0.1.0)
