@@ -103,7 +103,7 @@ h2 {
 .current_axis text {
   font-family: sans-serif;
   font-size: .6em;
-  font-weight: bold;
+  font-weight: normal;
   stroke: #555;
   fill: #555;
 }

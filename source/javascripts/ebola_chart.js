@@ -1,7 +1,13 @@
-var width = 1200,
-    height = 650;
-// var width = 960,
-//     height = 520;
+// var width = 1200,
+//     height = 650;
+var width = 960,
+    height = 520;
+
+var scale_x_offset = 50;
+var scale_y_offset = 18;
+var scale_length = width - scale_x_offset * 2;
+var axis_height = scale_y_offset * 1.25;
+var total_height = height + axis_height;
 
 var label_offsets = {Guinea: {x: 0.055, y: 0.045},
 		Liberia: {x: 0.025, y: -0.08},
@@ -26,14 +32,10 @@ var graticule = d3.geo.graticule();
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", total_height);
 
 var intensity_colors = ['rgb(247,251,255)', 'rgb(222,235,247)', 'rgb(198,219,239)', 'rgb(158,202,225)',
 	'rgb(107,174,214)', 'rgb(66,146,198)', 'rgb(33,113,181)', 'rgb(8,81,156)', 'rgb(8,48,107)'];
-
-var scale_x_offset = 50;
-var scale_y_offset = 18;
-var scale_length = width - scale_x_offset * 2;
 
 var pow = d3.scale.pow()
 	.exponent(0.75)
@@ -139,7 +141,7 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 	animate_map(1);
 }
 
-function axis_position() { return "translate(" + scale_x_offset + "," + (height - scale_y_offset) + ")" }
+function axis_position() { return "translate(" + scale_x_offset + "," + (total_height - scale_y_offset) + ")" }
 
 function draw_time_scale() {
 	var xAxis = d3.svg.axis()
