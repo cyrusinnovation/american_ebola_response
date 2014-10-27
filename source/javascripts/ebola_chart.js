@@ -3,9 +3,10 @@
 var width = 960,
     height = 520;
 
+var controls_width = 168;
 var scale_x_offset = 50;
 var scale_y_offset = 18;
-var scale_length = width - scale_x_offset * 2;
+var scale_length = width - scale_x_offset - controls_width;
 var axis_height = scale_y_offset * 1.25;
 var total_height = height + axis_height;
 
@@ -30,7 +31,7 @@ var path = d3.geo.path()
 
 var graticule = d3.geo.graticule();
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#ebola_chart").append("svg")
     .attr("width", width)
     .attr("height", total_height);
 
@@ -112,6 +113,9 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 	outbreak_data = ebola_outbreak_data
 	build_dates_of_interest();
 
+	d3.select('.animation-controls')
+		.style('margin-left', (controls_width + scale_x_offset - width) + 'px');
+
 	svg.insert("path", ".graticule")
 		.datum(topojson.feature(world, world.objects.land))
 		.attr("class", "land")
@@ -135,13 +139,12 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 			.attr("id", function(d) { return country_name(d.id); }, true)
 			.attr("d", path)
 
-	// draw_labels(text_date_at(63));
-	// outline_infected_countries(text_date_at(63));
 	draw_time_scale();
-	animate_map(1);
+	update_map(63);
+	// animate_map(1);
 }
 
-function axis_position() { return "translate(" + scale_x_offset + "," + (total_height - scale_y_offset) + ")" }
+function axis_position() { return "translate(" + (controls_width - 20) + "," + (total_height - scale_y_offset) + ")" }
 
 function draw_time_scale() {
 	var xAxis = d3.svg.axis()
@@ -306,13 +309,17 @@ function outline_infected_countries(text_date) {
 		.attr("d", path)
 }
 
+function update_map(current_date_index) {
+	set_date(current_date_index);
+	choropleth_map(current_date_index);
+	outline_infected_countries(text_date_at(current_date_index));
+	draw_labels(text_date_at(current_date_index))
+}
+
 function animate_map(initial_date_index) {
 	var current_date_index = initial_date_index;
 	timer = setInterval(function() {
-		set_date(current_date_index);
-		choropleth_map(current_date_index);
-		outline_infected_countries(text_date_at(current_date_index));
-		draw_labels(text_date_at(current_date_index))
+		update_map(current_date_index);
 		current_date_index = (current_date_index + 1) % search_data.length;
 	}, 250)
 }
