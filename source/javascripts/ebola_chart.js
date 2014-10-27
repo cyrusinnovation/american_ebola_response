@@ -1,7 +1,7 @@
-// var width = 1200,
-//     height = 650;
-var width = 960,
-    height = 520;
+var width = 1200,
+    height = 650;
+// var width = 960,
+//     height = 520;
 
 var label_offsets = {Guinea: {x: 0.055, y: 0.045},
 		Liberia: {x: 0.025, y: -0.08},
@@ -65,6 +65,7 @@ var outbreak_data = null;
 var dates_of_interest = [];
 var centroids_by_id = {};
 var time_scale = null;
+var current_date_format = d3.time.format('%b %d, %Y')
 
 function search_data_for_country(country_code, index) {
 	return search_data[index][country_code];
@@ -132,20 +133,13 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 			.attr("id", function(d) { return country_name(d.id); }, true)
 			.attr("d", path)
 
-	svg.append("text")
-		.attr("id", 'current-date')
-		.attr("x", width / 2)
-		.attr("y", height - 20)
-		.style("font-size", "1.333em")
-		.style("fill", intensity_colors[7])
-		.style("text-anchor", "middle")
-		.text(text_date_at(0));
-
 	// draw_labels(text_date_at(63));
 	// outline_infected_countries(text_date_at(63));
 	draw_time_scale();
-	animate_map();
+	animate_map(1);
 }
+
+function axis_position() { return "translate(" + scale_x_offset + "," + (height - scale_y_offset) + ")" }
 
 function draw_time_scale() {
 	var xAxis = d3.svg.axis()
@@ -154,7 +148,7 @@ function draw_time_scale() {
 
 	svg.append('g')
 		.attr('class', 'time_axis')
-		.attr('transform', "translate(" + scale_x_offset + "," + (height - scale_y_offset) + ")")
+		.attr('transform', axis_position())
 		.call(xAxis);
 
 	var poi_Axis = d3.svg.axis()
@@ -165,20 +159,33 @@ function draw_time_scale() {
 		.tickFormat(function(d) { return ''; });
 
 	svg.append('g')
-		.attr('class', 'time_axis')
-		.attr('transform', "translate(" + scale_x_offset + "," + (height - scale_y_offset) + ")")
+		.attr('class', 'poi_axis')
+		.attr('transform', axis_position())
 		.call(poi_Axis)
+
+	set_date(0);
+}
+
+function set_date(date_index) {
+	current_date = dates_of_interest[date_index];
+	d3.select('.current_axis').remove();
+	var current_axis = d3.svg.axis()
+		.orient('top')
+		.scale(time_scale)
+		.tickSize(12)
+		.tickValues([ current_date ])
+		.tickFormat(function(d) { return current_date_format(current_date); });
+
+	svg.append('g')
+		.attr('class', 'current_axis')
+		.attr('transform', axis_position())
+		.call(current_axis)
 }
 
 function choropleth_map(date_index) {
 	svg.selectAll(".country").transition()
 		.duration(250)
 		.style("fill", function(d) { return color_for_country(d.id, date_index); })
-}
-
-function set_date(date_index) {
-	svg.select('#current-date')
-		.text(text_date_at(date_index));
 }
 
 function outbreak_data_for(text_date) {
@@ -297,8 +304,8 @@ function outline_infected_countries(text_date) {
 		.attr("d", path)
 }
 
-function animate_map() {
-	var current_date_index = 1;
+function animate_map(initial_date_index) {
+	var current_date_index = initial_date_index;
 	timer = setInterval(function() {
 		set_date(current_date_index);
 		choropleth_map(current_date_index);
