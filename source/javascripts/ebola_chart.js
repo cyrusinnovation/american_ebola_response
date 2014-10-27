@@ -140,7 +140,8 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 		animate_map();
 	}
 	else {
-		set_current_date(63);
+		// set_current_date(63);
+		set_current_date(0);
 		update_map(Infograph.current_date_index);
 	}
 }
