@@ -31,8 +31,9 @@ var svg = d3.select("body").append("svg")
 var intensity_colors = ['rgb(247,251,255)', 'rgb(222,235,247)', 'rgb(198,219,239)', 'rgb(158,202,225)',
 	'rgb(107,174,214)', 'rgb(66,146,198)', 'rgb(33,113,181)', 'rgb(8,81,156)', 'rgb(8,48,107)'];
 
-var scale_offset = 50;
-var scale_length = width - scale_offset * 2;
+var scale_x_offset = 50;
+var scale_y_offset = 18;
+var scale_length = width - scale_x_offset * 2;
 
 var pow = d3.scale.pow()
 	.exponent(0.75)
@@ -91,7 +92,7 @@ function build_dates_of_interest() {
 
 	time_scale = d3.time.scale()
 		.domain(date_of_interest_range())
-		.range([scale_offset, scale_length]);
+		.range([scale_x_offset, scale_length]);
 }
 
 function date_of_interest_range() {
@@ -148,13 +149,25 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 
 function draw_time_scale() {
 	var xAxis = d3.svg.axis()
-	    .orient("top")
+	    .orient("bottom")
 	    .scale(time_scale);
 
 	svg.append('g')
 		.attr('class', 'time_axis')
-		.attr('transform', "translate(" + scale_offset + "," + (height - 5) + ")")
-		.call(xAxis)
+		.attr('transform', "translate(" + scale_x_offset + "," + (height - scale_y_offset) + ")")
+		.call(xAxis);
+
+	var poi_Axis = d3.svg.axis()
+		.orient('top')
+		.scale(time_scale)
+		.tickSize(5)
+		.tickValues(dates_of_interest)
+		.tickFormat(function(d) { return ''; });
+
+	svg.append('g')
+		.attr('class', 'time_axis')
+		.attr('transform', "translate(" + scale_x_offset + "," + (height - scale_y_offset) + ")")
+		.call(poi_Axis)
 }
 
 function choropleth_map(date_index) {
