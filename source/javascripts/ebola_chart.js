@@ -49,6 +49,7 @@ var quantize = d3.scale
     .domain([0, 1.0])
     .range(d3.range(intensity_colors.length).map(function(i) { return intensity_colors[i]; }));
 
+add_legend();
 queue()
 	.defer(d3.json, 'data/country_mapping.json')
 	.defer(d3.json, 'data/world-110m.json')
@@ -150,7 +151,6 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 			.attr("id", function(d) { return country_name(d.id); }, true)
 			.attr("d", path)
 
-	add_legend();
 	draw_time_scale();
 	if (Infograph.animating) {
 		animate_map();
