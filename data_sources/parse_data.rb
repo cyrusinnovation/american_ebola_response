@@ -3,6 +3,7 @@ require 'json'
 require_relative 'country_data'
 require_relative 'ebola_data'
 require_relative 'outbreak_data'
+require_relative 'news_data'
 
 CsvHeadings = Struct.new(:date, :country, :united_states) do
 end
@@ -102,6 +103,7 @@ class EbolaDataParser
 end
 
 outbreak_data = OutbreakData.new
+news_data = NewsData.new
 
 parser = EbolaDataParser.new
 data = parser.parse(['data1', 'data2', 'data3', 'data4'])

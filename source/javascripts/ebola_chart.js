@@ -81,8 +81,8 @@ function infection_added_color(country_code, index) {
 
 function color_for_country(country_code, index) {
 	result = search_data_for_country(country_code, index);
-	color = (result === undefined) ? intensity_colors[0] : quantize(result);
-	return add_colors(color, infection_added_color(country_code, index)).toString();
+	return (result === undefined) ? intensity_colors[0] : quantize(result);
+	// return add_colors(color, infection_added_color(country_code, index)).toString();
 }
 
 function country_name(country_code) {
