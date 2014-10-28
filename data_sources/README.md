@@ -1,3 +1,11 @@
+TOPICS:
+* Locality of interest - when a country or region experiences an outbreak, interest spikes there.
+* Spread of information vs spread of disease - information spreads much faster.
+* Policy decisions - helping to assuage hysteria or spreading it?
+* Fear as a double-edged sword, it prevents Ebola, but too much of it is a danger and threatening civil liberties
+* 
+
+
 WHO global alert and response: http://www.who.int/csr/don/archive/disease/ebola/en/
 WHO situation reports: http://www.who.int/csr/disease/ebola/situation-reports/en/
 

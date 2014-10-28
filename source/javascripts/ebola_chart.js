@@ -32,7 +32,7 @@ var svg = d3.select("#ebola_chart").append("svg")
     .attr("width", width)
     .attr("height", total_height);
 
-var intensity_colors = [d3.rgb(247,251,255), d3.rgb(222,235,247), d3.rgb(198,219,239), d3.rgb(158,202,225),
+var intensity_colors = [d3.rgb(222,235,247), d3.rgb(198,219,239), d3.rgb(158,202,225),
 	d3.rgb(107,174,214), d3.rgb(66,146,198), d3.rgb(33,113,181), d3.rgb(8,81,156), d3.rgb(8,48,107)];
 function add_colors(rgb1, rgb2) {
 	return d3.rgb(rgb1.r + rgb2.r, rgb1.g + rgb2.g, rgb1.b + rgb2.b);
@@ -47,7 +47,7 @@ var pow = d3.scale.pow()
 var quantize = d3.scale
 	.quantize()
     .domain([0, 1.0])
-    .range(d3.range(9).map(function(i) { return intensity_colors[i]; }));
+    .range(d3.range(intensity_colors.length).map(function(i) { return intensity_colors[i]; }));
 
 queue()
 	.defer(d3.json, 'data/country_mapping.json')
@@ -150,6 +150,7 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 			.attr("id", function(d) { return country_name(d.id); }, true)
 			.attr("d", path)
 
+	add_legend();
 	draw_time_scale();
 	if (Infograph.animating) {
 		animate_map();
@@ -159,6 +160,23 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 		set_current_date(0);
 		update_map(Infograph.current_date_index);
 	}
+}
+
+function add_legend() {
+	var legend_width = width * 0.15
+	var legend = d3.select('#legend')
+		.style('width', legend_width + 'px')
+		.style('left', (width - legend_width) + 'px')
+		.style('top', 20 + 'px');
+
+	var legend_list = legend.append('ul')
+			.attr('class', 'list-inline');
+
+	var keys = legend_list.selectAll('li.key')
+		.data(quantize.range())
+		.enter().append('li')
+		.attr('class', 'key')
+		.style('border-top-color', String);
 }
 
 function axis_position() { return "translate(" + scale_x_offset + "," + (total_height - scale_y_offset) + ")" }

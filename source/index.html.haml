@@ -1,13 +1,16 @@
 = stylesheet_link_tag 'bootstrap.min.css'
 = stylesheet_link_tag 'font-awesome.min.css'
 = stylesheet_link_tag 'animation-controls.css'
+= stylesheet_link_tag 'legend.css'
 
 %div.chart
 	%title The Spread of Ebola: Information and Disease
 
 	%div
 		%h2 The Spread of Ebola: Information and Disease
-		#ebola_chart.negative_top_margin
+		%div#ebola_chart.negative_top_margin
+		%div#legend
+			%div Google search intensity for the term "Ebola"
 
 %div.animation-controls
 	.btn-group

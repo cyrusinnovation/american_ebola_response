@@ -10,11 +10,11 @@ h2 {
   position: relative;
   z-index: 1000;
   margin-top: 10px;
-  margin-left: 180px;
+  margin-left: 100px;
 }
 
 .chart {
-  text-align: center;
+  text-align: left;
 }
 
 .negative_top_margin {
