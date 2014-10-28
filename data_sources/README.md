@@ -34,3 +34,9 @@ The Flu, TB and now Ebola: The Quarantine, an Unusual Legal Remedy, Returns. (NY
 
 Ms. Hickox raised serious concerns "about the state abusing its powers" and could spread the very fear that the order appeared aimed at counteracting.
 "By forcibly detaining people, we are also frightening the public and may deter genuinely sick people who fear quarantine from seeking the treatments they deserve," Mr. Ofer said in an email.
+
+http://abcnews.go.com/Health/wireStory/5000-ebola-health-workers-needed-west-africa-26502424
+----------------------------------------------------------------------
+"The challenge is good information, because information helps tell us where the disease is, how it's spreading and where we need to target our resources," Anthony Banbury told The Associated Press by phone from the Ghanaian capital of Accra, where the U.N. Mission for Ebola Emergency Response, or UNMEER, is based.
+
+"They are extremely ambitious (goals), given the geographical spread of the disease, the numbers of people infected, the very poor information on exactly where those infected are and what the transmission patterns are," Banbury said. "The three things we need the most are people, supplies and money. The most critical right now are people, health workers in particular, trained health care workers . but also people who can manage these Ebola treatment facilities."
