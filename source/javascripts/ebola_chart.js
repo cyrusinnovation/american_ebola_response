@@ -3,7 +3,7 @@
 var width = 960,
     height = 500;
 
-var scale_x_offset = 50;
+var scale_x_offset = 30;
 var scale_y_offset = 18;
 var scale_length = width - scale_x_offset * 2;
 var axis_height = scale_y_offset * 1.25;
@@ -28,14 +28,15 @@ var projection = d3.geo.mercator()
 var path = d3.geo.path()
     .projection(projection);
 
-var graticule = d3.geo.graticule();
-
 var svg = d3.select("#ebola_chart").append("svg")
     .attr("width", width)
     .attr("height", total_height);
 
-var intensity_colors = ['rgb(247,251,255)', 'rgb(222,235,247)', 'rgb(198,219,239)', 'rgb(158,202,225)',
-	'rgb(107,174,214)', 'rgb(66,146,198)', 'rgb(33,113,181)', 'rgb(8,81,156)', 'rgb(8,48,107)'];
+var intensity_colors = [d3.rgb(247,251,255), d3.rgb(222,235,247), d3.rgb(198,219,239), d3.rgb(158,202,225),
+	d3.rgb(107,174,214), d3.rgb(66,146,198), d3.rgb(33,113,181), d3.rgb(8,81,156), d3.rgb(8,48,107)];
+function add_colors(rgb1, rgb2) {
+	return d3.rgb(rgb1.r + rgb2.r, rgb1.g + rgb2.g, rgb1.b + rgb2.b);
+}
 
 var pow = d3.scale.pow()
 	.exponent(0.75)
@@ -47,11 +48,6 @@ var quantize = d3.scale
 	.quantize()
     .domain([0, 1.0])
     .range(d3.range(9).map(function(i) { return intensity_colors[i]; }));
-
-svg.append("path")
-    .datum(graticule)
-    .attr("class", "graticule")
-    .attr("d", path);
 
 queue()
 	.defer(d3.json, 'data/country_mapping.json')
@@ -67,15 +63,25 @@ var outbreak_data = null;
 var dates_of_interest = [];
 var centroids_by_id = {};
 var time_scale = null;
+var infection_lookups = [];
 var current_date_format = d3.time.format('%b %d, %Y')
 
 function search_data_for_country(country_code, index) {
 	return search_data[index][country_code];
 }
 
+function is_country_infected(country_code, index) {
+	return infection_lookups[index][country_code];
+}
+
+function infection_added_color(country_code, index) {
+	return is_country_infected(country_code, index) ? d3.rgb(110, 0, 0) : d3.rgb(0,0,0);
+}
+
 function color_for_country(country_code, index) {
 	result = search_data_for_country(country_code, index);
-	return (result === undefined) ? intensity_colors[0] : quantize(pow(result));
+	color = (result === undefined) ? intensity_colors[0] : quantize(result);
+	return add_colors(color, infection_added_color(country_code, index)).toString();
 }
 
 function country_name(country_code) {
@@ -102,6 +108,19 @@ function date_of_interest_range() {
 	return [dates_of_interest[0], dates_of_interest[dates_of_interest.length - 1]];
 }
 
+function build_infection_lookups() {
+	infection_lookups = [];
+	search_data.forEach(function (d, i) {
+		text_date = text_date_at(i);
+
+		var infected_countries = {};
+		outbreak_data[text_date].forEach(function(d) {
+			infected_countries[d.code] = true;
+		});
+		infection_lookups.push(infected_countries);
+	});
+}
+
 var us_country_code = 840;
 
 function build_map(error, country_mapping, world, ebola_search_data, ebola_outbreak_data) {
@@ -111,11 +130,7 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 	world_data = world;
 	outbreak_data = ebola_outbreak_data
 	build_dates_of_interest();
-
-	svg.insert("path", ".graticule")
-		.datum(topojson.feature(world, world.objects.land))
-		.attr("class", "land")
-		.attr("d", path);
+	build_infection_lookups();
 
 	svg.selectAll(".country")
 		.data(topojson.feature(world, world.objects.countries).features)
@@ -300,21 +315,21 @@ function infected_geometry_collector_for(text_date) {
 	return { type: 'GeometryCollection', bbox: world_data.objects.countries.bbox, geometries: geometries };
 }
 
-function outline_infected_countries(text_date) {
-	svg.selectAll('.infected_outline').remove();
+// function outline_infected_countries(text_date) {
+// 	svg.selectAll('.infected_outline').remove();
 	
-	svg.selectAll('.infected_outline')
-		.data(topojson.feature(world_data, infected_geometry_collector_for(text_date)).features)
-		.enter()
-		.append('path')
-		.attr('class', 'infected_outline')
-		.attr("d", path)
-}
+// 	svg.selectAll('.infected_outline')
+// 		.data(topojson.feature(world_data, infected_geometry_collector_for(text_date)).features)
+// 		.enter()
+// 		.append('path')
+// 		.attr('class', 'infected_outline')
+// 		.attr("d", path)
+// }
 
 function update_map(current_date_index) {
 	set_date(current_date_index);
 	choropleth_map(current_date_index);
-	outline_infected_countries(text_date_at(current_date_index));
+	// outline_infected_countries(text_date_at(current_date_index));
 	draw_labels(text_date_at(current_date_index))
 }
 
