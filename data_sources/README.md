@@ -21,3 +21,16 @@ We hear it said constantly that modern society is uniquely vulnerable to the thr
 So this is the strange paradox of the modern epidemic: The speed of information is both our greatest defense against a true epidemic in a city like New York, and it is the source of constant, nagging anxiety that creates the — entirely incorrect — sense that we live in unusually perilous times. A New Yorker or Londoner is far less likely to perish from an epidemic disease than he or she would have been 150 years ago. We are vastly less at risk and at the same time we are more worried — for the same reason.
 
 Information travels faster than viruses do now. This is why we are afraid. But this is also why we are safe.
+
+Countries in Asia Sense Vulnerability as a Virus Spreads Beyond Africa. (NYT Oct 27)
+----------------------------------------------------------------------
+"What happened in the States took us by surprised," said Louis Shih, the president of the Hong Kong Medical Association. "We were sort of feeling like, 'Oh, don't worry.' The medical sector is now quite alarmed."
+
+The Flu, TB and now Ebola: The Quarantine, an Unusual Legal Remedy, Returns. (NYT Oct 27)
+----------------------------------------------------------------------
+"It doesn't seem like we're to that stage yet," Steven D. Gravely said, a lawyer who helped Virginia write its laws on quarantine to make it easier for the state to respond quickly to disease outbreaks. Instead, he said, "there's so much anxiety right now, that's become the problem."
+
+"I'm very worried about it," Mr. Gostin said. "We used to think that we had balanced public health and civil liberties, but I think in this case we have forgotten that balance. And I'm one who thinks that we should always privelege public health. I'm not a civil libertarian."
+
+Ms. Hickox raised serious concerns "about the state abusing its powers" and could spread the very fear that the order appeared aimed at counteracting.
+"By forcibly detaining people, we are also frightening the public and may deter genuinely sick people who fear quarantine from seeking the treatments they deserve," Mr. Ofer said in an email.
