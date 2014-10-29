@@ -16,12 +16,10 @@ class NewsData
 		@news = {}
 
 		row_index = 0;
-		CSV.foreach('outbreak_news.csv') do |row|
+		CSV.foreach('inputs/outbreak_news.csv') do |row|
 			parse_line(row) unless row_index == 0
 			row_index = row_index + 1
 		end
-
-		puts @news
 	end
 
 	def date(date_field)

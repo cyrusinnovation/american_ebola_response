@@ -115,7 +115,7 @@ function build_infection_lookups() {
 		text_date = text_date_at(i);
 
 		var infected_countries = {};
-		outbreak_data[text_date].forEach(function(d) {
+		outbreak_data_for(text_date).forEach(function(d) {
 			infected_countries[d.code] = true;
 		});
 		infection_lookups.push(infected_countries);
@@ -229,7 +229,7 @@ function choropleth_map(date_index) {
 }
 
 function outbreak_data_for(text_date) {
-	return outbreak_data[text_date]
+	return outbreak_data[text_date].outbreak;
 }
 
 function closer_to_center(center_y, y1, y2) { return (Math.abs(y1 - center_y) <= Math.abs(y2 - center_y)) ? y2 : y1; }
@@ -318,15 +318,15 @@ function add_pointer_for_labels(text, text_date) {
 		});
 }
 
-function outbreak_index(outbreak_data, country_code) {
-	for (var i = 0; i < outbreak_data.length; i++) {
-		if (outbreak_data[i].code == country_code) return i;
+function outbreak_index(outbreak_search_data, country_code) {
+	for (var i = 0; i < outbreak_search_data.length; i++) {
+		if (outbreak_search_data[i].code == country_code) return i;
 	}
 	return -1;
 } 
 
 function infected_geometry_collector_for(text_date) {
-	current_outbreak_data = outbreak_data_for(text_date);
+	current_outbreak_data = outbreak_data_for(text_date).outbreak;
 	geometries = world_data.objects.countries.geometries.filter(function(d) {
 		return outbreak_index(current_outbreak_data, d.id) != -1;
 	});

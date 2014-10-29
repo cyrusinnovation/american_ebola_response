@@ -24,7 +24,7 @@ class EbolaDataParser
 
 	def write_country_mapping
 		mapping = @country_map.inject({}) { |memo, (country, code)| memo[code] = country; memo }
-		File.open("country_mapping.json","w") do |f|
+		File.open("outputs/country_mapping.json","w") do |f|
   			f.write({ 'countries' => mapping }.to_json)
 		end
 	end
@@ -93,7 +93,7 @@ class EbolaDataParser
 	end
 
 	def load_countries
-		file = File.new('CountryCodes.csv', 'r')
+		file = File.new('inputs/CountryCodes.csv', 'r')
 		@country_map = {}
 		while (line = file.gets)
 			fields = line.split(',')
@@ -102,12 +102,12 @@ class EbolaDataParser
 	end
 end
 
-outbreak_data = OutbreakData.new
-news_data = NewsData.new
-
 parser = EbolaDataParser.new
+news_data = NewsData.new
+outbreak_data = OutbreakData.new(news_data, parser.country_map)
+
 data = parser.parse(['data1', 'data2', 'data3', 'data4'])
 data.write_csv(outbreak_data)
 parser.write_country_mapping
 
-outbreak_data.write_outbreak_json(parser.country_map)
+outbreak_data.write_outbreak_json

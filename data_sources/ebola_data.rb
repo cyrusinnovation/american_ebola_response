@@ -9,9 +9,11 @@ class BorderingData
 	def initialize(all_dates, specific_date)
 		# Find data lines before and after the date
 		@after = all_dates.index { |date| date >= specific_date }
-		raise "BorderingDate: date #{date} is out of bounds" unless after
+		puts "Warning: BorderingDate: date #{specific_date} is out of bounds" unless @after
+		@after = all_dates.length - 1 unless @after
+		# raise "BorderingDate: date #{specific_date} is out of bounds" unless after
 		@exact = @after if @after == specific_date
-		raise "BorderingDate: date #{date} is out of bounds" if (after < 1)
+		raise "BorderingDate: date #{specific_date} is out of bounds" if (after < 1)
 	end
 
 	def interpolate(date, ebola_data)
@@ -33,7 +35,10 @@ class BorderingData
 		a = Date.parse(after, '%y-%m-%d')
 
 		interp = 1.0 - (a - d).to_f / (a - p).to_f
-		raise 'bad' if (interp < 0.0 || interp > 1.0)
+		if (interp < 0.0 || interp > 1.0)
+			puts "bad interpolant #{interp}"
+			interp = (interp < 0) ? 0 : 1.0
+		end
 		interp
 	end
 
@@ -71,9 +76,9 @@ class EbolaData
 
 	def write_csv(outbreak_data)
 		@sorted_countries = countries.keys.sort
-		CSV.open("ebola_results.csv", 'w') do |writer|
+		CSV.open("outputs/ebola_results.csv", 'w') do |writer|
 			writer << header
-			outbreak_data.dates.keys.each_with_index do |date, index|
+			outbreak_data.dates.each_with_index do |date, index|
 				writer << BorderingData.new(@dates, date).interpolate(date, self)
 			end
 		end

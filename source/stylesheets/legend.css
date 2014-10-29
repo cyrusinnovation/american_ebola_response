@@ -11,9 +11,14 @@ li.key {
     border-top-width: 15px;
     border-top-style: solid;
     font-size: .7em;
-    width: 11%;
+    width: 12%;
     padding-left: 0;
     padding-right: 0;
+}
+
+.legend-title {
+	margin-left: 3px;
+	margin-right: 3px;
 }
 
 .list-inline {
