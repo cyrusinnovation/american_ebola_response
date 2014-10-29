@@ -48,3 +48,7 @@ http://abcnews.go.com/Health/wireStory/5000-ebola-health-workers-needed-west-afr
 "The challenge is good information, because information helps tell us where the disease is, how it's spreading and where we need to target our resources," Anthony Banbury told The Associated Press by phone from the Ghanaian capital of Accra, where the U.N. Mission for Ebola Emergency Response, or UNMEER, is based.
 
 "They are extremely ambitious (goals), given the geographical spread of the disease, the numbers of people infected, the very poor information on exactly where those infected are and what the transmission patterns are," Banbury said. "The three things we need the most are people, supplies and money. The most critical right now are people, health workers in particular, trained health care workers . but also people who can manage these Ebola treatment facilities."
+
+On the fuzziness of information http://www.nytimes.com/2014/10/29/world/africa/in-liberia-a-good-or-very-bad-sign-empty-beds-.html?hp&action=click&pgtype=Homepage&module=second-column-region&region=top-news&WT.nav=top-news&_r=0
+----------------------------------------------------------------------
+Health care workers are finding a lot fewer ebola patients than expected in Liberia, and they don't understand why. This could be a result of fewer people with ebola, or more people hiding from health care workers.
