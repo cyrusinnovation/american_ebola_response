@@ -1,7 +1,6 @@
-// var width = 1200,
-//     height = 625;
-var width = 960,
-    height = 500;
+var width = parseInt(d3.select('#ebola_chart').style('width')),
+	mapAspectRatio = 0.52,
+	height = width * mapAspectRatio;
 
 var scale_x_offset = 30;
 var scale_y_offset = 18;
@@ -67,6 +66,9 @@ var outbreak_data = null;
 var dates_of_interest = [];
 var centroids_by_id = {};
 var time_scale = null;
+var xAxis = null;
+var poi_Axis = null;
+var current_axis = null;
 var infection_lookups = [];
 var current_news = null;
 var current_date_format = d3.time.format('%b %d, %Y')
@@ -185,7 +187,7 @@ function add_legend() {
 function axis_position() { return "translate(" + scale_x_offset + "," + (total_height - scale_y_offset) + ")" }
 
 function draw_time_scale() {
-	var xAxis = d3.svg.axis()
+	xAxis = d3.svg.axis()
 	    .orient("bottom")
 	    .scale(time_scale);
 
@@ -194,7 +196,7 @@ function draw_time_scale() {
 		.attr('transform', axis_position())
 		.call(xAxis);
 
-	var poi_Axis = d3.svg.axis()
+	poi_Axis = d3.svg.axis()
 		.orient('top')
 		.scale(time_scale)
 		.tickSize(5)
@@ -212,7 +214,7 @@ function draw_time_scale() {
 function set_date(date_index) {
 	current_date = dates_of_interest[date_index];
 	d3.select('.current_axis').remove();
-	var current_axis = d3.svg.axis()
+	current_axis = d3.svg.axis()
 		.orient('top')
 		.scale(time_scale)
 		.tickSize(12)
@@ -471,6 +473,40 @@ function set_current_date(date_index) {
 
 function increment_current_date(increment) {
 	set_current_date(Infograph.current_date_index + increment);
+}
+
+d3.select(window).on('resize', resize);
+
+function resize() {
+    // adjust things when the window size changes
+    width = parseInt(d3.select('#ebola_chart').style('width'));
+    height = width * mapAspectRatio;
+
+    scale_length = width - scale_x_offset * 2;
+	axis_height = scale_y_offset * 1.25;
+	total_height = height + axis_height;
+
+    // update projection
+    projection
+        .translate([width / 2, height / 1.6])
+        .scale((width + 1) / 2 / Math.PI);
+
+    // resize the map container
+    svg.style('width', width + 'px')
+    	.style('total_height', height + 'px');
+
+    // Update the time axes
+	time_scale.range([scale_x_offset, scale_length]);
+	svg.select('.time_axis')
+		.attr('transform', axis_position())
+		.call(xAxis);
+
+	svg.select('.poi_axis')
+		.attr('transform', axis_position())
+		.call(poi_Axis);
+
+    // resize the map
+    svg.selectAll('.country').attr('d', path);
 }
 
 d3.select(self.frameElement).style("height", height + "px");
