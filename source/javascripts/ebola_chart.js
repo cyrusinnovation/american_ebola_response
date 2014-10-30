@@ -143,15 +143,7 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 		.enter()
 			.append("path")
 			.attr("class", "country")
-			.each(function(d) { 
-				centroid = path.centroid(d); centroids_by_id[d.id] = { x: centroid[0], y: centroid[1] };
-				if (d.id == us_country_code) {
-					// Special case for US because Alaska messes up the centroid. Not sure
-					// how to separately calculate case for multipolygon
-					bb = path.bounds(d);
-					centroids_by_id[d.id] = { x: centroid[0] + bb[1][0] * 0.175, y: centroid[1] + bb[1][1] * 0.175 }
-				}
-			})
+			.each(calculate_centroid)
 			.style("fill", function(d) { return color_for_country(d.id, 0); })
 			.attr("id", function(d) { return country_name(d.id); }, true)
 			.attr("d", path)
@@ -164,6 +156,17 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 		// set_current_date(63);
 		set_current_date(0);
 		update_map(Infograph.current_date_index);
+	}
+}
+
+function calculate_centroid(geometry) {
+	centroid = path.centroid(geometry); 
+	centroids_by_id[geometry.id] = { x: centroid[0], y: centroid[1] };
+	if (geometry.id == us_country_code) {
+		// Special case for US because Alaska messes up the centroid. Not sure
+		// how to separately calculate case for multipolygon
+		bb = path.bounds(geometry);
+		centroids_by_id[geometry.id] = { x: centroid[0] + bb[1][0] * 0.175, y: centroid[1] + bb[1][1] * 0.175 }
 	}
 }
 
@@ -513,7 +516,8 @@ function resize() {
     svg.selectAll('.country').attr('d', path);
 
     // Redraw the labels
-    // draw_labels(text_date_at(Infograph.current_date_index));
+    svg.selectAll(".country").each(calculate_centroid);
+    draw_labels(text_date_at(Infograph.current_date_index));
 
     // d3.select(self.frameElement).style("height", height + "px");
 }
