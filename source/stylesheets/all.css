@@ -28,9 +28,10 @@ h2 {
 .country_label {
   text-anchor: 'middle';
   font-size: .7em;
-  font-weight: 100;
-  stroke: #555;
+  /*font-weight: 100;*/
+  stroke: none;
   fill: #555;
+  shape-rendering: crispEdges;
 }
 
 .country_pointer {
@@ -62,6 +63,7 @@ h2 {
   font-size: .7em;
   font-weight: 100;
   stroke: #555;
+  shape-rendering: crispEdges;
 }
 
 .poi_axis {
@@ -79,7 +81,8 @@ h2 {
   font-family: sans-serif;
   font-size: .7em;
   font-weight: 100;
-  stroke: #555;
+  stroke: none;
+  fill: #555;
 }
 
 .current_axis {
@@ -88,7 +91,7 @@ h2 {
 }
 
 .current_axis line {
-  fill: none;
+  fill: #555;
   stroke: #555;
   stroke-width: 2.5px;
 }
@@ -97,6 +100,7 @@ h2 {
   font-family: sans-serif;
   font-size: .7em;
   font-weight: normal;
-  stroke: #555;
+  stroke: none;
   fill: #555;
+  shape-rendering: crispEdges;
 }

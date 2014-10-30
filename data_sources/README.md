@@ -52,3 +52,7 @@ http://abcnews.go.com/Health/wireStory/5000-ebola-health-workers-needed-west-afr
 On the fuzziness of information http://www.nytimes.com/2014/10/29/world/africa/in-liberia-a-good-or-very-bad-sign-empty-beds-.html?hp&action=click&pgtype=Homepage&module=second-column-region&region=top-news&WT.nav=top-news&_r=0
 ----------------------------------------------------------------------
 Health care workers are finding a lot fewer ebola patients than expected in Liberia, and they don't understand why. This could be a result of fewer people with ebola, or more people hiding from health care workers.
+
+Article explaining high-level of interest in Ebola
+----------------------------------------------------------------------
+http://www.reuters.com/article/2014/10/10/us-health-ebola-brazil-idUSKCN0HZ1DV20141010

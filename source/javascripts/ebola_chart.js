@@ -9,11 +9,14 @@ var scale_length = width - scale_x_offset * 2;
 var axis_height = scale_y_offset * 1.25;
 var total_height = height + axis_height;
 
-var label_offsets = {Guinea: {x: 0.055, y: 0.045},
+var label_offsets = { 
+		Guinea: {x: 0.055, y: 0.045},
 		Liberia: {x: 0.025, y: -0.08},
-		Spain: {x: 0.03, y: 0.0275},
+		Spain: {x: 0.03, y: 0.0475},
 		Senegal: {x: 0.025, y: 0.095},
-		Nigeria: {x: 0.01, y: -0.105} }
+		Nigeria: {x: 0.01, y: -0.105},
+		Mali: {x: -0.065, y: -0.025}
+	}
 label_offsets['Sierra Leone'] = {x: 0.04, y: -0.0225};
 label_offsets['United States'] = {x: 0.09, y: -0.0175}
 
@@ -65,7 +68,9 @@ var dates_of_interest = [];
 var centroids_by_id = {};
 var time_scale = null;
 var infection_lookups = [];
+var current_news = null;
 var current_date_format = d3.time.format('%b %d, %Y')
+var parse_date_format = d3.time.format("%Y-%m-%d");
 
 function search_data_for_country(country_code, index) {
 	return search_data[index][country_code];
@@ -94,10 +99,8 @@ function text_date_at(date_index) {
 }
 
 function build_dates_of_interest() {
-	var format = d3.time.format("%Y-%m-%d");
-
 	search_data.forEach(function (d) {
-		dates_of_interest.push(format.parse(d.Date));
+		dates_of_interest.push(parse_date_format.parse(d.Date));
 	});
 
 	time_scale = d3.time.scale()
@@ -232,19 +235,29 @@ function outbreak_data_for(text_date) {
 	return outbreak_data[text_date].outbreak;
 }
 
+function news_data_for(text_date) {
+	return outbreak_data[text_date].news;
+}
+
 function closer_to_center(center_y, y1, y2) { return (Math.abs(y1 - center_y) <= Math.abs(y2 - center_y)) ? y2 : y1; }
 function further_from_center(center_y, y1, y2) { return (Math.abs(y1 - center_y) <= Math.abs(y2 - center_y)) ? y1 : y2; }
 function label_bottom(y_position) { return y_position + text_height_pixels * 0.25; }
 function label_top(y_position) { return y_position - text_height_pixels * 2.75; }
 
+function pointer_x_pos(outbreak_datum) {
+	var x_offset = offset_for(outbreak_datum.code).x;
+	var direction = (x_offset >= 0 ? 1.0 : -1.0)
+	return outbreak_datum.pos_x + pointer_offset_pixels * direction;
+}
+
 function calculate_pointer_end(outbreak_datum) {
 	closer = closer_to_center(outbreak_datum.center.y, label_bottom(outbreak_datum.pos_y), label_top(outbreak_datum.pos_y))
-	return {x: outbreak_datum.pos_x + pointer_offset_pixels, y: closer};
+	return {x: pointer_x_pos(outbreak_datum), y: closer};
 }
 
 function calculate_pointer_mid(outbreak_datum) {
 	further = further_from_center(outbreak_datum.center.y, label_bottom(outbreak_datum.pos_y), label_top(outbreak_datum.pos_y))
-	return {x: outbreak_datum.pos_x + pointer_offset_pixels, y: further};
+	return {x: pointer_x_pos(outbreak_datum), y: further};
 }
 
 function position_for_country(country_code) {
@@ -279,7 +292,8 @@ function draw_labels(text_date) {
 			return d.pos_y;
 		})
 		.attr("class", "country_label")
-		.style('text-anchor', 'end')
+		// .style('text-anchor', 'end')
+		.style('text-anchor', function(d) { return text_anchor_for_offset(offset_for(d.code).x); })
 		.each(function(d) {
 			d.pointer_end = calculate_pointer_end(d);
 			d.pointer_mid = calculate_pointer_mid(d);
@@ -287,6 +301,10 @@ function draw_labels(text_date) {
 
 	add_text_for_labels(text);
 	add_pointer_for_labels(text, text_date);
+}
+
+function text_anchor_for_offset(x_offset) {
+	return (x_offset < 0) ? 'start' : 'end';
 }
 
 function add_text_label(text, label_function, offset_index) {
@@ -348,7 +366,8 @@ function update_map(current_date_index) {
 	set_date(current_date_index);
 	choropleth_map(current_date_index);
 	// outline_infected_countries(text_date_at(current_date_index));
-	draw_labels(text_date_at(current_date_index))
+	draw_labels(text_date_at(current_date_index));
+	update_headlines(current_date_index);
 }
 
 function animate_map() {
@@ -359,6 +378,88 @@ function animate_map() {
 			pause_animation();
 		}		
 	}, 250)
+}
+
+function update_headlines(current_date_index) {
+	current_date = text_date_at(current_date_index);
+	news = news_data_for(current_date);
+	clear_outbreak_news(current_date, news);
+
+	if (news != null) {
+		set_outbreak_news(news);
+	}
+}
+
+function set_outbreak_news(news) {
+	current_news = news;
+	draw_news(news);
+}
+
+function draw_news(news) {
+	remove_news_articles();
+
+	headlines = d3.select('.headlines');
+	articles = headlines.selectAll('.article').data([news])
+		.enter()
+		.append('div')
+		.attr('class', 'article')
+		.each(function(d, i) {
+			article = d3.select(this)
+			add_article_data(article, d, i);
+		});
+}
+
+function add_article_data(article, article_data, article_index) {
+	article.append('div')
+		.attr('class', 'article-caret')
+		.append('i')
+		.attr('class', 'fa fa-caret-right fa-sm')
+
+	var article_content = article.append('div')
+		.attr('class', 'article-content')
+
+	article_content.append('span')
+		.attr('class', 'article-source')
+		.html(article_data.source);
+	article_content.append('span')
+		.attr('class', 'article-date')
+		.html(' ' + current_date_format(parse_date_format.parse(article_data.date)));
+	article_content.append('div')
+		.attr('class', 'article-headline')
+		.append('a')
+		.attr(':href', article_data.url)
+		.html(article_data.title);
+
+	set_headline_size(article, article_content);
+	position_news(article, article_index);
+}
+
+function set_headline_size(article, article_content) {
+	var article_width = (width * 0.25)
+	var data_width = 17;
+	article.style('width', article_width + 'px')
+	article_content.style('width', (article_width - data_width) + 'px')
+}
+
+function position_news(article, article_index) {
+	article.style('top', (height - 65) + 'px')
+		.style('left', (width * 0.02) + 'px');
+}
+
+function remove_news_articles() { d3.selectAll('.article').remove(); }
+
+function clear_outbreak_news(current_date, replacement_news) {
+	if (current_news == null) { return; }
+	
+	if (replacement_news == null) {
+		if (current_date == text_date_at(0)) {
+			remove_news_articles();
+			current_news = null;
+		}
+	}
+	else {
+		current_news = null;
+	}
 }
 
 function set_current_date(date_index) {

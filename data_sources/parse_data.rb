@@ -6,6 +6,21 @@ require_relative 'outbreak_data'
 require_relative 'news_data'
 
 CsvHeadings = Struct.new(:date, :country, :united_states) do
+	def country_index
+		country == 'United States' ? 2 : 1
+	end
+
+	def us_index
+		country == 'United States' ? 1 : 2
+	end
+
+	def correct_us_and_country
+		if (country == 'United States')
+			return CsvHeadings.new(date, united_states, country)
+		end
+
+		return self
+	end
 end
 
 class EbolaDataParser
@@ -18,7 +33,12 @@ class EbolaDataParser
 
 	def parse(dirs)
 		files = get_files(dirs)		
-		files.each { |file| parse_file(File.new(file, 'r')) }
+		files.each do |file| 
+			@current_file = file
+			parse_file(File.new(file, 'r'))
+		end
+
+		ebola_data.normalize_data
 		ebola_data
 	end
 
@@ -42,17 +62,18 @@ class EbolaDataParser
 
 		unused = [file.gets, file.gets] #empty
 		headings = split_line(file.gets)
-		CsvHeadings.new(headings[0].chomp, headings[1], headings[1]) unless headings.size == 3
-		CsvHeadings.new(headings[0].chomp, headings[1], headings[2])
+		CsvHeadings.new(headings[0].chomp, headings[1], headings[1]) unless headings.size == 3		
+		headings = CsvHeadings.new(headings[0].chomp, headings[1], headings[2])
 	end
 
 	def parse_date(date_range)
 		dates = date_range.split(' - ')
-		dates[1]
+		dates[1] if dates.length > 1
+		dates[0]
 	end
 
 	def country_code(country_name)
-		puts "Unknown country '#{country_name}'" unless @country_map[country_name]
+		puts "Unknown country '#{country_name}' when parsing #{@current_file}" unless @country_map[country_name]
 		@country_map[country_name]
 	end
 
@@ -63,15 +84,17 @@ class EbolaDataParser
 		while(line = file.gets)
 			fields = split_line(line)
 			break unless fields.length > 1
+			next if fields[1].include? ' '
 
 			dates << parse_date(fields[0])
 			if (fields.length == 3)
-				data << [fields[1].to_f, fields[2].to_f]
+				data << [fields[headings.country_index].to_f, fields[headings.us_index].to_f]
 			else
 				data << [fields[1].to_f, fields[1].to_f]
 			end
 		end
 
+		headings = headings.correct_us_and_country
 		CountryData.new(country_code(headings.country.chomp), data, dates)
 	end
 
@@ -106,7 +129,7 @@ parser = EbolaDataParser.new
 news_data = NewsData.new
 outbreak_data = OutbreakData.new(news_data, parser.country_map)
 
-data = parser.parse(['data1', 'data2', 'data3', 'data4'])
+data = parser.parse(['data1', 'data2', 'data3', 'data4', '90_day_1', '90_day_2', '90_day_3'])
 data.write_csv(outbreak_data)
 parser.write_country_mapping
 

@@ -69,8 +69,9 @@ class OutbreakData
 	def merge_in_outbreak_news
 		@news_data.news.keys.each do |date|
 			outbreak = current_or_previous_outbreak_data(date).clone
-			outbreak[:news] = @news_data.news[date];
-			@outbreak_data[date] = outbreak;
+			outbreak[:news] = @news_data.news[date]
+			outbreak[:news][:date] = date
+			@outbreak_data[date] = outbreak
 		end
 	end
 
