@@ -219,7 +219,7 @@ function set_date(date_index) {
 		.scale(time_scale)
 		.tickSize(12)
 		.tickValues([ current_date ])
-		.tickFormat(function(d) { return current_date_format(current_date); });
+		.tickFormat(function(d) { return current_date_format(d); });
 
 	svg.append('g')
 		.attr('class', 'current_axis')
@@ -513,7 +513,7 @@ function resize() {
     svg.selectAll('.country').attr('d', path);
 
     // Redraw the labels
-    draw_labels(text_date_at(Infograph.current_date_index));
+    // draw_labels(text_date_at(Infograph.current_date_index));
 
     // d3.select(self.frameElement).style("height", height + "px");
 }
