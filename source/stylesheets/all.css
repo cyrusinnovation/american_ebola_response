@@ -16,6 +16,7 @@ h2 {
 
 .chart {
   text-align: left;
+  min-width: 600px;
 }
 
 .negative_top_margin {

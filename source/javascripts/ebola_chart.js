@@ -15,9 +15,20 @@ var label_offsets = {
 		Senegal: {x: 0.025, y: 0.095},
 		Nigeria: {x: 0.01, y: -0.105},
 		Mali: {x: -0.065, y: -0.025}
-	}
+	};
 label_offsets['Sierra Leone'] = {x: 0.04, y: -0.0225};
-label_offsets['United States'] = {x: 0.09, y: -0.0175}
+label_offsets['United States'] = {x: 0.09, y: -0.0175};
+
+var label_minimum_pixel_offsets = {
+	Guinea: {x: 45, y: 19},
+	Liberia: {x: 20.8, y: -34.5},
+	Spain: {x: 22.4, y: 18.4},
+	Senegal: {x: 20.5, y: 40.5},
+	Nigeria: {x: 8.3, y: -45.4},
+	Mali: {x: 0, y: 0}
+};
+label_minimum_pixel_offsets['Sierra Leone'] = {x: 32.7, y: -9.6};
+label_minimum_pixel_offsets['United States'] = {x: 0, y: 0};
 
 var pointer_offset_pixels = 4;
 var text_height_pixels = 10;
@@ -174,7 +185,7 @@ function add_legend() {
 	var legend_width = width * 0.15
 	var legend = d3.select('#legend')
 		.style('width', legend_width + 'px')
-		.style('right', 20 + 'px')
+		.style('left', (width - legend_width - 20) + 'px')
 		.style('top', 20 + 'px');
 
 	var legend_list = legend.append('ul')
@@ -269,9 +280,28 @@ function position_for_country(country_code) {
 	return centroids_by_id[country_code]
 }
 
-function offset_for(country_code) {
-	offset = label_offsets[country_name(country_code)]
+function country_offset_px(country_name) {
+	offset = label_offsets[country_name];
 	return {x: offset.x * width, y: offset.y * height};
+}
+
+function vector_length_squared(vector) {
+	return (vector.x * vector.x) + (vector.y * vector.y);
+}
+
+function pixel_offset(country) {
+	var offset = label_offsets[country];
+	return {x: offset.x * width, y: offset.y * height};
+}
+
+function offset_for(country_code) {
+	var country = country_name(country_code);
+	var calculated_offset = pixel_offset(country);
+	var min_pixel_offset = label_minimum_pixel_offsets[country];
+	var offset = (vector_length_squared(calculated_offset) < vector_length_squared(min_pixel_offset)) ?
+		min_pixel_offset : calculated_offset;
+
+	return {x: offset.x, y: offset.y};
 }
 
 function text_pos_for_country(country_code) {
