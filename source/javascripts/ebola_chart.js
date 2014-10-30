@@ -505,6 +505,10 @@ function resize() {
 		.attr('transform', axis_position())
 		.call(poi_Axis);
 
+	svg.select('.current_axis')
+		.attr('transform', axis_position())
+		.call(current_axis);
+
     // resize the map
     svg.selectAll('.country').attr('d', path);
 }
