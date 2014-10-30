@@ -7,20 +7,32 @@ body {
 }
 
 h2 {
-  position: relative;
+  position: absolute;
   z-index: 1000;
-  margin: 10px 15% 0 0;
+  width: 100%;
+  margin-top: 20px;
   text-align: center;
-  padding: 0 10%;
+  padding: 0 27% 0 12%;
+  font-size: 2em;
+
+}
+
+@media (max-width: 800px) {
+  h2 {
+    font-size: 1.6em;
+  }
+}
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 1.4em;
+  }
 }
 
 .chart {
   text-align: left;
   min-width: 600px;
-}
-
-.negative_top_margin {
-  margin-top: -50px;
+  position: relative;
 }
 
 .country {

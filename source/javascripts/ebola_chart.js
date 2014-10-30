@@ -185,7 +185,7 @@ function add_legend() {
 	var legend_width = width * 0.15
 	var legend = d3.select('#legend')
 		.style('width', legend_width + 'px')
-		.style('left', (width - legend_width - 20) + 'px')
+		.style('right', 2 + '%')
 		.style('top', 20 + 'px');
 
 	var legend_list = legend.append('ul')
@@ -478,8 +478,13 @@ function set_headline_size(article, article_content) {
 }
 
 function position_news(article, article_index) {
-	article.style('top', (height - 65) + 'px')
-		.style('left', (width * 0.02) + 'px');
+	article.style('left', (width * 0.02) + 'px');
+	var articleHeight = parseInt(article.style('height'));
+	if (articleHeight <= 85)
+		article.style('top', (height - 95) + 'px');
+	else {
+		article.style('bottom', (25 + axis_height) + 'px');
+	}
 }
 
 function remove_news_articles() { d3.selectAll('.article').remove(); }
