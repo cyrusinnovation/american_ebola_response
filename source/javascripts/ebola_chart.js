@@ -433,6 +433,7 @@ function add_article_data(article, article_data, article_index) {
 		.attr('class', 'article-headline')
 		.append('a')
 		.attr(':href', article_data.url)
+		.attr('target', '_blank')
 		.html(article_data.title);
 
 	set_headline_size(article, article_content);
