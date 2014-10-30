@@ -174,7 +174,7 @@ function add_legend() {
 	var legend_width = width * 0.15
 	var legend = d3.select('#legend')
 		.style('width', legend_width + 'px')
-		.style('left', (width - legend_width) + 'px')
+		.style('right', 20 + 'px')
 		.style('top', 20 + 'px');
 
 	var legend_list = legend.append('ul')
@@ -514,6 +514,9 @@ function resize() {
 
     // resize the map
     svg.selectAll('.country').attr('d', path);
+
+    d3.select('ul.list-inline').remove();
+    add_legend();
 
     // Redraw the labels
     svg.selectAll(".country").each(calculate_centroid);
