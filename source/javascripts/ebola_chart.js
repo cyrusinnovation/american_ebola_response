@@ -492,8 +492,8 @@ function resize() {
         .scale((width + 1) / 2 / Math.PI);
 
     // resize the map container
-    svg.style('width', width + 'px')
-    	.style('total_height', height + 'px');
+    svg.attr('width', width + 'px')
+    	.attr('height', total_height + 'px');
 
     // Update the time axes
 	time_scale.range([scale_x_offset, scale_length]);
@@ -511,6 +511,11 @@ function resize() {
 
     // resize the map
     svg.selectAll('.country').attr('d', path);
+
+    // Redraw the labels
+    draw_labels(text_date_at(Infograph.current_date_index));
+
+    // d3.select(self.frameElement).style("height", height + "px");
 }
 
-d3.select(self.frameElement).style("height", height + "px");
+// d3.select(self.frameElement).style("height", height + "px");
