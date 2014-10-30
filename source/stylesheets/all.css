@@ -9,8 +9,9 @@ body {
 h2 {
   position: relative;
   z-index: 1000;
-  margin-top: 10px;
-  margin-left: 100px;
+  margin: 10px 15% 0 0;
+  text-align: center;
+  padding: 0 10%;
 }
 
 .chart {
