@@ -519,6 +519,7 @@ function resize() {
     svg.selectAll(".country").each(calculate_centroid);
     draw_labels(text_date_at(Infograph.current_date_index));
 
+    update_headlines(Infograph.current_date_index);
     // d3.select(self.frameElement).style("height", height + "px");
 }
 
