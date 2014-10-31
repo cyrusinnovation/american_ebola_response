@@ -12,6 +12,9 @@
 		%div#legend
 			%div.legend-title Intensity of Google searches for the term 'ebola'
 		%div.headlines
+		%div.tooltip
+			%div.tooltip-country
+			%div.tooltip-search-intensity
 
 %div.animation-controls
 	.btn-group
@@ -21,6 +24,8 @@
 			%i#play_pause_image{class: 'fa fa-play fa-3x'}
 		%botton#next-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
 			%i{class: 'fa fa-step-forward fa-3x'}
+
+/ = partial 'writeup'
 
 :javascript
 	var Infograph = {};

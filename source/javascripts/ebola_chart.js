@@ -84,9 +84,15 @@ var infection_lookups = [];
 var current_news = null;
 var current_date_format = d3.time.format('%b %d, %Y')
 var parse_date_format = d3.time.format("%Y-%m-%d");
+var hover_tooltip = d3.select('div.tooltip');
+var hover_country = null;
 
 function search_data_for_country(country_code, index) {
 	return search_data[index][country_code];
+}
+
+function search_intensity(country_code, index) {
+	return Math.round(search_data_for_country(country_code, index) * 100);
 }
 
 function is_country_infected(country_code, index) {
@@ -158,6 +164,8 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 			.style("fill", function(d) { return color_for_country(d.id, 0); })
 			.attr("id", function(d) { return country_name(d.id); }, true)
 			.attr("d", path)
+			.on('mouseover', country_mouseover)
+			.on('mouseout', country_mouseout)
 
 	draw_time_scale();
 	if (Infograph.animating) {
@@ -168,6 +176,35 @@ function build_map(error, country_mapping, world, ebola_search_data, ebola_outbr
 		set_current_date(0);
 		update_map(Infograph.current_date_index);
 	}
+}
+
+function country_mouseover(country) {
+	set_country_text(country.id)
+	bounding_box = hover_tooltip.node().getBoundingClientRect();
+
+	hover_tooltip
+		.style('left', (d3.event.pageX - bounding_box.width * 0.5) + 'px')
+		.style('top', (d3.event.pageY - bounding_box.height + 2) + 'px')
+		.transition().duration(300)
+		.style('opacity', 1);
+	console.log(hover_tooltip.attr('country_code'))
+	hover_country = country.id;
+}
+
+function country_mouseout(country) {
+	hover_tooltip
+		.transition().duration(300)
+		.style('opacity', 0);
+	hover_country = null;
+}
+
+function set_country_text(country_code) {
+	if (country_code == null) { return; }
+	intensity = search_intensity(country_code, Infograph.current_date_index)
+	country = country_name(country_code);
+
+	d3.select('.tooltip-country').html('Country: ' + country);
+	d3.select('.tooltip-search-intensity').html('Search intensity: ' + intensity);
 }
 
 function calculate_centroid(geometry) {
@@ -403,6 +440,7 @@ function update_map(current_date_index) {
 	// outline_infected_countries(text_date_at(current_date_index));
 	draw_labels(text_date_at(current_date_index));
 	update_headlines(current_date_index);
+	set_country_text(hover_country);
 }
 
 function animate_map() {
@@ -559,7 +597,4 @@ function resize() {
     draw_labels(text_date_at(Infograph.current_date_index));
 
     update_headlines(Infograph.current_date_index);
-    // d3.select(self.frameElement).style("height", height + "px");
 }
-
-// d3.select(self.frameElement).style("height", height + "px");

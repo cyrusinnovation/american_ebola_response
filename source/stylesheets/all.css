@@ -118,3 +118,19 @@ h2 {
   fill: #555;
   shape-rendering: crispEdges;
 }
+
+div.tooltip {   
+  position: absolute;
+  text-align: left;
+  padding: 2px;
+  font-size: .7em;
+  background: #fff;
+  border: 1px solid #555;
+  pointer-events: none;
+  top: 100px;
+  left: 10px;
+}
+
+.tooltip-country {
+  font-weight: normal;
+}

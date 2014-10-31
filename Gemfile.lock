@@ -33,6 +33,7 @@ GEM
     eventmachine (1.0.3)
     execjs (2.2.2)
     ffi (1.9.6)
+    github-markdown (0.6.7)
     haml (4.0.5)
       tilt
     hike (1.2.3)
@@ -127,6 +128,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  github-markdown
   middleman (~> 3.3.6)
   middleman-livereload (~> 3.1.0)
   puma

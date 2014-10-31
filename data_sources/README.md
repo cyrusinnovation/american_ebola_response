@@ -56,3 +56,8 @@ Health care workers are finding a lot fewer ebola patients than expected in Libe
 Article explaining high-level of interest in Ebola
 ----------------------------------------------------------------------
 http://www.reuters.com/article/2014/10/10/us-health-ebola-brazil-idUSKCN0HZ1DV20141010
+
+
+What the world thinks of the American Ebola panic
+----------------------------------------------------------------------
+http://www.washingtonpost.com/blogs/worldviews/wp/2014/10/22/what-the-world-thinks-of-the-american-ebola-panic/
