@@ -13,10 +13,4 @@ Australia - 10/9/2014 http://www.nytimes.com/2014/10/10/world/asia/australia-nur
 Sweden - 10/16/2014 ?, 10/19/2014 - http://www.thelocal.se/20141019/ebola-alarm-raised-at-arlanda-airport. A suspected Ebola case identified Aug 31, a spike in interest but no panic.
 Paraguay - 10/11/2014 - ??? Ebola scare in neighboring Brazil, medical authorities attempt to reassure people in Paraguay that everything is fine, but no one in Paraguay appears to be suspected of having the disease.
 Haiti is very, very weird. No news, but very consistently strong interest.
-
-Google trends data shows strong interest in Guyana and Suriname 10/5 - 10/11, but map doesn't. Instead it shows strong interest 8/7
-There seems to be a data bug with nations that have weekly data but no daily data (ie Guyana: code = 328)
-
-@sorted_countries.map { |country_name| countries[country_name].data[index].to_f }
-	- give CountryData class a search_data_for(text_date) method that will interpolate if necessary.
-	- This will involve a refactor of the interpolation logic out of the BorderData class into CountryData
+Cuba's particularly strong intensity is interesting and seems to be associated with the strong participation in sending medical professionals to stricken West African countries: http://www.nytimes.com/2014/10/20/opinion/cubas-impressive-role-on-ebola.html?_r=0

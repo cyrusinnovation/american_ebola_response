@@ -187,7 +187,6 @@ function country_mouseover(country) {
 		.style('top', (d3.event.pageY - bounding_box.height + 2) + 'px')
 		.transition().duration(300)
 		.style('opacity', 1);
-	console.log(hover_tooltip.attr('country_code'))
 	hover_country = country.id;
 }
 
@@ -443,13 +442,23 @@ function update_map(current_date_index) {
 	set_country_text(hover_country);
 }
 
+function on_last_search_date() {
+	return Infograph.current_date_index == search_data.length - 1;
+}
+
 function animate_map() {
+	if (on_last_search_date()) {
+		Infograph.current_date_index = 0;		
+	}
+
 	Infograph.intervalId = setInterval(function() {
 		update_map(Infograph.current_date_index);
-		increment_current_date(1);
-		if (Infograph.current_date_index == 0) {
+		if (on_last_search_date()) {
 			pause_animation();
-		}		
+		}
+		else {
+			increment_current_date(1);
+		}
 	}, 250)
 }
 
