@@ -105,9 +105,10 @@ class EbolaData
 		# @countries['430'].data.each_with_index do |data, index|
 		# 	puts "#{@countries['430'].dates[index]}: #{index} #{data}"
 		# end
-		# @countries['76'].data.each_with_index do |data, index|
-		# 	puts "#{@countries['76'].dates[index]}: #{index} #{data}"
-		# end
+		@countries['328'].data.each_with_index do |data, index|
+			puts "#{@countries['328'].dates[index]}: #{index} #{data}"
+		end
+		puts dates
 
 		@sorted_countries = countries.keys.sort
 		CSV.open("outputs/ebola_results.csv", 'w') do |writer|

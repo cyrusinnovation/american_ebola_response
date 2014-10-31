@@ -1,0 +1,22 @@
+Brazil 10/10/2014 - http://www.reuters.com/article/2014/10/10/us-health-ebola-brazil-idUSKCN0HZ1DV20141010
+Chile 10/12/2014 - http://www.bbc.com/news/blogs-trending-29618224 (viral video On Sunday afternoon at one of Chile's busiest hospitals, an announcement blurted out over the loudspeakers. "Can I have your attention, please. We have a patient who is suspected to have Ebola. Please leave the room and go to another hospital")
+Panama 10/15/2014 - ??? Could not find any information. This was the day that the second case was confirmed in the US, and the date of maximum search intensity in the US. Could be another social media scare. Check twitter.
+Belize 10/16/2014 - ??? https://plus.google.com/+Belizecom/posts/HtajM5m8sao
+Zimbabwe 10/10/2014 - http://www.iol.co.za/dailynews/news/woman-tested-for-ebola-in-zimbabwe-1.1763506 (Woman tested for Ebola in Zimbabwe)
+Zimbabwe 9/19/2014 - https://www.newsday.co.zw/2014/09/19/sick-pair-tests-negative-ebola/
+Jamaica 10/16/2014 - http://loopjamaica.com/2014/10/16/latest-jamaica-news-breaking-ebola-scare-in-jamaica/
+Trinidad & Tobago 10/16/2014 - ??? Closed https://www.facebook.com/ExpressNewspapers/posts/10152242442925814, August 8 - But no blip on the search intensity, http://www.ibtimes.co.uk/ebola-outbreak-colombia-trinidad-jamaica-impose-travel-bans-visitors-affected-countries-1470484
+Mozambique - 10/21/2014 - ??? no events on google, but was able to find an article about a scare
+Mozambique - 8/14/2014 http://allafrica.com/stories/201408141493.html
+Norway - 10/7/2014 http://news.yahoo.com/norwegian-doctor-ebola-arrives-norway-141347744.html
+Australia - 10/9/2014 http://www.nytimes.com/2014/10/10/world/asia/australia-nurse-ebola.html?_r=0
+Sweden - 10/16/2014 ?, 10/19/2014 - http://www.thelocal.se/20141019/ebola-alarm-raised-at-arlanda-airport. A suspected Ebola case identified Aug 31, a spike in interest but no panic.
+Paraguay - 10/11/2014 - ??? Ebola scare in neighboring Brazil, medical authorities attempt to reassure people in Paraguay that everything is fine, but no one in Paraguay appears to be suspected of having the disease.
+Haiti is very, very weird. No news, but very consistently strong interest.
+
+Google trends data shows strong interest in Guyana and Suriname 10/5 - 10/11, but map doesn't. Instead it shows strong interest 8/7
+There seems to be a data bug with nations that have weekly data but no daily data (ie Guyana: code = 328)
+
+@sorted_countries.map { |country_name| countries[country_name].data[index].to_f }
+	- give CountryData class a search_data_for(text_date) method that will interpolate if necessary.
+	- This will involve a refactor of the interpolation logic out of the BorderData class into CountryData
