@@ -12,6 +12,7 @@ svg.line_chart {
 .axis line {
   fill: none;
   stroke: #000;
+  stroke-width: 1.0px;
   shape-rendering: crispEdges;
 }
 
@@ -24,11 +25,25 @@ svg.line_chart {
   stroke: #aaa;
   stroke-linejoin: round;
   stroke-linecap: round;
-  stroke-width: 1.5px;
+  stroke-width: 1.0px;
 }
 
 .place--hover {
-  stroke: #000;
+  stroke-width: 2.0px;
+  stroke: #555;
+}
+
+.united-states {
+  fill: none;
+  stroke: rgb(158,202,225);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-width: 1.0px;  
+}
+
+.united-states--hover {
+  stroke-width: 2.0px;  
+  stroke: rgb(107,174,214);
 }
 
 .focus text {

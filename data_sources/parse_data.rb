@@ -134,22 +134,23 @@ class EbolaDataParser
 
 	def parse_line_chart_data
 		@places_of_interest = [
-			{ title: 'Brazil', places: ['Brazil'] },
-			{ title: 'Chile',  places: ['Chile'] },
-			{ title: 'Panama',  places: ['Panama'] },
-			{ title: 'Belize',  places: ['Belize'] },
-			{ title: 'Zimbabwe',  places: ['Zimbabwe'] },
-			{ title: 'Jamaica',  places: ['Jamaica'] },
-			{ title: 'Mozambique',  places: ['Mozambique'] },
-			{ title: 'Guyana',  places: ['Guyana'] },
-			{ title: 'Paraguay',  places: ['Paraguay'] },
-			{ title: 'Norway',  places: ['Norway'] },
-			{ title: 'Australia',  places: ['Australia'] },
-			{ title: 'Sweden',  places: ['Sweden'] },
-			{ title: 'Cuba',  places: ['Cuba'] },
-			{ title: 'Haiti', places: ['Haiti'] },
+			{ title: 'Brazil', places: ['Brazil', 'United States'] },
+			{ title: 'Chile',  places: ['Chile', 'United States'] },
+			{ title: 'Panama',  places: ['Panama', 'United States'] },
+			{ title: 'Belize',  places: ['Belize', 'United States'] },
+			{ title: 'Zimbabwe',  places: ['Zimbabwe', 'United States'] },
+			{ title: 'Jamaica',  places: ['Jamaica', 'United States'] },
+			{ title: 'Mozambique',  places: ['Mozambique', 'United States'] },
+			{ title: 'Guyana',  places: ['Guyana', 'United States'] },
+			{ title: 'Paraguay',  places: ['Paraguay', 'United States'] },
+			{ title: 'Norway',  places: ['Norway', 'United States'] },
+			{ title: 'Australia',  places: ['Australia', 'United States'] },
+			{ title: 'Sweden',  places: ['Sweden', 'United States'] },
+			{ title: 'Cuba',  places: ['Cuba', 'United States'] },
+			{ title: 'Haiti', places: ['Haiti', 'United States'] },
+			{ title: 'West_Africa', places: ['Liberia', 'Sierra Leone', 'Guinea', 'United States'] },
 			{ title: 'all_outliers', places: ['Brazil', 'Chile', 'Panama', 'Belize', 'Zimbabwe', 'Jamaica', 'Mozambique',
-				'Guyana', 'Paraguay', 'Norway', 'Australia', 'Sweden', 'Cuba', 'Haiti']}
+				'Guyana', 'Paraguay', 'Norway', 'Australia', 'Sweden', 'Cuba', 'Haiti', 'United States'] }
 		]
 
 		@places_of_interest.each do |place|

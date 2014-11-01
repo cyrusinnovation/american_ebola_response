@@ -16,8 +16,6 @@ LINE_CHART.line_chart = function(data_file, chart_title) {
   var y = d3.scale.linear()
       .range([height, 0]);
 
-  var color = d3.scale.category20();
-
   var voronoi = d3.geom.voronoi()
       .x(function(d) { return x(d.date); })
       .y(function(d) { return y(d.value); })
@@ -59,11 +57,11 @@ LINE_CHART.line_chart = function(data_file, chart_title) {
         .text(chart_title);
 
     svg.append("g")
-        .attr("class", "places")
       .selectAll("path")
         .data(places)
       .enter().append("path")
-        .attr("d", function(d) { d.line = this; return line(d.values); });
+        .attr("d", function(d) { d.line = this; return line(d.values); })
+        .attr("class", function(d) { console.log(d.place_class()); return d.place_class(); });
 
     var focus = svg.append("g")
         .attr("transform", "translate(-100,-100)")
@@ -93,14 +91,14 @@ LINE_CHART.line_chart = function(data_file, chart_title) {
         .on("mouseout", mouseout);
 
     function mouseover(d) {
-      d3.select(d.place.line).classed("place--hover", true);
+      d3.select(d.place.line).classed(d.place.hover_class(), true);
       d.place.line.parentNode.appendChild(d.place.line);
       focus.attr("transform", "translate(" + x(d.date) + "," + y(d.value) + ")");
       focus.select("text").text(d.place.name);
     }
 
     function mouseout(d) {
-      d3.select(d.place.line).classed("place--hover", false);
+      d3.select(d.place.line).classed(d.place.hover_class(), false);
       focus.attr("transform", "translate(-100,-100)");
     }
   });
@@ -109,7 +107,19 @@ LINE_CHART.line_chart = function(data_file, chart_title) {
     if (!i) dates = Object.keys(d).map(timeFormat.parse).filter(Number);
     var place = {
       name: d.Name,
-      values: null
+      values: null,
+
+      is_united_states: function() {
+        return this.name == 'United States';
+      },
+      place_class: function() {
+        if (this.is_united_states()) { return 'united-states'; }
+        return 'places';
+      },
+      hover_class: function() {
+        if (this.is_united_states()) { return 'united-states--hover'; }
+        return 'place--hover';
+      }      
     };
     place.values = dates.map(function(place_date) {
       return {
