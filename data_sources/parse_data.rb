@@ -127,7 +127,9 @@ class EbolaDataParser
 	end
 
 	def country_data(human_name)
-		@ebola_data.country_data_for(country_code(human_name))
+		cd = @ebola_data.country_data_for(country_code(human_name))
+		raise "unable to find country data for #{human_name}" unless cd
+		cd
 	end
 
 	def parse_line_chart_data
@@ -146,6 +148,8 @@ class EbolaDataParser
 			{ title: 'Sweden',  places: ['Sweden'] },
 			{ title: 'Cuba',  places: ['Cuba'] },
 			{ title: 'Haiti', places: ['Haiti'] },
+			{ title: 'all_outliers', places: ['Brazil', 'Chile', 'Panama', 'Belize', 'Zimbabwe', 'Jamaica', 'Mozambique',
+				'Guyana', 'Paraguay', 'Norway', 'Australia', 'Sweden', 'Cuba', 'Haiti']}
 		]
 
 		@places_of_interest.each do |place|

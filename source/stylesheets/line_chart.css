@@ -19,7 +19,7 @@ svg.line_chart {
   display: none;
 }
 
-.cities {
+.places {
   fill: none;
   stroke: #aaa;
   stroke-linejoin: round;
@@ -27,7 +27,7 @@ svg.line_chart {
   stroke-width: 1.5px;
 }
 
-.city--hover {
+.place--hover {
   stroke: #000;
 }
 
