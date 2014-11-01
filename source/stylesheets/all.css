@@ -134,3 +134,9 @@ div.tooltip {
 .tooltip-country {
   font-weight: normal;
 }
+
+iframe.line_graph {
+  border: none;
+  width: 500px;
+  height: 300px;
+}

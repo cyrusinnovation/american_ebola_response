@@ -92,7 +92,8 @@ function search_data_for_country(country_code, index) {
 }
 
 function search_intensity(country_code, index) {
-	return Math.round(search_data_for_country(country_code, index) * 100);
+	intensity = search_data_for_country(country_code, index);
+	return Math.round((intensity == undefined ? 0 : intensity) * 100);
 }
 
 function is_country_infected(country_code, index) {

@@ -1,14 +1,15 @@
 class CountryData
 	UNITED_STATES_COUNTRY_CODE = '840'
-	attr_accessor :name, :data, :dates, :max_usa
+	attr_accessor :name, :human_name, :data, :dates, :max_usa
 
-	def initialize(name, data, dates)
+	def initialize(name, data, dates, human_name)
 		@name = name
 		@data = data
 		@dates = dates
+		@human_name = human_name
 
 		if (data)
-			@max_usa = @data.inject(0) { |memo, datum| memo > datum[1] ? memo : datum[1] }
+			@max_usa = @data.inject(0) { |memo, datum| memo > datum[1].to_f ? memo : datum[1].to_f }
 		else
 			@max_usa = 999
 		end
@@ -17,7 +18,7 @@ class CountryData
 	def normalize_data
 		raise "bad @max_usa" if @max_usa > 100
 
-		@data = @data.map { |datum| datum[0] / max_usa }
+		@data = @data.map { |datum| datum[0].to_f / max_usa }
 	end
 
 	def data_hash
@@ -27,7 +28,7 @@ class CountryData
 	def merge_data(country_data)
 		if (country_data.name == UNITED_STATES_COUNTRY_CODE)
 			max_value = 0
-			country_data.data.each { |datum| max_value = (datum[1] > max_value ? datum[1] : max_value) }
+			country_data.data.each { |datum| max_value = (datum[1].to_f > max_value ? datum[1].to_f : max_value) }
 			if max_value < 100
 				return
 			end
@@ -76,6 +77,7 @@ class CountryData
 	end
 
 	private
+
 
 	def interpolant(date, prior, after)
 		d = Date.parse(date, '%y-%m-%d')

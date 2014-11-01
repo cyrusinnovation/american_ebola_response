@@ -4,11 +4,16 @@ require_relative 'country_data'
 require_relative 'outbreak_data'
 
 class EbolaData
-	attr_accessor :countries, :sorted_names
+	attr_accessor :countries, :sorted_names, :ninety_day_dates
 
 	def initialize()
 		@countries = {}
 		@dates = {}
+		@ninety_day_dates = nil
+	end
+
+	def country_data_for(country_code)
+		@countries[country_code]
 	end
 
 	def dates
@@ -20,13 +25,7 @@ class EbolaData
 	end
 
 	def add_country(country_data)
-		if (@dates.empty?)
-			@dates = dates_hash(country_data.dates)
-		else
-			@dates.merge!(dates_hash(country_data.dates))
-		end
-		raise "bad data for #{country_data.name}" if dates.include? nil
-
+		setup_dates(country_data)
 		merge_in_country_data(country_data)
 	end
 
@@ -64,6 +63,29 @@ class EbolaData
 			outbreak_data.dates.each do |date|
 				writer << line(date)
 			end
+		end
+	end
+
+	private
+
+	def setup_dates(country_data)
+		if (@dates.empty?)
+			@dates = dates_hash(country_data.dates)
+		else
+			@dates.merge!(dates_hash(country_data.dates))
+		end
+		raise "bad data for #{country_data.name}" if dates.include? nil
+
+		setup_ninety_day_dates(country_data)
+	end
+
+	def setup_ninety_day_dates(country_data)
+		return if @ninety_day_dates
+
+		if (country_data.data.size == 90)
+			@ninety_day_dates = country_data.dates.each_with_index.map do |date, index|
+				date unless country_data.data[index][0].nil?
+			end.compact
 		end
 	end
 end
