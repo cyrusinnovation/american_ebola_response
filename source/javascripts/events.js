@@ -16,6 +16,10 @@ Event.events = {
 			// {date: '2014-10-06', description: 'An NBC cameraman arrives for ebola treatment'}
 		],
 
+		taylor_swift: [
+			{date: '2014-10-27', description: "Taylor Swift album '1989' is released"}
+		],
+
 		brazil: [
 			{date: '2014-10-10', description: 'A West African man is tested for ebola in Brazil'}
 		],		

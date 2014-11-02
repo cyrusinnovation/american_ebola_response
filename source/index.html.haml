@@ -35,6 +35,7 @@
 / = partial 'writeup'
 
 #united_states_graph{style: 'margin-left: 10%; margin-right: 10%'}
+#taylor_swift_graph{style: 'width: 500px'}
 
 :javascript
 	var Infograph = {};
@@ -42,9 +43,11 @@
 	Infograph.intervalId = null;
 	Infograph.current_date_index = 0;
 	Infograph.line_charts = {};
-= javascript_include_tag "google_analytics"
+= javascript_include_tag "google_analytics", "mobilecheck"
 = javascript_include_tag "jquery-2.1.1.min", "d3", "queue.v1.min", "topojson.v1.min", "events", "animation_controls", "ebola_chart", "line_chart"
 
 :javascript
-	new LINE_CHART.line_chart("United_States.csv", 'Ebola search intensity: United States', 
+	new LINE_CHART.line_chart("United_States.csv", 'Ebola Google search intensity: United States', 
 		['us_infection', 'us_imported'], 'united_states_graph', 300, {resize: true});
+	new LINE_CHART.line_chart("taylor_swift.csv", 'Google search intensity for a variety of terms in the USA',
+		['taylor_swift'], 'taylor_swift_graph', 300, {});

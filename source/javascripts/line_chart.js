@@ -68,8 +68,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   }
 
   this.clear_focus = function(d) {
-    d3.selectAll('.united-states--hover').classed('united-states--hover', false);
-    d3.selectAll('.place--hover').classed('place--hover', false);
+    this.svg.selectAll('.united-states--hover').classed('united-states--hover', false);
+    this.svg.selectAll('.place--hover').classed('place--hover', false);
     this.focus.attr("transform", "translate(-100,-100)");
   }
 
@@ -100,14 +100,14 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     var self = this;
     axis_event_dates = this.event_dates();
 
-    event_axis = d3.svg.axis()
+    this.event_axis = d3.svg.axis()
       .orient('top')
       .scale(x)
       .tickSize(height)
       .tickValues(axis_event_dates)
       .tickFormat(function(d) { return self.event_for(d); });
 
-    hitbox_axis = d3.svg.axis()
+    this.hitbox_axis = d3.svg.axis()
       .orient('top')
       .scale(x)
       .tickSize(height)
@@ -118,7 +118,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.event_g
       .attr('class', 'axis--event')
       .attr("transform", "translate(0," + this.height + ")")
-      .call(event_axis)
+      .call(this.event_axis)
       .selectAll('text')
       .attr('y', -4)
       .attr('x', 6)
@@ -129,14 +129,14 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.hitbox_g
       .attr('class', 'event--hitbox')
       .attr("transform", "translate(0," + this.height + ")")
-      .call(hitbox_axis)
+      .call(this.hitbox_axis)
       .selectAll('line')
-      .on('mouseover', function(d) { self.event_mouseover(d); })
-      .on('mouseout', function(d) { self.event_mouseout(d); })
+      .on(hover_enter_event_name(), function(d) { self.event_mouseover(d); })
+      .on(hover_exit_event_name(), function(d) { self.event_mouseout(d); })
   }
 
   this.event_mouseover = function(date) {
-    d3.selectAll('.axis--event text')
+    this.svg.selectAll('.axis--event text')
       .transition()
       .duration(250)
       .style('opacity', function(d) { 
@@ -145,7 +145,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   }
 
   this.event_mouseout = function(d) {
-    d3.selectAll('.axis--event text')
+    this.svg.selectAll('.axis--event text')
       .transition()
       .duration(250)
       .style('opacity', '0');
@@ -218,8 +218,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
             return "M" + d.join("L") + "Z"; 
           })
           .datum(function(d) { return d.point; })
-          .on("mouseover", function(d) { self.mouseover(d); })
-          .on("mouseout", function(d) { self.mouseout(d); });
+          .on(hover_enter_event_name(), function(d) { self.mouseover(d); })
+          .on(hover_exit_event_name(), function(d) { self.mouseout(d); });
     }
 
     this.setup_events_axis(this.x_scale, this.height - 7);
@@ -232,15 +232,15 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
       name: d.Name,
       values: null,
 
-      is_united_states: function() {
-        return this.name == 'United States';
+      is_special_type: function() {
+        return this.name == 'United States' || this.name == 'ebola';
       },
       place_class: function() {
-        if (this.is_united_states()) { return 'united-states'; }
+        if (this.is_special_type()) { return 'united-states'; }
         return 'places';
       },
       hover_class: function() {
-        if (this.is_united_states()) { return 'united-states--hover'; }
+        if (this.is_special_type()) { return 'united-states--hover'; }
         return 'place--hover';
       }      
     };
@@ -288,7 +288,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
 
     this.event_g
       .attr("transform", "translate(0," + this.height + ")")
-      .call(event_axis)
+      .call(this.event_axis)
       .selectAll('text')
       .attr('y', -4)
       .attr('x', 6)
@@ -297,7 +297,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
 
     this.hitbox_g
       .attr("transform", "translate(0," + this.height + ")")
-      .call(hitbox_axis)
+      .call(this.hitbox_axis)
   }
 
   this.load_data = function() {
@@ -306,10 +306,6 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
       function(error, places) { 
         self.build_chart(error, places); 
       });
-  }
-
-  this.check_for_load = function() {
-    console.log('checking for load');
   }
 
   function isScrolledIntoView(elem)

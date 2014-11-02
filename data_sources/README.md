@@ -8,6 +8,8 @@ TOPICS:
 * Disconnect between authority figures and institutions and populace - examples in US, in Asia quote the NYTimes article, then show how this is not reflected by google search intensity.
 * Show huge spikes in interest in US correlated with ebola events, no noticable difference caused by policy events.
 
+Contrast searches for Ebola, Taylor Swift, Halloween. Need data for after Halloween to see how it falls off.
+
 When nurse Nina Pham was diagnosed with ebola in Dallas on ..., the response felt immediate and visceral.
 Viral internet stories vs viral disease.
 
