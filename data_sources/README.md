@@ -8,6 +8,9 @@ TOPICS:
 * Disconnect between authority figures and institutions and populace - examples in US, in Asia quote the NYTimes article, then show how this is not reflected by google search intensity.
 * Show huge spikes in interest in US correlated with ebola events, no noticable difference caused by policy events.
 
+When nurse Nina Pham was diagnosed with ebola in Dallas on ..., the response felt immediate and visceral.
+Viral internet stories vs viral disease.
+
 WHO global alert and response: http://www.who.int/csr/don/archive/disease/ebola/en/
 WHO situation reports: http://www.who.int/csr/disease/ebola/situation-reports/en/
 

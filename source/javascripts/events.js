@@ -2,8 +2,8 @@ var Event = {};
 Event.events = {
 	event_list : {
 		us_infection : [
-			{date: '2014-09-30', description: 'Thomas Duncan is confirmed to have ebola'},
-			{date: '2014-10-08', description: 'Thomas Duncan dies'},
+			{date: '2014-09-30', description: 'Thomas Eric Duncan tests positive for ebola'},
+			{date: '2014-10-08', description: 'Thomas Eric Duncan dies'},
 			{date: '2014-10-11', description: 'Nurse Nina Pham tests positive for ebola'},
 			{date: '2014-10-15', description: 'Nurse Amber Vinson tests positive for ebola'},
 			{date: '2014-10-23', description: 'Doctor Craig Spencer tests positive for ebola'}

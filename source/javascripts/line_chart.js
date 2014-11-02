@@ -1,13 +1,14 @@
 var LINE_CHART = {};
-LINE_CHART.line_chart = function(data_file, chart_title, event_names, override_height) {
+LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name, override_height) {
   var dates,
       timeFormat = d3.time.format("%Y-%m-%d"),
       axisFormat = d3.time.format("%m/%d"),
       eventFormat = d3.time.format("%b %d");
   var all_events = Event.events.get_events(event_names);
+  var chart_id = '#' + chart_name;
 
   var margin = {top: 20, right: 30, bottom: 30, left: 40};
-  var calc_width = parseInt(d3.select('#line_chart').style('width'));
+  var calc_width = parseInt(d3.select(chart_id).style('width'));
   var calc_height = override_height ? override_height : calc_width * 3 / 5;
   var width = calc_width - margin.left - margin.right;
   var height = calc_height - margin.top - margin.bottom;
@@ -27,7 +28,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, override_h
       .x(function(d) { return x(d.date); })
       .y(function(d) { return y(d.value); });
 
-  var svg = d3.select("#line_chart").append("svg")
+  var svg = d3.select(chart_id).append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .attr("class", "line_chart")
