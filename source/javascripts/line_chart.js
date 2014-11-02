@@ -262,7 +262,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.calculate_dimensions();
     this.setup_voronoi();
 
-    this.svg
+    d3.select(this.chart_id + ' svg')
       .attr("width", this.width + this.margin.left + this.margin.right)
       .attr("height", this.height + this.margin.top + this.margin.bottom)
     .select("g")
