@@ -2,7 +2,7 @@ var width = parseInt(d3.select('#ebola_chart').style('width')),
 	mapAspectRatio = 0.52,
 	height = width * mapAspectRatio;
 
-var scale_x_offset = 30;
+var scale_x_offset = 38;
 var scale_y_offset = 18;
 var scale_length = width - scale_x_offset * 2;
 var axis_height = scale_y_offset * 1.25;
@@ -125,7 +125,7 @@ function build_dates_of_interest() {
 
 	time_scale = d3.time.scale()
 		.domain(date_of_interest_range())
-		.range([scale_x_offset, scale_length]);
+		.range([0, scale_length]);
 }
 
 function date_of_interest_range() {
@@ -271,12 +271,56 @@ function set_date(date_index) {
 		.scale(time_scale)
 		.tickSize(12)
 		.tickValues([ current_date ])
-		.tickFormat(function(d) { return current_date_format(d); });
+		.tickFormat(function(d) { return '' });
 
-	svg.append('g')
+	tracker_axis = svg.append('g')
 		.attr('class', 'current_axis')
 		.attr('transform', axis_position())
-		.call(current_axis)
+		.call(current_axis);
+
+	update_tracker_totals(date_index, current_date, tracker_axis);
+}
+
+function update_tracker_totals(date_index, current_date, tracker_axis) {
+	tracker_tick = tracker_axis.select('.tick');
+	var outbreak_sum = global_outbreak_sum(date_index)
+	
+	tracker_div = d3.select('.global_tracker');
+	tracker_div.select('.tracker_date').html(current_date_format(current_date))
+	tracker_div.select('.tracker_cases').html('Cases: ' + number_with_commas(outbreak_sum.cases))
+	tracker_div.select('.tracker_deaths').html('Deaths: ' + number_with_commas(outbreak_sum.deaths))
+
+	var pos = tracker_position(tracker_axis, tracker_tick, tracker_div);
+	tracker_div.style('left', pos.x + 'px');
+	tracker_div.style('top', pos.y + 'px');	
+}
+
+function parse_translate(translate_attr) {
+	var splitBraces = translate_attr.split('(');
+    splitBraces = splitBraces[1].split(')');
+    var splitComma = splitBraces[0].split(',');
+	return { x: parseFloat(splitComma[0]), y: parseFloat(splitComma[1]) };	
+}
+
+function tracker_position(tracker_axis, tracker_tick, tracker_div) {
+	var p_axis = parse_translate(tracker_axis.attr('transform'));
+	var p_tick = parse_translate(tracker_tick.attr('transform'));
+	var bounding_box = tracker_div.node().getBoundingClientRect();
+
+	console.log(p_axis.x + ' ' + p_tick.x);
+    return { x: p_axis.x + p_tick.x - bounding_box.width * 0.5, y: p_axis.y + p_tick.y - 46 };
+}
+
+function global_outbreak_sum(date_index) {
+	var outbreaks = outbreak_data_for(text_date_at(date_index))
+	var cases = 0;
+	var deaths = 0;
+	outbreaks.forEach(function(outbreak) { 
+		cases += +outbreak.cases;
+		deaths += +outbreak.deaths;
+	});
+
+	return { cases: cases, deaths: deaths};
 }
 
 function choropleth_map(date_index) {
@@ -588,7 +632,7 @@ function resize() {
     	.attr('height', total_height + 'px');
 
     // Update the time axes
-	time_scale.range([scale_x_offset, scale_length]);
+	time_scale.range([0, scale_length]);
 	svg.select('.time_axis')
 		.attr('transform', axis_position())
 		.call(xAxis);
