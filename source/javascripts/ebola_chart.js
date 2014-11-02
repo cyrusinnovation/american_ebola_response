@@ -389,8 +389,8 @@ function add_text_label(text, label_function, offset_index) {
 function add_text_for_labels(text) {
 	text.each (function() {
 		text = d3.select(this);
-		add_text_label(text, function(d) { return "Deaths: " + d.deaths; }, 0 );
-		add_text_label(text, function(d) { return "Cases: " + d.cases; }, 1 );
+		add_text_label(text, function(d) { return "Deaths: " + number_with_commas(d.deaths); }, 0 );
+		add_text_label(text, function(d) { return "Cases: " + number_with_commas(d.cases); }, 1 );
 		add_text_label(text, function(d) { return country_name(d.code); }, 2 );
 	});	
 }
@@ -561,6 +561,10 @@ function set_current_date(date_index) {
 
 function increment_current_date(increment) {
 	set_current_date(Infograph.current_date_index + increment);
+}
+
+function number_with_commas(number_to_format) {
+    return number_to_format.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 d3.select(window).on('resize', resize);
