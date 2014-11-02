@@ -1,5 +1,5 @@
 var width = parseInt(d3.select('#ebola_chart').style('width')),
-	mapAspectRatio = 0.52,
+	mapAspectRatio = 0.51,
 	height = width * mapAspectRatio;
 
 var scale_x_offset = 38;
@@ -224,7 +224,7 @@ function add_legend() {
 	var legend = d3.select('#legend')
 		.style('width', legend_width + 'px')
 		.style('right', 2 + '%')
-		.style('top', 20 + 'px');
+		.style('top', 7 + 'px');
 
 	var legend_list = legend.append('ul')
 			.attr('class', 'list-inline');
@@ -307,7 +307,6 @@ function tracker_position(tracker_axis, tracker_tick, tracker_div) {
 	var p_tick = parse_translate(tracker_tick.attr('transform'));
 	var bounding_box = tracker_div.node().getBoundingClientRect();
 
-	console.log(p_axis.x + ' ' + p_tick.x);
     return { x: p_axis.x + p_tick.x - bounding_box.width * 0.5, y: p_axis.y + p_tick.y - 46 };
 }
 
@@ -573,11 +572,15 @@ function set_headline_size(article, article_content) {
 function position_news(article, article_index) {
 	article.style('left', (width * 0.02) + 'px');
 	var articleHeight = parseInt(article.style('height'));
-	if (articleHeight <= 85)
-		article.style('top', (height - 95) + 'px');
-	else {
-		article.style('bottom', (25 + axis_height) + 'px');
-	}
+	article.style('bottom', (47 + axis_height) + 'px');
+	// if (articleHeight <= 85) {
+	// 	console.log('case 1 ' + articleHeight);
+	// 	article.style('top', (height - 95) + 'px');
+	// }
+	// else {
+	// 	console.log('case 2 ' + articleHeight);
+	// 	article.style('bottom', (25 + axis_height) + 'px');
+	// }
 }
 
 function remove_news_articles() { d3.selectAll('.article').remove(); }
@@ -650,6 +653,7 @@ function resize() {
 
     d3.select('ul.list-inline').remove();
     add_legend();
+    set_date(Infograph.current_date_index);
 
     // Redraw the labels
     svg.selectAll(".country").each(calculate_centroid);
