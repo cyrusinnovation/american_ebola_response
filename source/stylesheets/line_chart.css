@@ -20,6 +20,33 @@ svg.line_chart {
   display: none;
 }
 
+.axis--event path {
+  display: none;
+}
+
+.axis--event line {
+  stroke: #777;
+  stroke-dasharray: 2,2;
+}
+
+.axis--event text {
+  text-anchor: start;
+  fill: #000;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  opacity: 0;
+}
+
+.event--hitbox path {
+  display: none;
+}
+
+.event--hitbox line {
+  stroke-width: 24px;
+  fill: none;
+  stroke: #555;
+  opacity: 0;
+}
+
 .places {
   fill: none;
   stroke: #aaa;

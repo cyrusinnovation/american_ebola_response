@@ -148,6 +148,7 @@ class EbolaDataParser
 			{ title: 'Sweden',  places: ['Sweden', 'United States'] },
 			{ title: 'Cuba',  places: ['Cuba', 'United States'] },
 			{ title: 'Haiti', places: ['Haiti', 'United States'] },
+			{ title: 'United_States', places: ['United States'] },
 			{ title: 'West_Africa', places: ['Liberia', 'Sierra Leone', 'Guinea', 'United States'] },
 			{ title: 'all_outliers', places: ['Brazil', 'Chile', 'Panama', 'Belize', 'Zimbabwe', 'Jamaica', 'Mozambique',
 				'Guyana', 'Paraguay', 'Norway', 'Australia', 'Sweden', 'Cuba', 'Haiti', 'United States'] }

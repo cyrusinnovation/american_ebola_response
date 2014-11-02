@@ -3,8 +3,10 @@ TOPICS:
 * Spread of information vs spread of disease - information spreads much faster.
 * Policy decisions - helping to assuage hysteria or spreading it?
 * Fear as a double-edged sword, it prevents Ebola, but too much of it is a danger and threatening civil liberties
-* 
-
+* Fear is short-lived. Illustrate with Brazil, Chile, etc. Those are very sharp spikes. Once the cause of fear has disappeared, the interest disappears as well. Contrast with Cuba.
+* Ebola fatigue. Diminishing returns. Crying wolf. Previous outbreaks, it looked like this was going to be another one, interest diminished even in affected areas. Interest is diminishing again.
+* Disconnect between authority figures and institutions and populace - examples in US, in Asia quote the NYTimes article, then show how this is not reflected by google search intensity.
+* Show huge spikes in interest in US correlated with ebola events, no noticable difference caused by policy events.
 
 WHO global alert and response: http://www.who.int/csr/don/archive/disease/ebola/en/
 WHO situation reports: http://www.who.int/csr/disease/ebola/situation-reports/en/
@@ -61,3 +63,8 @@ http://www.reuters.com/article/2014/10/10/us-health-ebola-brazil-idUSKCN0HZ1DV20
 What the world thinks of the American Ebola panic
 ----------------------------------------------------------------------
 http://www.washingtonpost.com/blogs/worldviews/wp/2014/10/22/what-the-world-thinks-of-the-american-ebola-panic/
+
+
+Alarmed by Ebola, Public Isn’t Calmed by ‘Experts Say’
+----------------------------------------------------------------------
+http://www.nytimes.com/2014/11/01/us/alarmed-by-ebola-public-isnt-calmed-by-experts-say-.html?smid=re-share&_r=0
