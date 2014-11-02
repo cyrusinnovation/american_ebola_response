@@ -647,7 +647,7 @@ function EbolaChart() {
 		.await(function(error, country_mapping, world_data, ebola_results, outbreak_data) {
 			queued_self.build_map(error, country_mapping, world_data, ebola_results, outbreak_data);
 		})
-	d3.select(window).on('resize', this.resize);	
+	d3.select(window).on('resize', function(d) { Infograph.ebola_chart.resize(); });
 }
 
 Infograph.ebola_chart = new EbolaChart();

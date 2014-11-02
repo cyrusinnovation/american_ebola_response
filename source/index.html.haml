@@ -3,6 +3,7 @@
 = stylesheet_link_tag 'all.css'
 = stylesheet_link_tag 'animation-controls.css'
 = stylesheet_link_tag 'legend.css', 'article.css'
+= stylesheet_link_tag 'line_chart.css'
 
 %div.chart
 	%title Ebola: Information and Disease
@@ -29,12 +30,11 @@
 		%botton#next-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
 			%i{class: 'fa fa-step-forward fa-3x'}
 
-%figure
-	%iframe.line_graph{src: 'line_graph.html', scrolling: 'no'}
-
 / #line_chart
 
 / = partial 'writeup'
+
+#line_chart
 
 :javascript
 	var Infograph = {};
@@ -42,4 +42,8 @@
 	Infograph.intervalId = null;
 	Infograph.current_date_index = 0;
 = javascript_include_tag "google_analytics"
-= javascript_include_tag "jquery-2.1.1.min", "d3", "queue.v1.min", "topojson.v1.min", "events", "animation_controls", "ebola_chart"
+= javascript_include_tag "jquery-2.1.1.min", "d3", "queue.v1.min", "topojson.v1.min", "events", "animation_controls", "ebola_chart", "line_chart"
+
+:javascript
+	new LINE_CHART.line_chart("United_States.csv", 'Ebola search intensity: United States', 
+		['us_infection', 'us_imported'], 300);
