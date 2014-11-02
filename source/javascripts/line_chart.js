@@ -17,10 +17,10 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   }
 
   this.setup_voronoi = function() {
-    this.x_scale = d3.time.scale()
+    this.x_scale
         .range([0, this.width]);
 
-    this.y_scale = d3.scale.linear()
+    this.y_scale
         .range([this.height, 0]);
 
     this.voronoi = d3.geom.voronoi()
@@ -34,6 +34,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   }
 
   var self = this;
+  this.x_scale = d3.time.scale();
+  this.y_scale = d3.scale.linear();
   this.calculate_dimensions();
   this.setup_voronoi();
 
@@ -56,6 +58,12 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.focus.attr("transform", "translate(-100,-100)");
   }
 
+  this.clear_focus = function(d) {
+    d3.selectAll('.united-states--hover').classed('united-states--hover', false);
+    d3.selectAll('.place--hover').classed('place--hover', false);
+    this.focus.attr("transform", "translate(-100,-100)");
+  }
+
   this.event_dates = function() {
     var self = this;
     return this.all_events.map(function(e) { return self.timeFormat.parse(e.date); })
@@ -63,11 +71,11 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
 
   this.setup_x_axis = function(x) {
     var self = this;
-    x_axis = this.svg.append("g")
+    this.x_axis = this.svg.append("g")
         .attr("class", "axis axis--x")
         .attr("transform", "translate(0," + this.height + ")");
 
-    x_axis
+    this.x_axis
       .call(d3.svg.axis()
         .scale(x)
         .orient("bottom")
@@ -97,9 +105,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
       .tickValues(axis_event_dates)
       .tickFormat(function(d) { return ''; });
 
-    event_g = this.svg.append('g');
-
-    event_g
+    this.event_g = this.svg.append('g');
+    this.event_g
       .attr('class', 'axis--event')
       .attr("transform", "translate(0," + this.height + ")")
       .call(event_axis)
@@ -109,7 +116,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
       .attr('transform', 'rotate(-90)')
       .style("text-anchor", 'start');
 
-    this.svg.append('g')
+    this.hitbox_g = this.svg.append('g');
+    this.hitbox_g
       .attr('class', 'event--hitbox')
       .attr("transform", "translate(0," + this.height + ")")
       .call(hitbox_axis)
@@ -153,9 +161,10 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.y_scale.domain([0, d3.max(places, function(c) { return d3.max(c.values, function(d) { return d.value; }); })]).nice();
 
     this.setup_x_axis(this.x_scale);
-
-    this.svg.append("g")
+    this.y_axis = this.svg.append("g")
         .attr("class", "axis axis--y")
+
+    this.y_axis
         .call(d3.svg.axis()
           .scale(this.y_scale)
           .orient("left"))
@@ -165,7 +174,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
         .style("font-weight", "bold")
         .text(chart_title);
 
-    this.svg.append("g")
+    this.place_lines = this.svg.append("g");
+    this.place_lines
       .selectAll("path")
         .data(places)
       .enter().append("path")
@@ -182,10 +192,10 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.focus.append("text")
         .attr("y", -10);
 
-    var voronoiGroup = this.svg.append("g")
+    this.voronoiGroup = this.svg.append("g")
         .attr("class", "voronoi");
 
-    voronoiGroup.selectAll("path")
+    this.voronoiGroup.selectAll("path")
         .data(this.voronoi(d3.nest()
             .key(function(d) { return self.x_scale(d.date) + "," + self.y_scale(d.value); })
             .rollup(function(v) { return v[0]; })
@@ -233,7 +243,46 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   }
 
   this.resize = function() {
-    console.log('resizing');
+    var self = this;
+    this.calculate_dimensions();
+    this.setup_voronoi();
+
+    this.svg
+      .attr("width", this.width + this.margin.left + this.margin.right)
+      .attr("height", this.height + this.margin.top + this.margin.bottom)
+    .select("g")
+      .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+
+    this.x_axis
+      .attr("transform", "translate(0," + this.height + ")")
+      .call(d3.svg.axis()
+        .scale(this.x_scale)
+        .orient("bottom")
+        .ticks(8)
+        .tickFormat(function(d) { return self.axisFormat(d) }));
+
+    this.y_axis
+        .call(d3.svg.axis()
+          .scale(this.y_scale)
+          .orient("left"))
+
+    this.clear_focus();
+    this.place_lines
+      .selectAll("path")
+      .attr("d", function(d) { return self.line(d.values); })        
+
+    this.event_g
+      .attr("transform", "translate(0," + this.height + ")")
+      .call(event_axis)
+      .selectAll('text')
+      .attr('y', -4)
+      .attr('x', 6)
+      .attr('transform', 'rotate(-90)')
+      .style("text-anchor", 'start');
+
+    this.hitbox_g
+      .attr("transform", "translate(0," + this.height + ")")
+      .call(hitbox_axis)
   }
 
   Infograph.line_charts[chart_name] = this;
@@ -243,5 +292,5 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     function(error, places) { 
       self.build_chart(error, places); 
     });
-  d3.select(window).on('resize', function() { Infograph.line_charts[chart_name].resize(); });
+  d3.select(window).on('resize.' + chart_name, function() { Infograph.line_charts[chart_name].resize(); });
 };
