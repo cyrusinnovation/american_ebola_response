@@ -1,5 +1,5 @@
 var LINE_CHART = {};
-LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name, override_height) {
+LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name, override_height, options) {
   this.dates,
   this.override_height = override_height;
   this.timeFormat = d3.time.format("%Y-%m-%d"),
@@ -7,6 +7,9 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   this.focus = null,
   this.all_events = Event.events.get_events(event_names);
   this.chart_id = '#' + chart_name;
+  this.resizable = options.resize;
+  this.force_load = options.force_load;
+  this.loaded = false;
 
   this.calculate_dimensions = function() {
     this.margin = {top: 20, right: 30, bottom: 30, left: 40};
@@ -16,6 +19,10 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.height = this.calc_height - this.margin.top - this.margin.bottom;    
   }
 
+  this.supports_voronoi = function() {
+    return !this.resizable;
+  }
+
   this.setup_voronoi = function() {
     this.x_scale
         .range([0, this.width]);
@@ -23,14 +30,16 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.y_scale
         .range([this.height, 0]);
 
-    this.voronoi = d3.geom.voronoi()
-        .x(function(d) { return Infograph.line_charts[chart_name].x_scale(d.date); })
-        .y(function(d) { return Infograph.line_charts[chart_name].y_scale(d.value); })
-        .clipExtent([[-this.margin.left, -this.margin.top], [this.width + this.margin.right, this.height + this.margin.bottom]]);
+    if (this.supports_voronoi()) {
+      this.voronoi = d3.geom.voronoi()
+          .x(function(d) { return Infograph.line_charts[chart_name].x_scale(d.date); })
+          .y(function(d) { return Infograph.line_charts[chart_name].y_scale(d.value); })
+          .clipExtent([[-this.margin.left, -this.margin.top], [this.width + this.margin.right, this.height + this.margin.bottom]]);
+    }
 
     this.line = d3.svg.line()
         .x(function(d) { return this.x_scale(d.date); })
-        .y(function(d) { return this.y_scale(d.value); });    
+        .y(function(d) { return this.y_scale(d.value); });        
   }
 
   var self = this;
@@ -157,6 +166,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
 
   this.build_chart = function(error, places) {
     var self = this;
+    this.loaded = true;
     this.x_scale.domain(d3.extent(this.dates));
     this.y_scale.domain([0, d3.max(places, function(c) { return d3.max(c.values, function(d) { return d.value; }); })]).nice();
 
@@ -192,22 +202,25 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.focus.append("text")
         .attr("y", -10);
 
-    this.voronoiGroup = this.svg.append("g")
-        .attr("class", "voronoi");
+    if (this.supports_voronoi()) {
+      this.voronoiGroup = this.svg.append("g")
+          .attr("class", "voronoi");
 
-    this.voronoiGroup.selectAll("path")
-        .data(this.voronoi(d3.nest()
-            .key(function(d) { return self.x_scale(d.date) + "," + self.y_scale(d.value); })
-            .rollup(function(v) { return v[0]; })
-            .entries(d3.merge(places.map(function(d) { return d.values; })))
-            .map(function(d) { return d.values; })))
-      .enter().append("path")
-        .attr("d", function(d) { 
-          return "M" + d.join("L") + "Z"; 
-        })
-        .datum(function(d) { return d.point; })
-        .on("mouseover", function(d) { self.mouseover(d); })
-        .on("mouseout", function(d) { self.mouseout(d); });
+      this.voronoiData = this.voronoi(d3.nest()
+              .key(function(d) { return self.x_scale(d.date) + "," + self.y_scale(d.value); })
+              .rollup(function(v) { return v[0]; })
+              .entries(d3.merge(places.map(function(d) { return d.values; })))
+              .map(function(d) { return d.values; }));
+      this.voronoiGroup.selectAll("path")
+          .data(this.voronoiData)
+        .enter().append("path")
+          .attr("d", function(d) { 
+            return "M" + d.join("L") + "Z"; 
+          })
+          .datum(function(d) { return d.point; })
+          .on("mouseover", function(d) { self.mouseover(d); })
+          .on("mouseout", function(d) { self.mouseout(d); });
+    }
 
     this.setup_events_axis(this.x_scale, this.height - 7);
   }
@@ -243,6 +256,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   }
 
   this.resize = function() {
+    if (!this.loaded) { return; }
+
     var self = this;
     this.calculate_dimensions();
     this.setup_voronoi();
@@ -285,12 +300,44 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
       .call(hitbox_axis)
   }
 
+  this.load_data = function() {
+    d3.csv("data/" + data_file, 
+      function(d, i) { return self.type(d, i); },
+      function(error, places) { 
+        self.build_chart(error, places); 
+      });
+  }
+
+  this.check_for_load = function() {
+    console.log('checking for load');
+  }
+
+  function isScrolledIntoView(elem)
+  {
+      var docViewTop = $(window).scrollTop();
+      var docViewBottom = docViewTop + $(window).height();
+
+      var elemTop = $(elem).offset().top;
+      var elemBottom = elemTop + $(elem).height();
+
+      return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom));
+  }
+
   Infograph.line_charts[chart_name] = this;
 
-  d3.csv("data/" + data_file, 
-    function(d, i) { return self.type(d, i); },
-    function(error, places) { 
-      self.build_chart(error, places); 
-    });
-  d3.select(window).on('resize.' + chart_name, function() { Infograph.line_charts[chart_name].resize(); });
+  if (this.force_load) {
+    this.load_data();
+  }
+  else {
+    d3.select(window).on('scroll.' + chart_name, function() {
+      if (isScrolledIntoView(self.chart_id)) {
+        self.load_data();
+        d3.select(window).on('scroll.' + chart_name, null);
+      }
+    })
+  }
+
+  if (this.resizable) {
+    d3.select(window).on('resize.' + chart_name, function() { Infograph.line_charts[chart_name].resize(); });
+  }
 };

@@ -590,6 +590,7 @@ function EbolaChart() {
 	}
 
 	this.resize = function() {
+		if (this.time_scale == null) { return; }
 		var self = this;
 
 	    // adjust things when the window size changes
