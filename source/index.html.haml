@@ -2,7 +2,7 @@
 = stylesheet_link_tag 'font-awesome.min.css'
 = stylesheet_link_tag 'all.css'
 = stylesheet_link_tag 'animation-controls.css'
-= stylesheet_link_tag 'legend.css', 'article.css'
+= stylesheet_link_tag 'legend.css', 'article.css', 'writeup.css'
 = stylesheet_link_tag 'line_chart.css'
 
 %div.chart
@@ -30,12 +30,51 @@
 		%botton#next-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
 			%i{class: 'fa fa-step-forward fa-3x'}
 
-/ #line_chart
+.writeup
+	%div.writeup-section
+		%div.spacing
+			/ %div.separator
+		%div.quotation-container.one-third
+			%p.quotation-contents We hear it said constantly that modern society is uniquely vulnerable to the threat of a pandemic because of the global connectedness of air travel. Yet we rarely pause to consider the other side of our global connectedness: the speed of information, which has been increasing at a much faster rate over the past few decades than the speed of airplanes has.
+			%div.quotation-citation
+				%div.no-margin 
+					%span.quotation-author Johnson, Steven.
+					%span.quotation-title
+						%a{ href: 'http://www.nytimes.com/2014/10/25/opinion/ebolas-information-paradox.html' }Ebola’s Information Paradox
+				%div.no-margin{style: 'padding-left: 10px'}
+					%span.quotation-source The New York Times,
+					%span.quotation-date 24 Oct. 2014
+		%div.section-content.two-thirds.inline-block
+			%h3.section-title The Internet and the Virus
+			:markdown
+				The internet has turned the world upside down in a lot of different ways. It changed commerce. And kitten videos. And viruses.
 
-/ = partial 'writeup'
+				Viruses because, after all, the internet is an important avenue of distribution for most computer viruses. And further, it enables scientific research and collaboration on biological viruses at a scale not possible before. And it even gave rise to a new meaning of the word virus in its adjectival form: viral, as in, “to spread rapidly via the internet.” 
 
-#united_states_graph{style: 'margin-left: 10%; margin-right: 10%'}
-#taylor_swift_graph{style: 'width: 500px'}
+				And few things on the internet went viral in October 2014 quite like the dangerous virus ebola. But how did the ebola crisis shape the interest in itself, and how did the interest shape the ebola crisis?
+	%div.writeup-section
+		%div.spacing
+		%div.section-content
+			%h3.section-title Sifting the Searches
+			:markdown
+				Searching [Google](https://www.google.com/) can provide information about many different things. But it turns out that examining Google searches themselves can also provide some important insights. For instance, having a deep understanding of the searches on its service helps Google and [its advertisers](http://en.wikipedia.org/wiki/Search_engine_optimization) [make money](http://en.wikipedia.org/wiki/AdWords).
+
+				But less cynically, Google searches can also provide information about the spread of disease, as with [Google's Flu Trends](http://www.google.org/flutrends/) service. Flu trends [works in part](http://en.wikipedia.org/wiki/Google_Flu_Trends#Introduction) by tracking online queries for influenza-related terms to estimate flu activity.
+
+				In this spirit, let's investigate global Google search activity for the term “ebola”, beginning with a look at search patterns in the United States.
+	%div.writeup-section
+		%div.spacing
+		%div.section-content
+			%h3.section-title Searching USA
+		#united_states_graph.large-line-graph
+	%div.writeup-section
+		#taylor_swift_graph.small-line-graph
+	%div.writeup-section
+		%div.spacing
+		%div.section-content
+			%h3.section-title The Limits of the Data
+			:markdown
+				Some of the more interesting claims, such as those to the left, about the ebola crisis and our response to it are challenging to investigate in any depth with our limited Google search data.
 
 :javascript
 	var Infograph = {};

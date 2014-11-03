@@ -28,6 +28,7 @@ Fear of Ebola is much more contagious than the disease itself. We don't want to 
 H. Steven Moffic Milwaukee, Oct 24, 2014 (letter to the New York Times)
 
 http://www.nytimes.com/2014/10/25/opinion/ebolas-information-paradox.html?_r=0
+Johnson, Steven. "Ebola’s Information Paradox." The New York Times. The New York Times, 24 Oct. 2014. Web. 02 Nov. 2014.
 
 As societies and technologies evolve, the velocities vary with which disease and information can spread. The tremendous population density of London in the 19th century enabled the cholera bacterium to spread through a neighborhood with terrifying speed, while the information about that terror moved more slowly. This was good news for the mental well-being of England’s wider population, which was spared the anxiety of following the death count as if it were a stock ticker. But it was terrible from a public health standpoint; the epidemic had largely faded before the official institutions of public health even realized the magnitude of the outbreak.
 
@@ -73,3 +74,8 @@ http://www.washingtonpost.com/blogs/worldviews/wp/2014/10/22/what-the-world-thin
 Alarmed by Ebola, Public Isn’t Calmed by ‘Experts Say’
 ----------------------------------------------------------------------
 http://www.nytimes.com/2014/11/01/us/alarmed-by-ebola-public-isnt-calmed-by-experts-say-.html?smid=re-share&_r=0
+
+Google Flu Tracker got it wrong
+How Google Confused Basketball Fans With Flu Patients
+----------------------------------------------------------------------
+http://www.businessweek.com/articles/2014-03-14/how-google-confused-basketball-fans-with-flu-patients
