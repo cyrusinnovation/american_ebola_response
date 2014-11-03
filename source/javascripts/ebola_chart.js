@@ -1,6 +1,6 @@
 function EbolaChart() {
 	this.width = parseInt(d3.select('#ebola_chart').style('width')),
-		this.mapAspectRatio = 0.51,
+		this.mapAspectRatio = 0.55,
 		this.height = this.width * this.mapAspectRatio;
 
 	this.scale_x_offset = 38;
@@ -34,7 +34,7 @@ function EbolaChart() {
 	this.pointer_offset_pixels = 4;
 	this.text_height_pixels = 10;
 
-	this.projection_height_ratio = 1.6
+	this.projection_height_ratio = 1.53
 	this.projection = d3.geo.mercator()
 	    .scale((this.width + 1) / 2 / Math.PI)
 	    .translate([this.width / 2, this.height / this.projection_height_ratio])
@@ -173,7 +173,7 @@ function EbolaChart() {
 
 		this.hover_tooltip
 			.style('left', (d3.event.pageX - bounding_box.width * 0.5) + 'px')
-			.style('top', (d3.event.pageY - bounding_box.height + 2) + 'px')
+			.style('top', (d3.event.pageY - this.height + 2) + 'px')
 			.transition().duration(300)
 			.style('opacity', 1);
 		this.hover_country = country.id;
@@ -481,7 +481,7 @@ function EbolaChart() {
 		Infograph.intervalId = setInterval(function() {
 			self.update_map(Infograph.current_date_index);
 			if (self.on_last_search_date()) {
-				pause_animation();
+				Infograph.animation_controls.pause_animation();
 			}
 			else {
 				self.increment_current_date(1);

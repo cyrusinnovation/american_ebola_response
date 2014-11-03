@@ -5,30 +5,7 @@
 = stylesheet_link_tag 'legend.css', 'article.css', 'writeup.css'
 = stylesheet_link_tag 'line_chart.css'
 
-%div.chart
-	%title The Spread of Ebola: Information and Disease
-
-	%div#ebola_chart
-		%h2 The Spread of Ebola: Information and Disease
-		%div#legend
-			%div.legend-title Google search activity for the term “ebola”
-		%div.global_tracker
-			%div.tracker_date
-			%div.tracker_cases
-			%div.tracker_deaths
-		%div.headlines
-		%div.tooltip
-			%div.tooltip-country
-			%div.tooltip-search-intensity
-
-%div.animation-controls
-	.btn-group
-		%botton#prev-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
-			%i{class: 'fa fa-step-backward fa-3x'}	
-		%button#play-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 50px'}
-			%i#play_pause_image{class: 'fa fa-play fa-3x'}
-		%botton#next-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
-			%i{class: 'fa fa-step-forward fa-3x'}
+%h2 The Spread of Ebola: Information and Disease
 
 .writeup
 	%div.writeup-section
@@ -50,7 +27,34 @@
 
 				Viruses because, after all, the internet is an important avenue of distribution for most computer viruses. And further, it enables scientific research and collaboration on biological viruses at a scale not possible before. And it even gave rise to a new meaning of the word virus in its adjectival form: viral, as in, “to spread rapidly via the internet.” 
 
-				And few things on the internet went viral in October 2014 quite like the dangerous virus ebola. But how did the ebola crisis shape the interest in itself, and how did the interest shape the ebola crisis? Unwinding the two is a task as vast and tangled as the world wide web itself.
+				And few things on the internet went viral in October 2014 quite like the dangerous virus ebola. But how did the ebola crisis shape the interest in itself, and how did the interest shape the ebola crisis? Unwinding the two is a vast and tangled process much like the world wide web itself.
+
+				Below is a visualization that tracks the global spread of ebola together with the online response to it as measured by Google search activity for the term “ebola”.
+%div.chart
+	%div.separator{style: 'stroke-dasharray: 2,2;'}
+	%title The Spread of Ebola: Information and Disease
+
+	%div#ebola_chart
+		%div.animation-controls
+			.btn-group
+				%botton#prev-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
+					%i{class: 'fa fa-step-backward fa-3x'}	
+				%button#play-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 50px'}
+					%i#play_pause_image{class: 'fa fa-play fa-3x'}
+				%botton#next-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
+					%i{class: 'fa fa-step-forward fa-3x'}	
+		%div#legend
+			%div.legend-title Google search activity for the term “ebola”
+		%div.global_tracker
+			%div.tracker_date
+			%div.tracker_cases
+			%div.tracker_deaths
+		%div.headlines
+		%div.tooltip
+			%div.tooltip-country
+			%div.tooltip-search-intensity
+
+.writeup
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
@@ -60,7 +64,7 @@
 
 				But less cynically, Google searches can also provide information about the spread of disease, as with [Google's Flu Trends](http://www.google.org/flutrends/) service. Flu trends [works in part](http://en.wikipedia.org/wiki/Google_Flu_Trends#Introduction) by tracking online queries for influenza-related terms in order to estimate flu activity.
 
-				In this spirit, let's investigate global [Google search activity](http://www.google.com/trends/) for the term “ebola”, beginning with a look at search patterns in the United States.
+				In this spirit, let's continue investigating global [Google search activity](http://www.google.com/trends/) for the term “ebola”, beginning with a look at search patterns in the United States.
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
@@ -70,12 +74,15 @@
 			:markdown
 				Figure **[1]** above shows that when an important ebola-related event happened in the United States, Google search activity for ebola spiked immediately or shortly thereafter (mouse over or tap on an event line to see its title).
 
-				Spikes were more dramatic for ebola infections discovered in the United States rather than for aid workers returned to the US for treatment. Interest peaked after nurse Amber Vinson was diagnosed with Ebola on October 15th respectively.
+				Spikes were more dramatic for ebola infections discovered in the United States than they were for aid workers returned to the US for treatment. Interest peaked after nurse Amber Vinson was diagnosed with Ebola on October 15th.
 
-				Many in the media have criticized the American response to ebola as one of [panic](http://www.washingtonpost.com/blogs/post-partisan/wp/2014/10/17/stop-the-ebola-panic/). For the most part, the events marked on the graph above are frightening to contemplate, which would seem to corroborate fear as an important motivator in sparking the intense interest around ebola. But before investigating this further, let's get a better sense of just how intense search activity for ebola in the United States was.
+				Media criticisms, both foreign and domestic, of the American response to ebola have ranged from calling it a [“panic](http://www.washingtonpost.com/blogs/post-partisan/wp/2014/10/17/stop-the-ebola-panic/)” to labelling it as “[disease-provoked hysteria](http://www.washingtonpost.com/blogs/worldviews/wp/2014/10/22/what-the-world-thinks-of-the-american-ebola-panic/)”. But is this fair? How does it compare to the response in other nations? Before investigating this further, let's get a better sense of just how intense search activity for ebola in the United States was.
+
+			/ Many in the media have criticized the American response to ebola as one of [panic](). For the most part, the events marked on the graph above are frightening to contemplate, which would seem to corroborate fear as an important motivator in sparking the intense interest around ebola. 
 	%div.writeup-section
 		%div.spacing
 		#taylor_swift_graph.small-line-graph.right{style: 'margin-top: -10px'}
+		#west_africa_graph.small-line-graph.right{style: 'margin-top: -10px'}
 		%div.section-content
 			%h3.section-title Comparing Activity
 			:markdown
@@ -86,14 +93,15 @@
 				Figure **[2]** plots search activity in the USA for the terms “Halloween”, “Taylor Swift” and “1989” against the search activity for ebola.
 
 				Peak search activity was much higher for ebola than for Taylor Swift or her album, but only half that of Halloween.
+
+				The nations with the consistently highest search activity for ebola are the stricken nations in West Africa – Liberia, Sierra Leone, and Guinea. Figure **[3]** plots their search activity relative to that of the United States.
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
 			%h3.section-title The Global Response
 			:markdown
-				Let's resume the earlier question of motivation: why are people searching for ebola? Is it fear alone? And for every nation around the globe?
+				Let's resume our earlier question about the character of the response in other nations around the globe.
 
-				The nations with consistently the highest search activity for ebola are the affected nations in West Africa, in particular: Liberia, Sierra Leone, and Guinea (see Figure **[3]**).
 
 				Brazil/Paraguay vs Sweden
 	%div.writeup-section
@@ -163,3 +171,5 @@
 		['us_infection', 'us_imported'], 'united_states_graph', 300, {resize: true});
 	new LINE_CHART.line_chart("taylor_swift.csv", '[2] Google search activity for a variety of terms in the USA',
 		['taylor_swift'], 'taylor_swift_graph', 300, {});
+	new LINE_CHART.line_chart("West_Africa.csv", '[3] Search activity: West Africa vs USA',
+		[], 'west_africa_graph', 300, {});

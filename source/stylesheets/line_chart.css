@@ -49,10 +49,10 @@ svg.line_chart {
 
 .places {
   fill: none;
-  stroke: #aaa;
+  stroke: #999;
   stroke-linejoin: round;
   stroke-linecap: round;
-  stroke-width: 1.0px;
+  stroke-width: 1.5px;
 }
 
 .place--hover {
@@ -65,7 +65,7 @@ svg.line_chart {
   stroke: rgb(158,202,225);
   stroke-linejoin: round;
   stroke-linecap: round;
-  stroke-width: 1.0px;  
+  stroke-width: 1.5px;  
 }
 
 .united-states--hover {

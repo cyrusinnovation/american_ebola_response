@@ -7,6 +7,14 @@ body {
 }
 
 h2 {
+  text-align: center;
+  /*background: rgb(198,219,239);*/
+  margin: 0px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+/*h2 {
   position: absolute;
   z-index: 1000;
   width: 100%;
@@ -28,7 +36,7 @@ h2 {
     font-size: 1.4em;
   }
 }
-
+*/
 .chart {
   text-align: left;
   min-width: 600px;

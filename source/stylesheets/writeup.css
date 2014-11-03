@@ -22,7 +22,7 @@
 }
 
 .separator {
-	border: 1px solid;
+	border: 1px dashed;
 	width: 100%;
 }
 
