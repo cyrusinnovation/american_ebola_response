@@ -4,12 +4,12 @@ require_relative 'country_data'
 require_relative 'outbreak_data'
 
 class EbolaData
-	attr_accessor :countries, :sorted_names, :ninety_day_dates
+	attr_accessor :countries, :sorted_names, :daily_data_dates
 
 	def initialize()
 		@countries = {}
 		@dates = {}
-		@ninety_day_dates = nil
+		@daily_data_dates = nil
 	end
 
 	def country_data_for(country_code)
@@ -76,16 +76,23 @@ class EbolaData
 		end
 		raise "bad data for #{country_data.name}" if dates.include? nil
 
-		setup_ninety_day_dates(country_data)
+		setup_daily_dates(country_data)
 	end
 
-	def setup_ninety_day_dates(country_data)
-		return if @ninety_day_dates
+	def setup_daily_dates(country_data)
+		return if @daily_data_dates && (@daily_data_dates.size >= 95)
+		return if @daily_data_dates && (country_data.data.size == 90)
 
-		if (country_data.data.size == 90)
-			@ninety_day_dates = country_data.dates.each_with_index.map do |date, index|
-				date unless country_data.data[index][0].nil?
-			end.compact
+		date_hash = {}
+		date_hash = Hash[@daily_data_dates.map { |v| [v, v] }] if @daily_data_dates
+
+		if (country_data.data.size == 90 || country_data.data.size <= 30)
+			date_hash = country_data.dates.each_with_index.inject(date_hash) do |memo, (date, index)|
+				memo[date] = date unless country_data.data[index][0].nil?
+				memo
+			end
+
+			@daily_data_dates = date_hash.keys.sort;
 		end
 	end
 end

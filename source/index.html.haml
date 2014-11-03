@@ -100,14 +100,41 @@
 		%div.section-content
 			%h3.section-title The Global Response
 			:markdown
-				Let's resume our earlier question about the character of the response in other nations around the globe.
+				Let's resume our earlier question about the character of the response in other nations around the globe. In examining search data from across the globe, the excited response of the United States to ebola within its borders is typical of how other nations reacted as well.
 
+		%div.section-content{style: 'clear: both'}
+		#spain_graph.small-line-graph.left
+		%div.section-content
+			%h4.section-title Spain
+			:markdown
+				As of this writing, Spain is the only other non-West African nation to report an ebola case contracted within its borders. On October 6th, a [Spanish nurse contracted the disease](http://www.ibtimes.com/ebola-virus-spreads-spain-nurse-first-ebola-case-outside-west-africa-1699974) after treating a man brought to Spain for treatment after catching ebola in Sierra Leone.
 
-				Brazil/Paraguay vs Sweden
+				And on October 16th, Spain had another Ebola scare when [several patients who later tested negative were hospitalized with potential ebola symptoms](http://www.reuters.com/article/2014/10/16/health-ebola-spain-idUSL6N0SB42620141016). Figure **[4]** illustrates these events.
+		%div.section-content{style: 'clear: both'}
+		#chile_graph.small-line-graph.left
+		%div.section-content
+			%h4.section-title Chile
+			:markdown
+				The event in Spain on October 16th suggests that even the threat of ebola within a nation's borders is enough to measurably raise search activity. Some nations experienced very dramatic surges around a suspected ebola case that later proved not to be ebola.
+
+				Chile experienced an ebola scare on October 12th when a [viral video](https://www.youtube.com/watch?v=v9igKnTvUuw) spread around the internet. The video, taken at a hospital, features a voice on a loudspeaker saying, “[Can I have your attention, please. We have a patient who is suspected to have Ebola. Please leave the room and go to another hospital](http://www.bbc.com/news/blogs-trending-29618224)”.
+		%div.section-content{style: 'clear: both'}
+		#sweden_graph.small-line-graph.left
+		%div.section-content
+			%h4.section-title Sweden
+			:markdown
+				Some nations had a much milder response to suspected ebola cases.
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
-			%h3.section-title{style: 'margin-bottom: 5px'} The Question of Quarantine		
+			%h3.section-title Good Neighbors
+			:markdown
+				Graphs of USA with Canada/Mexico and Brazil/Paraguay
+
+	%div.writeup-section
+		%div.spacing
+		%div.section-content
+			%h3.section-title{style: 'margin-bottom: 5px'} Looking at Policy
 		%div.quotation-container.one-half.inline-block
 			%p.quotation-contents Ms. Hickox raised serious concerns "about the state abusing its powers" and could spread the very fear that the [New York/New Jersey quarantine] order appeared aimed at counteracting.
 			%p.quotation-contents "By forcibly detaining people, we are also frightening the public and may deter genuinely sick people who fear quarantine from seeking the treatments they deserve," [Udi Ofer, the head of the American Civil Liberties Union in New Jersey] said in an email.
@@ -141,6 +168,14 @@
 			* Reported case and death information from WHO, the authority on the matter, constantly fluctuating.
 			* Add a section on data sources, give credit to WHO and Google Trends
 
+	%div.writeup-section
+		%div.spacing
+		%div.section-content
+			%h3.section-title Nigerian Success
+			:markdown
+				Nigeria's success: A strong public awareness campaign listed first among contributing factors.
+				Information travels faster than viruses do now. This is why we are afraid. But this is also why we are safe.
+				http://www.who.int/mediacentre/news/statements/2014/nigeria-ends-ebola/en/
 	%div.separator{style: 'margin-bottom: 10px'}
 	%div.section-content
 		:markdown
@@ -173,3 +208,7 @@
 		['taylor_swift'], 'taylor_swift_graph', 300, {});
 	new LINE_CHART.line_chart("West_Africa.csv", '[3] Search activity: West Africa vs USA',
 		[], 'west_africa_graph', 300, {});
+	new LINE_CHART.line_chart("Spain.csv", '[4] Search activity: Spain vs USA',
+		['spain'], 'spain_graph', 300, {});
+	new LINE_CHART.line_chart("Chile.csv", '[5] Search activity: Chile vs USA',
+		['chile'], 'chile_graph', 300, {});

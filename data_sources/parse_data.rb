@@ -136,6 +136,7 @@ class EbolaDataParser
 		@places_of_interest = [
 			{ title: 'Brazil', places: ['Brazil', 'United States'] },
 			{ title: 'Chile',  places: ['Chile', 'United States'] },
+			{ title: 'Spain',  places: ['Spain', 'United States'] },
 			{ title: 'Panama',  places: ['Panama', 'United States'] },
 			{ title: 'Belize',  places: ['Belize', 'United States'] },
 			{ title: 'Zimbabwe',  places: ['Zimbabwe', 'United States'] },
@@ -160,7 +161,7 @@ class EbolaDataParser
 	end
 
 	def write_place_line_chart(place)
-		chart_data = LineChartData.new(ebola_data.ninety_day_dates, place[:title])
+		chart_data = LineChartData.new(ebola_data.daily_data_dates, place[:title])
 		place[:places].each do |place_name|
 			chart_data.add_country(country_data(place_name))
 		end
@@ -173,7 +174,7 @@ parser = EbolaDataParser.new
 news_data = NewsData.new
 outbreak_data = OutbreakData.new(news_data, parser.country_map)
 
-data = parser.parse(['data1', 'data2', 'data3', 'data4', '90_day_1', '90_day_2', '90_day_3'])
+data = parser.parse(['data1', 'data2', 'data3', 'data4', '90_day_1', '90_day_2', '90_day_3', '30_day_1', '30_day_2', '30_day_3'])
 data.write_csv(outbreak_data)
 parser.write_country_mapping
 

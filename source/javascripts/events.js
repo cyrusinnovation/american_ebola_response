@@ -21,6 +21,16 @@ Event.events = {
 			{date: '2014-10-31', description: "Halloween"}
 		],
 
+		spain: [
+			{date: '2014-08-06', description: 'Spain prepares to treat a returning missionary'},
+			{date: '2014-10-06', description: 'A Spanish nurse contracts ebola'},
+			{date: '2014-10-16', description: 'Several patients suspected of ebola in Spain'}
+		],
+
+		chile: [
+			{date: '2014-10-12', description: 'A suspected ebola case at a Chilean hospital'},
+		],
+
 		brazil: [
 			{date: '2014-10-10', description: 'A West African man is tested for ebola in Brazil'}
 		],		

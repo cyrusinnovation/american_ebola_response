@@ -87,13 +87,15 @@ class CountryData
 		interp = 1.0 - (a - d).to_f / (a - p).to_f
 		if (interp < 0.0 || interp > 1.0)
 			#puts "bad interpolant #{interp} for dates prior=#{p}, after=#{a}, specific=#{d}"
-			interp = (interp < 0) ? 0 : 1.0
+			interp = (interp < 0) ? 0 : interp
 		end
 		interp
 	end
 
 	# linear interpolate between x and y
 	def linear_interpolate(x, y, s)
+		return 0 if (s > 1.5) # When dates are too far out of range, just report no data.
+		s = (s > 1.0) ? 1.0 : s
 		x + (y - x) * s
 	end	
 

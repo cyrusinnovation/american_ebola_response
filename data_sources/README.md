@@ -82,3 +82,12 @@ Google Flu Tracker got it wrong
 How Google Confused Basketball Fans With Flu Patients
 ----------------------------------------------------------------------
 http://www.businessweek.com/articles/2014-03-14/how-google-confused-basketball-fans-with-flu-patients
+
+Interpreting Google Trends data
+----------------------------------------------------------------------
+https://support.google.com/trends/answer/4355164?hl=en&rd=1
+
+Nigeria's success: A strong public awareness campaign listed first among contributing factors.
+----------------------------------------------------------------------
+Information travels faster than viruses do now. This is why we are afraid. But this is also why we are safe.
+http://www.who.int/mediacentre/news/statements/2014/nigeria-ends-ebola/en/
