@@ -64,13 +64,38 @@
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
-			%h3.section-title Searching USA
+			%h3.section-title Searchin’ USA
 		#united_states_graph.large-line-graph
 		%div.section-content
 			:markdown
-				The above graph shows that when an important ebola-related event happened in the United States, Google search activity for ebola spiked shortly thereafter (mouse over or tap on an event line to see its title).
+				Figure **[1]** above shows that when an important ebola-related event happened in the United States, Google search activity for ebola spiked immediately or shortly thereafter (mouse over or tap on an event line to see its title).
+
+				Spikes were more dramatic for ebola infections discovered in the United States rather than for aid workers returned to the US for treatment. Interest peaked after nurse Amber Vinson was diagnosed with Ebola on October 15th respectively.
+
+				Many in the media have criticized the American response to ebola as one of [panic](http://www.washingtonpost.com/blogs/post-partisan/wp/2014/10/17/stop-the-ebola-panic/). For the most part, the events marked on the graph above are frightening to contemplate, which would seem to corroborate fear as an important motivator in sparking the intense interest around ebola. But before investigating this further, let's get a better sense of just how intense search activity for ebola in the United States was.
 	%div.writeup-section
-		#taylor_swift_graph.small-line-graph
+		%div.spacing
+		#taylor_swift_graph.small-line-graph.right{style: 'margin-top: -10px'}
+		%div.section-content
+			%h3.section-title Comparing Activity
+			:markdown
+				The musician Taylor Swift released the album “[1989](http://en.wikipedia.org/wiki/1989_(Taylor_Swift_album))” in America on October 27, 2014. It is expected to sell over 1.3 million copies and [break the one-week sales record for an album by a woman](http://www.billboard.com/articles/columns/chart-beat/6304336/taylor-swift-1989-biggest-sales-week-since-2002).
+
+				Americans celebrated the popular annual holiday Halloween on October 31.
+
+				Figure **[2]** plots search activity in the USA for the terms “Halloween”, “Taylor Swift” and “1989” against the search activity for ebola.
+
+				Peak search activity was much higher for ebola than for Taylor Swift or her album, but only half that of Halloween.
+	%div.writeup-section
+		%div.spacing
+		%div.section-content
+			%h3.section-title The Global Response
+			:markdown
+				Let's resume the earlier question of motivation: why are people searching for ebola? Is it fear alone? And for every nation around the globe?
+
+				The nations with consistently the highest search activity for ebola are the affected nations in West Africa, in particular: Liberia, Sierra Leone, and Guinea (see Figure **[3]**).
+
+				Brazil/Paraguay vs Sweden
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
@@ -99,13 +124,14 @@
 					%span.quotation-date 24 Oct. 2014
 		%div.section-content{style: 'margin-top: 10px'}
 			:markdown
-				Discuss the policy debate. Contrast the responses of Australia and Cuba.
+				Discuss the policy debate. Contrast the responses of Australia + several Carribean nations who have established a quarantine with Cuba.
 
 		:markdown
 			* Other section: Fuzziness of information
 			* Failure of Google Flu Trends to live up to the hype and its recent revampt that moved toward reported data away from search data
+			* Rumor driving interest (Chile), infected people running from health care workers in West Africa.
 			* Reported case and death information from WHO, the authority on the matter, constantly fluctuating.
-			* Add a section on sources
+			* Add a section on data sources, give credit to WHO and Google Trends
 
 	%div.separator{style: 'margin-bottom: 10px'}
 	%div.section-content
@@ -133,7 +159,7 @@
 = javascript_include_tag "jquery-2.1.1.min", "d3", "queue.v1.min", "topojson.v1.min", "events", "animation_controls", "ebola_chart", "line_chart"
 
 :javascript
-	new LINE_CHART.line_chart("United_States.csv", '[1] Ebola Google search activity: United States', 
+	new LINE_CHART.line_chart("United_States.csv", '[1] Search activity for “ebola” in the United States', 
 		['us_infection', 'us_imported'], 'united_states_graph', 300, {resize: true});
 	new LINE_CHART.line_chart("taylor_swift.csv", '[2] Google search activity for a variety of terms in the USA',
 		['taylor_swift'], 'taylor_swift_graph', 300, {});

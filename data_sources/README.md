@@ -7,6 +7,7 @@ TOPICS:
 * Ebola fatigue. Diminishing returns. Crying wolf. Previous outbreaks, it looked like this was going to be another one, interest diminished even in affected areas. Interest is diminishing again.
 * Disconnect between authority figures and institutions and populace - examples in US, in Asia quote the NYTimes article, then show how this is not reflected by google search intensity.
 * Show huge spikes in interest in US correlated with ebola events, no noticable difference caused by policy events.
+* Lull in interest now mirrors the one immediately after the outbreak in West Africa. We found out then that things were a lot worse than we thought. Experts are saying that may be the case again and not to believe the lack of full beds.
 
 Contrast searches for Ebola, Taylor Swift, Halloween. Need data for after Halloween to see how it falls off.
 

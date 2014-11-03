@@ -4,7 +4,7 @@ require 'csv'
 file = File.new('inputs/' + @file_name, 'r')
 n_lines = 0
 
-@headers = nil;
+@headers = nil
 @contents = {}
 @dates = []
 
@@ -20,7 +20,7 @@ end
 def parse_line(fields)
 	@dates << fields[0]
 	@headers.each_with_index do |name, i|
-		@contents[name] << fields[i + 1].chomp
+		@contents[name] << fields[i + 1].chomp.to_f
 	end
 end
 
@@ -37,6 +37,15 @@ file.each_line do |line|
 	end
 end
 
+def normalize_for_ebola
+	return unless @headers.include?('ebola')
+
+	peak_ebola = @contents['ebola'].max
+	@contents.keys.each do |key|
+		@contents[key] = @contents[key].map { |value| value * 100 / peak_ebola }
+	end
+end
+
 def header
 	['Name'] + @dates
 end
@@ -50,4 +59,5 @@ def write_contents
 	end
 end
 
+normalize_for_ebola
 write_contents

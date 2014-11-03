@@ -85,6 +85,7 @@
 	width: 47.6%;
 }
 
+
 .left {
 	float: left;
 }
@@ -93,6 +94,16 @@
 	float: right;
 }
 
+@media (max-width: 750px) {
+  .left {
+    float: none;
+    margin: 0 auto;
+  }
+  .right {
+    float: none;
+    margin: 0 auto;
+  }
+}
 /*http://www.codeitpretty.com/2012/05/you-cant-float-center.html*/
 .center {
 	margin: 0 auto;

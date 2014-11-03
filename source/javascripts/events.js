@@ -17,7 +17,8 @@ Event.events = {
 		],
 
 		taylor_swift: [
-			{date: '2014-10-27', description: "Taylor Swift album '1989' is released"}
+			{date: '2014-10-27', description: "Taylor Swift album '1989' is released"},
+			{date: '2014-10-31', description: "Halloween"}
 		],
 
 		brazil: [
