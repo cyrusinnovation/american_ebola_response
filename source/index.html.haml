@@ -100,18 +100,18 @@
 		%div.section-content
 			%h3.section-title The Global Response
 			:markdown
-				Let's resume our earlier question about the character of the response in other nations around the globe. In examining search data from across the globe, the excited response of the United States to ebola within its borders is typical of how other nations reacted as well.
+				Let's resume our earlier question about the character of the response in other nations around the globe. In examining the data, the excited response of the United States to ebola within its borders appears to be typical of how other nations reacted as well.
 
 		%div.section-content{style: 'clear: both'}
-		#spain_graph.small-line-graph.left
+		#spain_graph.small-line-graph.left{style: 'margin-top: -10px'}
 		%div.section-content
 			%h4.section-title Spain
 			:markdown
-				As of this writing, Spain is the only other non-West African nation to report an ebola case contracted within its borders. On October 6th, a [Spanish nurse contracted the disease](http://www.ibtimes.com/ebola-virus-spreads-spain-nurse-first-ebola-case-outside-west-africa-1699974) after treating a man brought to Spain for treatment after catching ebola in Sierra Leone.
+				As of this writing, Spain is the only other non-West African nation to report an ebola case contracted within its borders. On October 6th, a [Spanish nurse contracted the disease](http://www.ibtimes.com/ebola-virus-spreads-spain-nurse-first-ebola-case-outside-west-africa-1699974) after treating a man brought to Spain for hospitalization after becoming sick with ebola in Sierra Leone.
 
 				And on October 16th, Spain had another Ebola scare when [several patients who later tested negative were hospitalized with potential ebola symptoms](http://www.reuters.com/article/2014/10/16/health-ebola-spain-idUSL6N0SB42620141016). Figure **[4]** illustrates these events.
 		%div.section-content{style: 'clear: both'}
-		#chile_graph.small-line-graph.left
+		#chile_graph.small-line-graph.left{style: 'margin-top: -10px'}
 		%div.section-content
 			%h4.section-title Chile
 			:markdown
@@ -119,17 +119,31 @@
 
 				Chile experienced an ebola scare on October 12th when a [viral video](https://www.youtube.com/watch?v=v9igKnTvUuw) spread around the internet. The video, taken at a hospital, features a voice on a loudspeaker saying, “[Can I have your attention, please. We have a patient who is suspected to have Ebola. Please leave the room and go to another hospital](http://www.bbc.com/news/blogs-trending-29618224)”.
 		%div.section-content{style: 'clear: both'}
-		#sweden_graph.small-line-graph.left
+		#sweden_graph.small-line-graph.left{style: 'margin-top: -10px'}
 		%div.section-content
 			%h4.section-title Sweden
 			:markdown
 				Some nations had a much milder response to suspected ebola cases.
+
+				In Sweden, patients were hospitalized for suspected ebola on [August 31st](http://online.wsj.com/articles/swedish-man-hospitalized-with-suspected-case-of-ebola-1409519411) and [October 19th](http://www.thelocal.se/20141019/ebola-alarm-raised-at-arlanda-airport). These events produced a perceptable rise in interest, but at a smaller scale than in many other nations.
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
 			%h3.section-title Good Neighbors
 			:markdown
-				Graphs of USA with Canada/Mexico and Brazil/Paraguay
+				On March 31st, shortly after ebola was first detected in West Africa, [Senegal closed its borders to neighboring Guinea](http://www.bbc.com/news/world-africa-26816438). And in a moment noted for its irony, Mexico and Belize [denied an American cruise ship permission to dock](http://www.washingtonpost.com/news/morning-mix/wp/2014/10/17/cruise-ship-carrying-texas-ebola-nurse-refused-entry-in-belize/) for fear of ebola.
+
+		%div.section-content{style: 'clear: both'}
+		#mexico_canada_graph.small-line-graph.left{style: 'margin-top: -10px'}
+		%div.section-content
+			:markdown
+				This pattern is reflected in the search data as well. When a nation confirms or is suspected to have a case of ebola, search interest in neighboring countries spikes. Mexico and Canada's ebola search activity, for example, closely mirrors the United States (figure **[7]**). Mexico diverged for a period shortly after August 6th when [a student in Mexico City](http://www.oem.com.mx/elsoldemexico/notas/n3496087.htm) was suspected of ebola.
+
+		%div.section-content{style: 'clear: both'}
+		#brazil_paraguay_graph.small-line-graph.left{style: 'margin-top: -10px'}
+		%div.section-content
+			:markdown
+				And when a man was [suspected of having ebola](http://www.reuters.com/article/2014/10/10/us-health-ebola-brazil-idUSKCN0HZ1DV20141010) on October 10th in the southern Brazilian state Paraná, which [borders Paraguay](https://www.google.com/maps/place/State+of+Paraná,+Brazil), ebola search activity in Paraguay actually eclipsed the activity in Brazil (figure **[8]**).
 
 	%div.writeup-section
 		%div.spacing
@@ -176,21 +190,55 @@
 				Nigeria's success: A strong public awareness campaign listed first among contributing factors.
 				Information travels faster than viruses do now. This is why we are afraid. But this is also why we are safe.
 				http://www.who.int/mediacentre/news/statements/2014/nigeria-ends-ebola/en/
-	%div.separator{style: 'margin-bottom: 10px'}
-	%div.section-content
-		:markdown
-			The source code and raw data for this project are publicly available on [Github](https://github.com/cyrusinnovation/ebola_infograph)
-			
-		%span By
-		%span.quotation-title
-			%a{ href: 'http://www.linkedin.com/in/davidblinnroadhomegames' }David Blinn 
-		%span.quotation-source{style: 'font-size: 18px'} with the support of:
-	%div.logo-container
-		%div.image-with-margin
-			= link_to image_tag( 'images/CyrusInnovationLogo.png'), 'http://www.cyrusinnovation.com/'
-	%div.logo-container
-		%div.image-with-margin
-			= link_to image_tag( 'images/occom.png'), 'http://occom.co/'
+
+	%div.writeup-section
+		%div.spacing
+		%div.quotation-container.one-third
+			%p.quotation-contents Information travels faster than viruses do now. This is why we are afraid. But this is also why we are safe.
+			%div.quotation-citation
+				%div.no-margin 
+					%span.quotation-author Johnson, Steven.
+					%span.quotation-title
+						%a{ href: 'http://www.nytimes.com/2014/10/25/opinion/ebolas-information-paradox.html' }Ebola’s Information Paradox
+				%div.no-margin{style: 'padding-left: 10px'}
+					%span.quotation-source The New York Times,
+					%span.quotation-date 24 Oct. 2014		
+		%div.section-content.two-thirds.inline-block
+			%h3.section-title The Limits of the Internet
+			:markdown
+				Nigeria's success in combatting ebola within its borders suggests that it is possible to inform a citizenry in the midst of a raging medical crisis.
+
+				Education and information are keys in fighting the spread of an infection, and the internet can play in important role in disseminating and aggregating that information. At the same time, it is important to recognize limits.
+		%div.section-content{style: 'clear: both'}
+			:markdown
+				[Google Flu Trends](http://www.google.org/flutrends/), cited above as an example of the power of search data in predicting flu outbreaks, has actually been [dramatically over estimating the number of flu cases](http://www.businessweek.com/articles/2014-03-14/how-google-confused-basketball-fans-with-flu-patients). What was Google's fix? To [incorporate their service](http://bits.blogs.nytimes.com/2014/10/31/the-new-thing-in-google-flu-trends-is-traditional-data/)  the official, traditional, and human-gathered [CDC reports](http://www.cdc.gov/flu/weekly/).
+
+				[Headlines in May](http://news.yahoo.com/dramatic-improvement-controlling-ebola-outbreak-150438707.html) were claiming success in combatting the outbreak when in fact the crisis would go on to take a dramatic turn for the worse.
+
+%div.separator{style: 'margin-bottom: 10px'}
+.writeup
+	%div.writeup-section
+		%div.section-content
+			%h3.section-title Data and Methods
+			:markdown
+				Data about the spread of the ebola virus were gathered from the World Health Organization [Global Alert and Response](http://www.who.int/csr/don/archive/disease/ebola/en/) and [Situation Report](http://www.who.int/csr/disease/ebola/situation-reports/en/) listings.
+
+				Data about ebola searches were gathered using [Google Trends](http://www.google.com/trends/). All data were normalized against the United States, with the peak US search activity for the period under study fixed at a value of 100. For an explanation of the Google Trends data, visit the [about page](https://support.google.com/trends/answer/4355164?hl=en&rd=1).
+		%div.spacing
+		%div.section-content
+			:markdown
+				The source code and raw data for this project are publicly available on [Github](https://github.com/cyrusinnovation/ebola_infograph)
+				
+			%span By
+			%span.quotation-title
+				%a{ href: 'http://www.linkedin.com/in/davidblinnroadhomegames' }David Blinn 
+			%span.quotation-source{style: 'font-size: 18px'} with the support of:
+		%div.logo-container
+			%div.image-with-margin
+				= link_to image_tag( 'images/CyrusInnovationLogo.png'), 'http://www.cyrusinnovation.com/'
+		%div.logo-container
+			%div.image-with-margin
+				= link_to image_tag( 'images/occom.png'), 'http://occom.co/'
 
 :javascript
 	var Infograph = {};
@@ -212,3 +260,9 @@
 		['spain'], 'spain_graph', 300, {});
 	new LINE_CHART.line_chart("Chile.csv", '[5] Search activity: Chile vs USA',
 		['chile'], 'chile_graph', 300, {});
+	new LINE_CHART.line_chart("Sweden.csv", '[6] Search activity: Sweden vs USA',
+		['sweden'], 'sweden_graph', 300, {});
+	new LINE_CHART.line_chart("Mexico_Canada.csv", '[7] Search activity: Mexico, Canda, USA',
+		['mexico'], 'mexico_canada_graph', 300, {});
+	new LINE_CHART.line_chart("Brazil_Paraguay.csv", '[8] Search activity: Brazil vs Paraguay',
+		['brazil_paraguay'], 'brazil_paraguay_graph', 300, {});

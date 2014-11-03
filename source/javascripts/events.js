@@ -31,7 +31,16 @@ Event.events = {
 			{date: '2014-10-12', description: 'A suspected ebola case at a Chilean hospital'},
 		],
 
-		brazil: [
+		sweden: [
+			{date: '2014-08-31', description: 'A man returning from West Africa is hospitalized'},
+			{date: '2014-10-19', description: 'An airline passenger is hospitalized in Stockholm'}
+		],
+
+		mexico: [
+			{date: '2014-08-06', description: 'A student in Mexico City is suspected of ebola'},
+		],
+
+		brazil_paraguay: [
 			{date: '2014-10-10', description: 'A West African man is tested for ebola in Brazil'}
 		],		
 	},
