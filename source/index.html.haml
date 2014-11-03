@@ -50,7 +50,7 @@
 
 				Viruses because, after all, the internet is an important avenue of distribution for most computer viruses. And further, it enables scientific research and collaboration on biological viruses at a scale not possible before. And it even gave rise to a new meaning of the word virus in its adjectival form: viral, as in, “to spread rapidly via the internet.” 
 
-				And few things on the internet went viral in October 2014 quite like the dangerous virus ebola. But how did the ebola crisis shape the interest in itself, and how did the interest shape the ebola crisis?
+				And few things on the internet went viral in October 2014 quite like the dangerous virus ebola. But how did the ebola crisis shape the interest in itself, and how did the interest shape the ebola crisis? Unwinding the two is a task as vast and tangled as the world wide web itself.
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
@@ -58,14 +58,17 @@
 			:markdown
 				Searching [Google](https://www.google.com/) can provide information about many different things. But it turns out that examining Google searches themselves can also provide some important insights. For instance, having a deep understanding of the searches on its service helps Google and [its advertisers](http://en.wikipedia.org/wiki/Search_engine_optimization) [make money](http://en.wikipedia.org/wiki/AdWords).
 
-				But less cynically, Google searches can also provide information about the spread of disease, as with [Google's Flu Trends](http://www.google.org/flutrends/) service. Flu trends [works in part](http://en.wikipedia.org/wiki/Google_Flu_Trends#Introduction) by tracking online queries for influenza-related terms to estimate flu activity.
+				But less cynically, Google searches can also provide information about the spread of disease, as with [Google's Flu Trends](http://www.google.org/flutrends/) service. Flu trends [works in part](http://en.wikipedia.org/wiki/Google_Flu_Trends#Introduction) by tracking online queries for influenza-related terms in order to estimate flu activity.
 
-				In this spirit, let's investigate global Google search activity for the term “ebola”, beginning with a look at search patterns in the United States.
+				In this spirit, let's investigate global [Google search activity](http://www.google.com/trends/) for the term “ebola”, beginning with a look at search patterns in the United States.
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
 			%h3.section-title Searching USA
 		#united_states_graph.large-line-graph
+		%div.section-content
+			:markdown
+				The above graph shows that when an important ebola-related event happened in the United States, Google search activity for ebola spiked shortly thereafter (mouse over or tap on an event line to see its title).
 	%div.writeup-section
 		#taylor_swift_graph.small-line-graph
 	%div.writeup-section
@@ -73,7 +76,7 @@
 		%div.section-content
 			%h3.section-title{style: 'margin-bottom: 5px'} The Question of Quarantine		
 		%div.quotation-container.one-half.inline-block
-			%p.quotation-contents Ms. Hickox raised serious concerns "about the state abusing its powers" and could spread the very fear that the order appeared aimed at counteracting.
+			%p.quotation-contents Ms. Hickox raised serious concerns "about the state abusing its powers" and could spread the very fear that the [New York/New Jersey quarantine] order appeared aimed at counteracting.
 			%p.quotation-contents "By forcibly detaining people, we are also frightening the public and may deter genuinely sick people who fear quarantine from seeking the treatments they deserve," [Udi Ofer, the head of the American Civil Liberties Union in New Jersey] said in an email.
 			%div.quotation-citation
 				%div.no-margin 
@@ -84,7 +87,7 @@
 					%span.quotation-source The New York Times,
 					%span.quotation-date 26 Oct. 2014			
 		%div.quotation-container.one-half.inline-block
-			%p.quotation-contents As a psychiatrist... it would be best for those returning from West Africa, especially health care workers, to be quarantined, or to self-quarantine, for the appropriate length of time.
+			%p.quotation-contents As a psychiatrist, I do have concern about the psychological ramifications [of Dr. Craig Spencer's behavior in New York], which include frightening the public. For our emotional security, it would be best for those returning from West Africa, especially health care workers, to be quarantined, or to self-quarantine, for the appropriate length of time.
 			%p.quotation-contents Fear of Ebola is much more contagious than the disease itself. We don't want to produce any more panic in the public.
 			%div.quotation-citation
 				%div.no-margin 
@@ -97,6 +100,12 @@
 		%div.section-content{style: 'margin-top: 10px'}
 			:markdown
 				Discuss the policy debate. Contrast the responses of Australia and Cuba.
+
+		:markdown
+			* Other section: Fuzziness of information
+			* Failure of Google Flu Trends to live up to the hype and its recent revampt that moved toward reported data away from search data
+			* Reported case and death information from WHO, the authority on the matter, constantly fluctuating.
+			* Add a section on sources
 
 	%div.separator{style: 'margin-bottom: 10px'}
 	%div.section-content
@@ -124,7 +133,7 @@
 = javascript_include_tag "jquery-2.1.1.min", "d3", "queue.v1.min", "topojson.v1.min", "events", "animation_controls", "ebola_chart", "line_chart"
 
 :javascript
-	new LINE_CHART.line_chart("United_States.csv", 'Ebola Google search activity: United States', 
+	new LINE_CHART.line_chart("United_States.csv", '[1] Ebola Google search activity: United States', 
 		['us_infection', 'us_imported'], 'united_states_graph', 300, {resize: true});
-	new LINE_CHART.line_chart("taylor_swift.csv", 'Google search activity for a variety of terms in the USA',
+	new LINE_CHART.line_chart("taylor_swift.csv", '[2] Google search activity for a variety of terms in the USA',
 		['taylor_swift'], 'taylor_swift_graph', 300, {});

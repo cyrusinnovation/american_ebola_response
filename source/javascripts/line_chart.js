@@ -321,7 +321,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
 
   Infograph.line_charts[chart_name] = this;
 
-  if (this.force_load) {
+  if (this.force_load || isScrolledIntoView(self.chart_id)) {
     this.load_data();
   }
   else {
