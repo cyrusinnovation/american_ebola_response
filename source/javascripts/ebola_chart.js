@@ -192,7 +192,7 @@ function EbolaChart() {
 		country = this.country_name(country_code);
 
 		d3.select('.tooltip-country').html('Country: ' + country);
-		d3.select('.tooltip-search-intensity').html('Search intensity: ' + intensity);
+		d3.select('.tooltip-search-intensity').html('Search activity: ' + intensity);
 	}
 
 	this.calculate_centroid = function(geometry) {

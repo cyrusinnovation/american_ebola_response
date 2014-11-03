@@ -11,7 +11,7 @@
 	%div#ebola_chart
 		%h2 The Spread of Ebola: Information and Disease
 		%div#legend
-			%div.legend-title Intensity of Google searches for the term 'ebola'
+			%div.legend-title Google search activity for the term “ebola”
 		%div.global_tracker
 			%div.tracker_date
 			%div.tracker_cases
@@ -33,7 +33,6 @@
 .writeup
 	%div.writeup-section
 		%div.spacing
-			/ %div.separator
 		%div.quotation-container.one-third
 			%p.quotation-contents We hear it said constantly that modern society is uniquely vulnerable to the threat of a pandemic because of the global connectedness of air travel. Yet we rarely pause to consider the other side of our global connectedness: the speed of information, which has been increasing at a much faster rate over the past few decades than the speed of airplanes has.
 			%div.quotation-citation
@@ -72,9 +71,48 @@
 	%div.writeup-section
 		%div.spacing
 		%div.section-content
-			%h3.section-title The Limits of the Data
+			%h3.section-title{style: 'margin-bottom: 5px'} The Question of Quarantine		
+		%div.quotation-container.one-half.inline-block
+			%p.quotation-contents Ms. Hickox raised serious concerns "about the state abusing its powers" and could spread the very fear that the order appeared aimed at counteracting.
+			%p.quotation-contents "By forcibly detaining people, we are also frightening the public and may deter genuinely sick people who fear quarantine from seeking the treatments they deserve," [Udi Ofer, the head of the American Civil Liberties Union in New Jersey] said in an email.
+			%div.quotation-citation
+				%div.no-margin 
+					%span.quotation-author Benjamin Weiser and J. David Goodman
+					%span.quotation-title
+						%a{ href: 'http://www.nytimes.com/2014/10/27/nyregion/as-states-look-to-halt-ebola-restrictions-prompt-a-debate.html' }The Flu, TB and Now Ebola: A Rare Legal Remedy Returns
+				%div.no-margin{style: 'padding-left: 10px'}
+					%span.quotation-source The New York Times,
+					%span.quotation-date 26 Oct. 2014			
+		%div.quotation-container.one-half.inline-block
+			%p.quotation-contents As a psychiatrist... it would be best for those returning from West Africa, especially health care workers, to be quarantined, or to self-quarantine, for the appropriate length of time.
+			%p.quotation-contents Fear of Ebola is much more contagious than the disease itself. We don't want to produce any more panic in the public.
+			%div.quotation-citation
+				%div.no-margin 
+					%span.quotation-author H. Steven Moffic.
+					%span.quotation-title
+						%a{ href: 'http://www.nytimes.com/2014/10/25/opinion/the-ebola-patient-in-new-york.html' }Letter to the Editor
+				%div.no-margin{style: 'padding-left: 10px'}
+					%span.quotation-source The New York Times,
+					%span.quotation-date 24 Oct. 2014
+		%div.section-content{style: 'margin-top: 10px'}
 			:markdown
-				Some of the more interesting claims, such as those to the left, about the ebola crisis and our response to it are challenging to investigate in any depth with our limited Google search data.
+				Discuss the policy debate. Contrast the responses of Australia and Cuba.
+
+	%div.separator{style: 'margin-bottom: 10px'}
+	%div.section-content
+		:markdown
+			The source code and raw data for this project are publicly available on [Github](https://github.com/cyrusinnovation/ebola_infograph)
+			
+		%span By
+		%span.quotation-title
+			%a{ href: 'http://www.linkedin.com/in/davidblinnroadhomegames' }David Blinn 
+		%span.quotation-source{style: 'font-size: 18px'} with the support of:
+	%div.logo-container
+		%div.image-with-margin
+			= link_to image_tag( 'images/CyrusInnovationLogo.png'), 'http://www.cyrusinnovation.com/'
+	%div.logo-container
+		%div.image-with-margin
+			= link_to image_tag( 'images/occom.png'), 'http://occom.co/'
 
 :javascript
 	var Infograph = {};
@@ -86,7 +124,7 @@
 = javascript_include_tag "jquery-2.1.1.min", "d3", "queue.v1.min", "topojson.v1.min", "events", "animation_controls", "ebola_chart", "line_chart"
 
 :javascript
-	new LINE_CHART.line_chart("United_States.csv", 'Ebola Google search intensity: United States', 
+	new LINE_CHART.line_chart("United_States.csv", 'Ebola Google search activity: United States', 
 		['us_infection', 'us_imported'], 'united_states_graph', 300, {resize: true});
-	new LINE_CHART.line_chart("taylor_swift.csv", 'Google search intensity for a variety of terms in the USA',
+	new LINE_CHART.line_chart("taylor_swift.csv", 'Google search activity for a variety of terms in the USA',
 		['taylor_swift'], 'taylor_swift_graph', 300, {});

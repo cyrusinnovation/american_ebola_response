@@ -26,6 +26,7 @@ Source for world map data: https://github.com/mbostock/topojson/tree/master/exam
 As a psychiatrist, I do have concern about the psychological ramifications, which include frightening the public. For our emotional security, it would be best for those returning from West Africa, especially health care workers, to be quarantined, or to self-quarantine, for the appropriate length of time.
 Fear of Ebola is much more contagious than the disease itself. We don't want to produce any more panic in the public.
 H. Steven Moffic Milwaukee, Oct 24, 2014 (letter to the New York Times)
+http://www.nytimes.com/2014/10/25/opinion/the-ebola-patient-in-new-york.html
 
 http://www.nytimes.com/2014/10/25/opinion/ebolas-information-paradox.html?_r=0
 Johnson, Steven. "Ebola’s Information Paradox." The New York Times. The New York Times, 24 Oct. 2014. Web. 02 Nov. 2014.
@@ -44,6 +45,7 @@ Countries in Asia Sense Vulnerability as a Virus Spreads Beyond Africa. (NYT Oct
 
 The Flu, TB and now Ebola: The Quarantine, an Unusual Legal Remedy, Returns. (NYT Oct 27)
 ----------------------------------------------------------------------
+http://www.nytimes.com/2014/10/27/nyregion/as-states-look-to-halt-ebola-restrictions-prompt-a-debate.html
 "It doesn't seem like we're to that stage yet," Steven D. Gravely said, a lawyer who helped Virginia write its laws on quarantine to make it easier for the state to respond quickly to disease outbreaks. Instead, he said, "there's so much anxiety right now, that's become the problem."
 
 "I'm very worried about it," Mr. Gostin said. "We used to think that we had balanced public health and civil liberties, but I think in this case we have forgotten that balance. And I'm one who thinks that we should always privelege public health. I'm not a civil libertarian."
