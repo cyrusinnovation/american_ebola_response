@@ -18,3 +18,5 @@ gem 'rack-contrib'
 gem 'puma'
 
 gem 'github-markdown'
+
+gem 'middleman-gh-pages'
