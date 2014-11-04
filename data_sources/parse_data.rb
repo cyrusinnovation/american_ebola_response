@@ -150,8 +150,10 @@ class EbolaDataParser
 			{ title: 'Cuba',  places: ['Cuba', 'United States'] },
 			{ title: 'Haiti', places: ['Haiti', 'United States'] },
 			{ title: 'United_States', places: ['United States'] },
+			{ title: 'US_Policy', places: ['United States'], dates: (Date.new(2014,10,4)..Date.new(2014,11,1)) },
 			{ title: 'Mexico_Canada', places: ['Mexico', 'Canada', 'United States'] },
 			{ title: 'West_Africa', places: ['Liberia', 'Sierra Leone', 'Guinea', 'United States'] },
+			{ title: 'Nigeria', places: ['Nigeria', 'United States'], dates: (Date.new(2014,7,10)..Date.new(2014,11,1)) },
 			{ title: 'all_outliers', places: ['Brazil', 'Chile', 'Panama', 'Belize', 'Zimbabwe', 'Jamaica', 'Mozambique',
 				'Guyana', 'Paraguay', 'Norway', 'Australia', 'Sweden', 'Cuba', 'Haiti', 'United States'] }
 		]
@@ -162,7 +164,8 @@ class EbolaDataParser
 	end
 
 	def write_place_line_chart(place)
-		chart_data = LineChartData.new(ebola_data.daily_data_dates, place[:title])
+		date_range = (place.has_key?(:dates) ? place[:dates].to_a.map { |date| date.strftime('%Y-%m-%d') } : ebola_data.daily_data_dates)
+		chart_data = LineChartData.new(date_range, place[:title])
 		place[:places].each do |place_name|
 			chart_data.add_country(country_data(place_name))
 		end

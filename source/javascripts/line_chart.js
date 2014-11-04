@@ -10,6 +10,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   this.resizable = options.resize;
   this.force_load = options.force_load;
   this.loaded = false;
+  this.tick_count = options.tick_count || 8;
+  this.max_range = options.max_range;
 
   this.calculate_dimensions = function() {
     this.margin = {top: 20, right: 30, bottom: 30, left: 40};
@@ -88,7 +90,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
       .call(d3.svg.axis()
         .scale(x)
         .orient("bottom")
-        .ticks(8)
+        .ticks(this.tick_count)
         .tickFormat(function(d) { return self.axisFormat(d) }));
   }
 
@@ -168,7 +170,9 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     var self = this;
     this.loaded = true;
     this.x_scale.domain(d3.extent(this.dates));
-    this.y_scale.domain([0, d3.max(places, function(c) { return d3.max(c.values, function(d) { return d.value; }); })]).nice();
+    
+    var max_range = this.max_range || d3.max(places, function(c) { return d3.max(c.values, function(d) { return d.value; }); });
+    this.y_scale.domain([0, max_range]).nice();
 
     this.setup_x_axis(this.x_scale);
     this.y_axis = this.svg.append("g")
@@ -273,7 +277,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
       .call(d3.svg.axis()
         .scale(this.x_scale)
         .orient("bottom")
-        .ticks(8)
+        .ticks(this.tick_count)
         .tickFormat(function(d) { return self.axisFormat(d) }));
 
     this.y_axis
