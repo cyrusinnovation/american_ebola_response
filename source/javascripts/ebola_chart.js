@@ -154,6 +154,7 @@ function EbolaChart() {
 				.attr("d", self.path)
 				.on(hover_enter_event_name(), function(d) { self.country_mouseover(d); })
 				.on(hover_exit_event_name(), function(d) { self.country_mouseout(d); })
+				.mouse()
 
 		this.draw_time_scale();
 		if (Infograph.animating) {
@@ -171,9 +172,12 @@ function EbolaChart() {
 		this.set_country_text(country.id)
 		bounding_box = this.hover_tooltip.node().getBoundingClientRect();
 
+		var element = document.getElementById("ebola_chart")
+		var pos = d3.mouse(element);
+
 		this.hover_tooltip
-			.style('left', (d3.event.pageX - bounding_box.width * 0.5) + 'px')
-			.style('top', (d3.event.pageY - this.height + 2) + 'px')
+			.style('left', (pos[0] - bounding_box.width * 0.5) + 'px')
+			.style('top', (pos[1] - bounding_box.height - 2) + 'px')
 			.transition().duration(300)
 			.style('opacity', 1);
 		this.hover_country = country.id;
