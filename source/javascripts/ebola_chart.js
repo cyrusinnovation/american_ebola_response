@@ -153,8 +153,7 @@ function EbolaChart() {
 				.attr("id", function(d) { return self.country_name(d.id); }, true)
 				.attr("d", self.path)
 				.on(hover_enter_event_name(), function(d) { self.country_mouseover(d); })
-				.on(hover_exit_event_name(), function(d) { self.country_mouseout(d); })
-				.mouse()
+				.on(hover_exit_event_name(), function(d) { self.country_mouseout(d); });
 
 		this.draw_time_scale();
 		if (Infograph.animating) {
