@@ -4,7 +4,10 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   this.override_height = override_height;
   this.timeFormat = d3.time.format("%Y-%m-%d"),
   this.axisFormat = d3.time.format("%m/%d"),
+  this.mouseoverFormat = d3.time.format("%b %d"),
   this.focus = null,
+  this.focus_title = null,
+  this.focus_activity = null,
   this.all_events = Event.events.get_events(event_names);
   this.chart_id = '#' + chart_name;
   this.resizable = options.resize;
@@ -61,7 +64,9 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     d3.select(d.place.line).classed(d.place.hover_class(), true);
     d.place.line.parentNode.appendChild(d.place.line);
     this.focus.attr("transform", "translate(" + this.x_scale(d.date) + "," + this.y_scale(d.value) + ")");
-    this.focus.select("text").text(d.place.name);
+
+    this.focus_title.text(d.place.name + ' – ' + this.mouseoverFormat(d.date));
+    this.focus_activity.text('Search activity: ' + Math.round(d.value));
   }
 
   this.mouseout = function(d) {
@@ -199,11 +204,15 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.focus = this.svg.append("g")
         .attr("transform", "translate(-100,-100)")
         .attr("class", "focus");
+    this.focus_activity = this.focus.append('div')
+        .attr('class', 'mouseover-activity')
 
     this.focus.append("circle")
         .attr("r", 3.5);
 
-    this.focus.append("text")
+    this.focus_title = this.focus.append("text")
+        .attr("y", -22);
+    this.focus_activity = this.focus.append("text")
         .attr("y", -10);
 
     if (this.supports_voronoi()) {

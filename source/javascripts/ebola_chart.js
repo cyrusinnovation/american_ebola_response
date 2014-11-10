@@ -166,6 +166,7 @@ function EbolaChart() {
 		}
 		this.resize();
 	}
+	
 
 	this.country_mouseover = function(country) {
 		this.set_country_text(country.id)
