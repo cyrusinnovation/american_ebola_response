@@ -15,6 +15,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   this.loaded = false;
   this.tick_count = options.tick_count || 8;
   this.max_range = options.max_range;
+  this.places = null;
 
   this.calculate_dimensions = function() {
     this.margin = {top: 20, right: 30, bottom: 30, left: 40};
@@ -25,7 +26,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   }
 
   this.supports_voronoi = function() {
-    return !this.resizable;
+    // return !this.resizable;
+    return true;
   }
 
   this.setup_voronoi = function() {
@@ -171,9 +173,48 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     return event_text;
   }    
 
+  this.voronoi_group = function() {
+    if (this.supports_voronoi()) {
+
+      var voronoi_path = null;
+      if (!this.voronoiGroup) {
+        this.voronoiGroup = this.svg.append("g")
+            .attr("class", "voronoi");
+
+      this.voronoiData = this.voronoi(d3.nest()
+              .key(function(d) { return self.x_scale(d.date) + "," + self.y_scale(d.value); })
+              .rollup(function(v) { return v[0]; })
+              .entries(d3.merge(this.places.map(function(d) { return d.values; })))
+              .map(function(d) { return d.values; }));
+
+        voronoi_path = this.voronoiGroup.selectAll("path")
+          .data(this.voronoiData)
+          .enter().append("path");
+      }
+      else {
+        this.voronoiData = this.voronoi(d3.nest()
+                .key(function(d) { return self.x_scale(d.date) + "," + self.y_scale(d.value); })
+                .rollup(function(v) { return v[0]; })
+                .entries(d3.merge(this.places.map(function(d) { return d.values; })))
+                .map(function(d) { return d.values; }));
+        
+        voronoi_path = this.voronoiGroup.selectAll("path").data(this.voronoiData);
+      }
+      
+      voronoi_path
+          .attr("d", function(d) { 
+            return "M" + d.join("L") + "Z"; 
+          })
+          .datum(function(d) { return d.point; })
+          .on(hover_enter_event_name(), function(d) { self.mouseover(d); })
+          .on(hover_exit_event_name(), function(d) { self.mouseout(d); });
+    }    
+  }
+
   this.build_chart = function(error, places) {
     var self = this;
     this.loaded = true;
+    this.places = places;
     this.x_scale.domain(d3.extent(this.dates));
     
     var max_range = this.max_range || d3.max(places, function(c) { return d3.max(c.values, function(d) { return d.value; }); });
@@ -215,25 +256,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.focus_activity = this.focus.append("text")
         .attr("y", -10);
 
-    if (this.supports_voronoi()) {
-      this.voronoiGroup = this.svg.append("g")
-          .attr("class", "voronoi");
-
-      this.voronoiData = this.voronoi(d3.nest()
-              .key(function(d) { return self.x_scale(d.date) + "," + self.y_scale(d.value); })
-              .rollup(function(v) { return v[0]; })
-              .entries(d3.merge(places.map(function(d) { return d.values; })))
-              .map(function(d) { return d.values; }));
-      this.voronoiGroup.selectAll("path")
-          .data(this.voronoiData)
-        .enter().append("path")
-          .attr("d", function(d) { 
-            return "M" + d.join("L") + "Z"; 
-          })
-          .datum(function(d) { return d.point; })
-          .on(hover_enter_event_name(), function(d) { self.mouseover(d); })
-          .on(hover_exit_event_name(), function(d) { self.mouseout(d); });
-    }
+    this.voronoi_group();
 
     this.setup_events_axis(this.x_scale, this.height - 7);
   }
@@ -299,6 +322,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
       .selectAll("path")
       .attr("d", function(d) { return self.line(d.values); })        
 
+    this.voronoi_group();
+
     this.event_g
       .attr("transform", "translate(0," + this.height + ")")
       .call(this.event_axis)
@@ -311,6 +336,8 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
     this.hitbox_g
       .attr("transform", "translate(0," + this.height + ")")
       .call(this.hitbox_axis)
+
+    this.onscreen_check();
   }
 
   this.load_data = function() {
@@ -319,6 +346,13 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
       function(error, places) { 
         self.build_chart(error, places); 
       });
+  }
+
+  this.onscreen_check = function() {
+    if (!this.loaded && isScrolledIntoView(self.chart_id)) {
+      self.load_data();
+      d3.select(window).on('scroll.' + chart_name, null);
+    }
   }
 
   function isScrolledIntoView(elem)
@@ -339,10 +373,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   }
   else {
     d3.select(window).on('scroll.' + chart_name, function() {
-      if (isScrolledIntoView(self.chart_id)) {
-        self.load_data();
-        d3.select(window).on('scroll.' + chart_name, null);
-      }
+      self.onscreen_check();
     })
   }
 
