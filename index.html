@@ -33,7 +33,6 @@
 </div>
 <div class='writeup'>
 <div class='chart'>
-<!-- %div.separator{style: 'stroke-dasharray: 2,2;'} -->
 <title>The Spread of Ebola: Information and Disease</title>
 <div id='ebola_chart'>
 <div class='animation-controls'>
@@ -76,7 +75,7 @@
 <div class='large-line-graph' id='canada_graph'></div>
 <div class='section-content'>
 <h4 class='section-title'>Spain</h4>
-<p>As of this writing, Spain is the only other non-West African nation to report an Ebola case contracted within its borders. On October 6, a <a href="http://www.ibtimes.com/ebola-virus-spreads-spain-nurse-first-ebola-case-outside-west-africa-1699974">Spanish nurse contracted the disease</a> from a man brought to Spain for hospitalization after becoming sick with Ebola in Sierra Leone.</p>
+<p>As of this writing, Spain is the only other non-African nation to report an Ebola case contracted within its borders. On October 6, a <a href="http://www.ibtimes.com/ebola-virus-spreads-spain-nurse-first-ebola-case-outside-west-africa-1699974">Spanish nurse contracted the disease</a> from a man brought to Spain for hospitalization after becoming sick with Ebola in Sierra Leone.</p>
 
 <p>And on October 16, Spain had another Ebola scare when <a href="http://www.reuters.com/article/2014/10/16/health-ebola-spain-idUSL6N0SB42620141016">several patients who later tested negative were hospitalized with potential Ebola symptoms</a>. Figure <strong>[4]</strong> illustrates these events.</p>
 </div>
@@ -84,9 +83,9 @@
 <div class='large-line-graph' id='spain_graph'></div>
 </div>
 </div>
-<div class='separator' style='margin-top: 20px; margin-bottom: 20px'></div>
 <div class='writeup'>
-<div class='writeup-section'>
+<div class='writeup-section' style='clear: both'>
+<div class='spacing'></div>
 <div class='section-content'>
 <h3 class='section-title'>Data and Methods</h3>
 <p>Data about the spread of the ebola virus were gathered from the World Health Organization <a href="http://www.who.int/csr/don/archive/disease/ebola/en/">Global Alert and Response</a> and <a href="http://www.who.int/csr/disease/ebola/situation-reports/en/">Situation Report</a> listings. Ebola case and death numbers reported above are the combined confirmed, suspected, and probable numbers issued by the CDC.</p>
@@ -114,6 +113,7 @@
 </div>
 </div>
 </div>
+<meta content='images/pygmy-marmoset-monkey.jpg' property='og:image'>
 <script>
   var Infograph = {};
   Infograph.animating = false;
@@ -127,7 +127,7 @@
   new LINE_CHART.line_chart("Spain.csv", '[4] Search activity: Spain vs USA',
   	['spain'], 'spain_graph', 300, {resize: true});
   new LINE_CHART.line_chart("Canada.csv", 'Search activity: Canda vs USA',
-  	['us_infection', 'us_imported'], 'canada_graph', 300, {resize: true});
+  	['us_infection', 'us_imported', 'canada'], 'canada_graph', 300, {resize: true});
 </script>
 
   </body>

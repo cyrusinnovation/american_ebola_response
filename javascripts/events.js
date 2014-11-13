@@ -11,9 +11,13 @@ Event.events = {
 
 		us_imported: [
 			{date: '2014-08-02', description: 'Aid worker and missionary arrive for treatment'},
-			{date: '2014-09-05', description: 'A doctor arrives in US for ebola treatment'},
-			{date: '2014-09-09', description: 'Second doctor arrives for ebola treatment'},
+			{date: '2014-09-05', description: 'A doctor arrives in US for Ebola treatment'},
+			{date: '2014-09-09', description: 'Second doctor arrives for Ebola treatment'},
 			// {date: '2014-10-06', description: 'An NBC cameraman arrives for ebola treatment'}
+		],
+
+		canada: [
+			{date: '2014-08-09', description: 'A man in Canada is tested for Ebola'}
 		],
 
 		taylor_swift: [
