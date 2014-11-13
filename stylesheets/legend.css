@@ -1,0 +1,27 @@
+#legend {
+	position: absolute;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    font-size: .7em;
+    border: 1px solid #555;
+    background-color: #fff;
+}
+
+li.key {
+    border-top-width: 15px;
+    border-top-style: solid;
+    font-size: .7em;
+    width: 12%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.legend-title {
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.list-inline {
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
