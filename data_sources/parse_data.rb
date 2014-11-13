@@ -152,6 +152,7 @@ class EbolaDataParser
 			{ title: 'United_States', places: ['United States'] },
 			{ title: 'US_Policy', places: ['United States'], dates: (Date.new(2014,10,4)..Date.new(2014,11,1)) },
 			{ title: 'Mexico_Canada', places: ['Mexico', 'Canada', 'United States'] },
+			{ title: 'Canada', places: ['Canada', 'United States'] },
 			{ title: 'West_Africa', places: ['Liberia', 'Sierra Leone', 'Guinea', 'United States'] },
 			{ title: 'Nigeria', places: ['Nigeria', 'United States'], dates: (Date.new(2014,7,10)..Date.new(2014,11,1)) },
 			{ title: 'all_outliers', places: ['Brazil', 'Chile', 'Panama', 'Belize', 'Zimbabwe', 'Jamaica', 'Mozambique',
