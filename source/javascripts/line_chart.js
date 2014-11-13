@@ -26,7 +26,6 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
   }
 
   this.supports_voronoi = function() {
-    // return !this.resizable;
     return true;
   }
 
@@ -197,7 +196,7 @@ LINE_CHART.line_chart = function(data_file, chart_title, event_names, chart_name
                 .rollup(function(v) { return v[0]; })
                 .entries(d3.merge(this.places.map(function(d) { return d.values; })))
                 .map(function(d) { return d.values; }));
-        
+
         voronoi_path = this.voronoiGroup.selectAll("path").data(this.voronoiData);
       }
       
