@@ -15,7 +15,6 @@
 				America did not panic during the Ebola crisis, at least not when you measure its internet search activity against the rest of the world. The map below tracks the global spread of Ebola together with the online response to it as measured by Google search activity for the term “ebola”.
 .writeup
 	%div.chart
-		/ %div.separator{style: 'stroke-dasharray: 2,2;'}
 		%title The Spread of Ebola: Information and Disease
 
 		%div#ebola_chart
@@ -50,14 +49,15 @@
 		%div.section-content
 			%h4.section-title Spain
 			:markdown
-				As of this writing, Spain is the only other non-West African nation to report an Ebola case contracted within its borders. On October 6, a [Spanish nurse contracted the disease](http://www.ibtimes.com/ebola-virus-spreads-spain-nurse-first-ebola-case-outside-west-africa-1699974) from a man brought to Spain for hospitalization after becoming sick with Ebola in Sierra Leone.
+				As of this writing, Spain is the only other non-African nation to report an Ebola case contracted within its borders. On October 6, a [Spanish nurse contracted the disease](http://www.ibtimes.com/ebola-virus-spreads-spain-nurse-first-ebola-case-outside-west-africa-1699974) from a man brought to Spain for hospitalization after becoming sick with Ebola in Sierra Leone.
 
 				And on October 16, Spain had another Ebola scare when [several patients who later tested negative were hospitalized with potential Ebola symptoms](http://www.reuters.com/article/2014/10/16/health-ebola-spain-idUSL6N0SB42620141016). Figure **[4]** illustrates these events.
 		%div.section-content{style: 'clear: both'}
 		#spain_graph.large-line-graph
-%div.separator{style: 'margin-top: 20px; margin-bottom: 20px'}
+
 .writeup
-	%div.writeup-section
+	%div.writeup-section{style: 'clear: both'}
+		%div.spacing
 		%div.section-content
 			%h3.section-title Data and Methods
 			:markdown
@@ -79,6 +79,7 @@
 		%div.logo-container
 			%div.image-with-margin
 				= link_to image_tag( 'images/occom.png'), 'http://occom.co/'
+%meta{property: 'og:image', content: 'images/pygmy-marmoset-monkey.jpg'} 
 
 :javascript
 	var Infograph = {};
@@ -93,5 +94,5 @@
 	new LINE_CHART.line_chart("Spain.csv", '[4] Search activity: Spain vs USA',
 		['spain'], 'spain_graph', 300, {resize: true});
 	new LINE_CHART.line_chart("Canada.csv", 'Search activity: Canda vs USA',
-		['us_infection', 'us_imported'], 'canada_graph', 300, {resize: true});
+		['us_infection', 'us_imported', 'canada'], 'canada_graph', 300, {resize: true});
 
