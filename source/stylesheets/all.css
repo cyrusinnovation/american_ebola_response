@@ -1,0 +1,165 @@
+@charset "utf-8";
+
+body {
+  background: # ffffff;
+  /*text-align: center;*/
+  font-family: sans-serif; 
+}
+
+h2 {
+  text-align: center;
+  /*background: rgb(198,219,239);*/
+  margin: 0px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+/*h2 {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  margin-top: 2px;
+  text-align: center;
+  padding: 0 19.5% 0 12%;
+  font-size: 2em;
+
+}
+
+@media (max-width: 800px) {
+  h2 {
+    font-size: 1.6em;
+  }
+}
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 1.4em;
+  }
+}
+*/
+.chart {
+  text-align: left;
+  min-width: 600px;
+  position: relative;
+}
+
+.country {
+  fill: none;  stroke: none;  stroke-width: .5px;
+}
+
+.country_label {
+  text-anchor: 'middle';
+  font-size: .7em;
+  /*font-weight: 100;*/
+  stroke: none;
+  fill: #555;
+  shape-rendering: crispEdges;
+}
+
+.country_pointer {
+  stroke: #555;
+  stroke-width: 1.0px;
+  fill: none;  
+}
+
+.infected_outline {
+  fill: none;
+  stroke: #b22;
+  stroke-width: 1.5px;
+}
+
+.time_axis {
+  fill: none;
+  stroke: #555;
+  stroke-width: 1px;
+}
+
+.time_axis line {
+  fill: none;
+  stroke: #555;
+  stroke-width: 1px;
+}
+
+.time_axis text {
+  font-family: sans-serif;
+  font-size: .7em;
+  font-weight: 100;
+  stroke: #555;
+  shape-rendering: crispEdges;
+}
+
+.poi_axis {
+  fill: none;
+  stroke: none;
+}
+
+.poi_axis line {
+  fill: none;
+  stroke: #555;
+  stroke-width: 1px;
+}
+
+.poi_axis text {
+  font-family: sans-serif;
+  font-size: .7em;
+  font-weight: 100;
+  stroke: none;
+  fill: #555;
+}
+
+.current_axis {
+  fill: none;
+  stroke: none;
+}
+
+.current_axis line {
+  fill: #555;
+  stroke: #555;
+  stroke-width: 2.5px;
+}
+
+.current_axis text {
+  font-family: sans-serif;
+  font-size: .7em;
+  font-weight: normal;
+  stroke: none;
+  fill: #555;
+  shape-rendering: crispEdges;
+}
+
+.global_tracker {
+  font-family: sans-serif;
+  font-size: .7em;
+  font-weight: normal;
+  position: absolute;
+  text-align: center;
+  line-height: 11px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tracker_date {
+  font-weight: bold;
+}
+
+div.tooltip {   
+  position: absolute;
+  text-align: left;
+  padding: 2px;
+  font-size: .7em;
+  background: #fff;
+  border: 1px solid #555;
+  pointer-events: none;
+  top: 100px;
+  left: 10px;
+}
+
+.tooltip-country {
+  font-weight: normal;
+}
+
+iframe.line_graph {
+  border: none;
+  width: 600px;
+  height: 300px;
+}

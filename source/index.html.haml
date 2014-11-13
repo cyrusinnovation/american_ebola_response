@@ -1,0 +1,296 @@
+= stylesheet_link_tag 'bootstrap.min.css'
+= stylesheet_link_tag 'font-awesome.min.css'
+= stylesheet_link_tag 'all.css'
+= stylesheet_link_tag 'animation-controls.css'
+= stylesheet_link_tag 'legend.css', 'article.css', 'writeup.css'
+= stylesheet_link_tag 'line_chart.css'
+
+%h2 The Spread of Ebola: Information and Disease
+
+.writeup
+	%div.writeup-section
+		%div.spacing
+		%div.quotation-container.one-third
+			%p.quotation-contents We hear it said constantly that modern society is uniquely vulnerable to the threat of a pandemic because of the global connectedness of air travel. Yet we rarely pause to consider the other side of our global connectedness: the speed of information, which has been increasing at a much faster rate over the past few decades than the speed of airplanes has.
+			%div.quotation-citation
+				%div.no-margin 
+					%span.quotation-author Johnson, Steven.
+					%span.quotation-title
+						%a{ href: 'http://www.nytimes.com/2014/10/25/opinion/ebolas-information-paradox.html' }Ebola’s Information Paradox
+				%div.no-margin{style: 'padding-left: 10px'}
+					%span.quotation-source The New York Times,
+					%span.quotation-date 24 Oct. 2014
+		%div.section-content.two-thirds.inline-block
+			%h3.section-title The Internet and the Virus
+			:markdown
+				Information travels fast these days, and nowhere faster than the internet. There's even a word for it now – when something surges across the web so fast and so thoroughly that it becomes almost impossible to avoid its omnipresence, we say it has gone viral.
+
+				And few things on the internet went viral in October 2014 quite like the dangerous virus Ebola. As Ebola leapt from West Africa out to other patches of the globe, the globe lit up in interest about Ebola. And while the spread of Ebola certainly sparked the viral global interest, the spread of the global interest has in turn shaped the spread of the virus itself, as Steven Johnson points out in the quotation at left.
+
+				Below is a visualization that tracks the global spread of Ebola together with the online response to it as measured by Google search activity for the term “ebola”.
+%div.chart
+	%div.separator{style: 'stroke-dasharray: 2,2;'}
+	%title The Spread of Ebola: Information and Disease
+
+	%div#ebola_chart
+		%div.animation-controls
+			.btn-group
+				%botton#prev-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
+					%i{class: 'fa fa-step-backward fa-3x'}	
+				%button#play-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 50px'}
+					%i#play_pause_image{class: 'fa fa-play fa-3x'}
+				%botton#next-button{class: 'btn btn-sm btn-default', style: 'padding: 10px 20px'}
+					%i{class: 'fa fa-step-forward fa-3x'}	
+		%div#legend
+			%div.legend-title Google search activity for the term “ebola”
+		%div.global_tracker
+			%div.tracker_date
+			%div.tracker_cases
+			%div.tracker_deaths
+		%div.headlines
+		%div.tooltip
+			%div.tooltip-country
+			%div.tooltip-search-intensity
+
+.writeup
+	%div.writeup-section
+		%div.spacing
+		%div.section-content
+			%h3.section-title Sifting the Searches
+			:markdown
+				Searching [Google](https://www.google.com/) can provide information about many different things. But it turns out that examining Google searches themselves can also provide some important insights. For instance, having a deep understanding of the searches on its service helps Google and [its advertisers](http://en.wikipedia.org/wiki/Search_engine_optimization) [make money](http://en.wikipedia.org/wiki/AdWords).
+
+				But less cynically, Google searches can also provide information about the spread of disease, as with [Google's Flu Trends](http://www.google.org/flutrends/) service. Flu trends [works in part](http://en.wikipedia.org/wiki/Google_Flu_Trends#Introduction) by tracking online queries for influenza-related terms in order to estimate flu activity.
+
+				In this spirit, let's continue investigating global [Google search activity](http://www.google.com/trends/) for the term “ebola”, beginning with a look at search patterns in the United States.
+	%div.writeup-section
+		%div.spacing
+		%div.section-content
+			%h3.section-title Searchin’ USA
+		#united_states_graph.large-line-graph
+		%div.section-content
+			:markdown
+				Figure **[1]** above shows that when an important Ebola-related event happened in the United States, Google search activity for Ebola spiked immediately or shortly thereafter (mouse over or tap on an event line to see its title).
+
+				Spikes were more dramatic for Ebola infections discovered in the United States than they were for aid workers returned to the US for treatment. Interest peaked after nurse Amber Vinson was diagnosed with Ebola on October 15.
+
+				Media criticisms, both foreign and domestic, of the American response to Ebola have ranged from calling it a “[epic, epidemic overreaction](http://www.cnn.com/2014/10/20/health/ebola-overreaction/)” to labelling it as “[disease-provoked hysteria](http://www.washingtonpost.com/blogs/worldviews/wp/2014/10/22/what-the-world-thinks-of-the-american-ebola-panic/)”. But is this fair? How does it compare to the response in other nations? Before investigating this further, let's get a better sense of just how intense search activity for Ebola in the United States was.
+
+			/ Many in the media have criticized the American response to Ebola as one of [panic](). For the most part, the events marked on the graph above are frightening to contemplate, which would seem to corroborate fear as an important motivator in sparking the intense interest around Ebola. 
+	%div.writeup-section
+		%div.spacing
+		#taylor_swift_graph.small-line-graph.right{style: 'margin-top: -10px'}
+		#west_africa_graph.small-line-graph.right{style: 'margin-top: -10px'}
+		%div.section-content
+			%h3.section-title Comparing Activity
+			:markdown
+				The musician Taylor Swift released the album “[1989](http://en.wikipedia.org/wiki/1989_(Taylor_Swift_album))” in America on October 27, 2014. It sold nearly 1.3 million copies [with the biggest sales week for an album in over 10 years](http://www.cnn.com/2014/11/05/showbiz/music/taylor-swift-1989-sales/index.html).
+
+				Americans celebrated the popular annual holiday Halloween on October 31.
+
+				Figure **[2]** plots search activity in the USA for the terms “Halloween”, “Taylor Swift” and “1989” against the search activity for Ebola.
+
+				Peak search activity was much higher for Ebola than for Taylor Swift or her album, but only half that of Halloween.
+
+				The nations with the consistently highest search activity for Ebola are the stricken nations in West Africa – Liberia, Sierra Leone, and Guinea. Figure **[3]** plots their search activity relative to that of the United States.
+	%div.writeup-section
+		%div.spacing
+		%div.section-content
+			%h3.section-title The Global Response
+			:markdown
+				Let's resume our earlier question about the character of the response in other nations around the globe. In examining the data, the excited response of the United States to Ebola within its borders appears to be typical of how other nations reacted as well.
+
+		%div.section-content{style: 'clear: both'}
+		#spain_graph.small-line-graph.left{style: 'margin-top: -10px'}
+		%div.section-content
+			%h4.section-title Spain
+			:markdown
+				As of this writing, Spain is the only other non-West African nation to report an Ebola case contracted within its borders. On October 6, a [Spanish nurse contracted the disease](http://www.ibtimes.com/ebola-virus-spreads-spain-nurse-first-ebola-case-outside-west-africa-1699974) after treating a man brought to Spain for hospitalization after becoming sick with Ebola in Sierra Leone.
+
+				And on October 16, Spain had another Ebola scare when [several patients who later tested negative were hospitalized with potential Ebola symptoms](http://www.reuters.com/article/2014/10/16/health-ebola-spain-idUSL6N0SB42620141016). Figure **[4]** illustrates these events.
+		%div.section-content{style: 'clear: both'}
+		#chile_graph.small-line-graph.left{style: 'margin-top: -10px'}
+		%div.section-content
+			%h4.section-title Chile
+			:markdown
+				The event in Spain on October 16 suggests that even the threat of Ebola within a nation's borders is enough to measurably raise search activity. Some nations experienced very dramatic surges around a suspected Ebola case that later proved not to be Ebola.
+
+				Chile experienced an Ebola scare on October 12th when a [viral video](https://www.youtube.com/watch?v=v9igKnTvUuw) spread around the internet. The video, taken at a hospital, features a voice on a loudspeaker saying, “[Can I have your attention, please. We have a patient who is suspected to have Ebola. Please leave the room and go to another hospital](http://www.bbc.com/news/blogs-trending-29618224)”.
+		%div.section-content{style: 'clear: both'}
+		#sweden_graph.small-line-graph.left{style: 'margin-top: -10px'}
+		%div.section-content
+			%h4.section-title Sweden
+			:markdown
+				Not all nations responsed equally to suspected Ebola cases.
+
+				In Sweden, patients were hospitalized for suspected Ebola on [August 31](http://online.wsj.com/articles/swedish-man-hospitalized-with-suspected-case-of-ebola-1409519411) and [October 19](http://www.thelocal.se/20141019/ebola-alarm-raised-at-arlanda-airport). These events produced a perceptable rise in interest, but at a smaller scale than in many other nations.
+	%div.writeup-section{style: 'clear: both'}
+		%div.spacing
+		%div.section-content{style: 'padding-top: 20px'}
+			%h3.section-title Good Neighbors
+			:markdown
+				On March 31, shortly after Ebola was first detected in West Africa, [Senegal closed its borders to neighboring Guinea](http://www.bbc.com/news/world-africa-26816438). And in a moment noted for its irony, Mexico and Belize [denied an American cruise ship permission to dock](http://www.washingtonpost.com/news/morning-mix/wp/2014/10/17/cruise-ship-carrying-texas-ebola-nurse-refused-entry-in-belize/) for fear of Ebola.
+
+		%div.section-content{style: 'clear: both'}
+		#mexico_canada_graph.small-line-graph.left{style: 'margin-top: -10px'}
+		%div.section-content
+			:markdown
+				This pattern is reflected in the search data as well. When a nation confirms or is suspected to have a case of Ebola, search interest in neighboring countries spikes. Mexico and Canada's Ebola search activity, for example, closely mirrors the United States (figure **[7]**). Mexico diverged for a period shortly after August 6 when [a student in Mexico City](http://www.oem.com.mx/elsoldemexico/notas/n3496087.htm) was suspected of Ebola.
+
+		%div.section-content{style: 'clear: both'}
+		#brazil_paraguay_graph.small-line-graph.left{style: 'margin-top: -10px'}
+		%div.section-content
+			:markdown
+				And when a man was [suspected of having Ebola](http://www.reuters.com/article/2014/10/10/us-health-ebola-brazil-idUSKCN0HZ1DV20141010) on October 10th in the southern Brazilian state Paraná, which [borders Paraguay](https://www.google.com/maps/place/State+of+Paraná,+Brazil), Ebola search activity in Paraguay actually eclipsed the activity in Brazil (figure **[8]**).
+
+	%div.writeup-section
+		%div.spacing
+		%div.section-content{style: 'padding-top: 20px'}
+			%h3.section-title{style: 'margin-bottom: 5px'} Looking at Policy
+			:markdown
+				Governments around the world have issued a variety of different policies in attempting to keep Ebola out, or once it enters, to remove it. [Over thirty nations](https://www.internationalsos.com/ebola/index.cfm?content_id=435&) have issued some form of travel restrictions against those arriving from ebola-stricken nations. [Australia](http://rt.com/news/200003-australia-ebola-travel-ban/) and [Canada](http://www.bbc.com/news/world-us-canada-29861563) have banned the issuance of visas to travellers from Liberia, Guinea, and Sierra Leone.
+
+				A major focus of the policy debate in the United States has been on the use of mandatory quarantines imposed on aid workers returning from West Africa after Dr. Craig Spencer was diagnosed with Ebola. A central figure in this debate has been nurse Kaci Hickox, who protested quarantines imposed on her first at Newark airport, and then in Maine. Arguments for and against the quarantine policies play on the idea that they affect citizens' level of Ebola-related fear.
+		%div.quotation-container.one-half.inline-block
+			%p.quotation-contents Ms. Hickox raised serious concerns "about the state abusing its powers" and could spread the very fear that the [New York/New Jersey quarantine] order appeared aimed at counteracting.
+			%p.quotation-contents "By forcibly detaining people, we are also frightening the public and may deter genuinely sick people who fear quarantine from seeking the treatments they deserve," [Udi Ofer, the head of the American Civil Liberties Union in New Jersey] said in an email.
+			%div.quotation-citation
+				%div.no-margin 
+					%span.quotation-author Benjamin Weiser and J. David Goodman
+					%span.quotation-title
+						%a{ href: 'http://www.nytimes.com/2014/10/27/nyregion/as-states-look-to-halt-ebola-restrictions-prompt-a-debate.html' }The Flu, TB and Now Ebola: A Rare Legal Remedy Returns
+				%div.no-margin{style: 'padding-left: 10px'}
+					%span.quotation-source The New York Times,
+					%span.quotation-date 26 Oct. 2014			
+		%div.quotation-container.one-half.inline-block
+			%p.quotation-contents As a psychiatrist, I do have concern about the psychological ramifications [of Dr. Craig Spencer's behavior in New York], which include frightening the public. For our emotional security, it would be best for those returning from West Africa, especially health care workers, to be quarantined, or to self-quarantine, for the appropriate length of time.
+			%p.quotation-contents Fear of Ebola is much more contagious than the disease itself. We don't want to produce any more panic in the public.
+			%div.quotation-citation
+				%div.no-margin 
+					%span.quotation-author H. Steven Moffic.
+					%span.quotation-title
+						%a{ href: 'http://www.nytimes.com/2014/10/25/opinion/the-ebola-patient-in-new-york.html' }Letter to the Editor
+				%div.no-margin{style: 'padding-left: 10px'}
+					%span.quotation-source The New York Times,
+					%span.quotation-date 24 Oct. 2014
+		%div.section-content{style: 'padding-top: 20px'}
+		#us_policy_graph.small-line-graph.right{style: 'margin-top: -10px'}
+		%div.section-content
+			:markdown
+				Figure **[1]** above showed that frightening Ebola-related events were soon followed by dramatic changes in search activity for Ebola.
+
+				Figure **[9]** overlays policy-related events on the graph of American Ebola search activity. It does not provide strong evidence to say whether Americans were assuaged, frightened, or even indifferent to the evolving quarantine policies.
+
+				An [NBC/Wall Street Journal poll](http://www.nbcnews.com/storyline/ebola-virus-outbreak/nbc-wsj-poll-71-back-mandatory-quarantines-ebola-health-workers-n239576) taken on October 30th stated that 71% of Americans favored mandatory quarantines for health care workers returning from treating Ebola in West Africa.
+		%div.section-content{style: 'clear: both'}
+		#australia_graph.small-line-graph.right{style: 'margin-top: -10px'}
+		%div.section-content
+			%h4.section-title Policy in Australia
+			:markdown
+				Australia has not yet had an Ebola case within its borders, but it has instituted tough restrictions against travellers from West Africa.
+
+				On September 28, Australia issued a policy to [prevent its health care workers from assisting in Ebola outbreak zones](http://www.theguardian.com/world/2014/sep/29/australia-cannot-bring-health-workers-home-from-african-ebola-zones). On October 27, it [stopped issuing visas](http://www.reuters.com/article/2014/10/28/us-health-ebola-australia-idUSKBN0IH05120141028) to residents of Liberia, Guinea, and Sierra Leone.
+
+				Figure **[10]** shows that Australia had consistently lower Ebola search activity than the United States.
+		%div.section-content{style: 'clear: both'}
+		#cuba_graph.small-line-graph.right{style: 'margin-top: -10px'}
+		%div.section-content
+			%h4.section-title Policy in Cuba
+			:markdown
+				Cuba is unusual in both its Ebola search activity and its policy decisions. While other Caribbean island nations including Jamaica, Haiti, and the Dominican Republic have [banned visitors from stricken West African countries](https://www.internationalsos.com/ebola/index.cfm?content_id=435&), Cuba has sent “[the largest foreign medical team from a single country](http://www.who.int/features/2014/cuban-ebola-team/en/)” to fight Ebola in West Africa.
+
+				Figure **[11]** charts search activity for Ebola in Cuba against the United States. Search activity data was not available for the entire period under study, and activity is marked at 0 during empty periods. Ebola search activity data for Cuba was only available at one-week sampling intervals.
+	%div.writeup-section{style: 'padding-top: 5px'}
+		%div.spacing
+		#nigeria_graph.small-line-graph.right{style: 'margin-top: -10px'}
+		%div.section-content
+			%h3.section-title Nigerian Success
+			:markdown
+				Nigeria's response to and containment of its Ebola outbreak has been [widely praised](http://www.latimes.com/world/africa/la-fg-nigeria-ebola-20141020-story.html). On October 20th a man arrived in Africa's most populous city – Lagos, Nigeria – with vomiting and diarrhea from an Ebola infection. On August 4, Nigeria confirmed several new infections among the health care workers who treated the sick man. The situation looked dire, but Nigeria managed to contain the outbreak with no new cases occuring after August 31.
+
+				In a statement on Nigeria's response, the [World Health Organization credited Nigerian public awareness campaigns](http://www.who.int/mediacentre/news/statements/2014/nigeria-ends-ebola/en/) as an important contributor to success. “[Interest spiked after health authorities announced the first confirmed case of Ebola infection of a Nigerian on Aug. 4—and the local media coverage exploded.](http://time.com/3089072/ebola-outbreak-nigeria-lagos/)” Figure **[12]** depicts an extreme spike in Nigerian Ebola search activity shortly after this August 4 date. I could find no single event to explain the resumption in search activity around the date of October 4.
+
+	%div.writeup-section
+		%div.spacing
+		%div.quotation-container.one-third
+			%p.quotation-contents Information travels faster than viruses do now. This is why we are afraid. But this is also why we are safe.
+			%div.quotation-citation
+				%div.no-margin 
+					%span.quotation-author Johnson, Steven.
+					%span.quotation-title
+						%a{ href: 'http://www.nytimes.com/2014/10/25/opinion/ebolas-information-paradox.html' }Ebola’s Information Paradox
+				%div.no-margin{style: 'padding-left: 10px'}
+					%span.quotation-source The New York Times,
+					%span.quotation-date 24 Oct. 2014		
+		%div.section-content.two-thirds.inline-block
+			%h3.section-title Information Limits
+			:markdown
+				Nigeria's success in combatting Ebola within its borders suggests that it is possible to inform a citizenry in the midst of a raging medical crisis.
+
+				Education and information are keys in fighting the spread of an infection, and the internet can play an important role in disseminating and aggregating that information. At the same time, it is important to recognize what it cannot do.
+		%div.section-content{style: 'clear: both'}
+			:markdown
+				[Google Flu Trends](http://www.google.org/flutrends/), cited above as an example of the power of search data in predicting flu outbreaks, has actually been [strikingly inaccurate in its estimates of the number of flu cases](http://www.businessweek.com/articles/2014-03-14/how-google-confused-basketball-fans-with-flu-patients). To attempt to fix the problem, Google [is incorporating into their service](http://bits.blogs.nytimes.com/2014/10/31/the-new-thing-in-google-flu-trends-is-traditional-data/) the official, traditional, and human-gathered [CDC reports](http://www.cdc.gov/flu/weekly/).
+
+				In West Africa, human-gathering and dissemination of information remains very difficult. As new admissions to ebola treatment centers drop, health care workers there say that it is [too early to celebrate](http://www.nytimes.com/2014/10/29/world/africa/in-liberia-a-good-or-very-bad-sign-empty-beds-.html). Indeed, as far back as [May, headlines were claiming success](http://news.yahoo.com/dramatic-improvement-controlling-ebola-outbreak-150438707.html) in combatting the outbreak when in fact the crisis would go on to take a dramatic turn for the worse.
+
+				Information travels fast these days, but good information can still be hard to find.
+%div.separator{style: 'margin-top: 20px; margin-bottom: 20px'}
+.writeup
+	%div.writeup-section
+		%div.section-content
+			%h3.section-title Data and Methods
+			:markdown
+				Data about the spread of the ebola virus were gathered from the World Health Organization [Global Alert and Response](http://www.who.int/csr/don/archive/disease/ebola/en/) and [Situation Report](http://www.who.int/csr/disease/ebola/situation-reports/en/) listings. Ebola case and death numbers reported above are the combined confirmed, suspected, and probable numbers issued by the CDC.
+
+				Data about ebola searches were gathered using [Google Trends](http://www.google.com/trends/). All data were normalized against the United States, with the peak US search activity for the period under study fixed at a value of 100. For an explanation of the Google Trends data, visit the [about page](https://support.google.com/trends/answer/4355164?hl=en&rd=1). Search data prior to July 30th was obtained at a weekly sampling interval and interpolated. Search data on and after July 30th was sampled at a daily interval.
+		%div.spacing
+		%div.section-content
+			:markdown
+				The source code and raw data for this project are publicly available on [Github](https://github.com/cyrusinnovation/ebola_infograph)
+				
+			%span By
+			%span.quotation-title
+				%a{ href: 'mailto:dblinn@cyrusinnovation.com', target: '#' }David Blinn 
+			%span.quotation-source{style: 'font-size: 18px'} with the support of:
+		%div.logo-container
+			%div.image-with-margin
+				= link_to image_tag( 'images/CyrusInnovationLogo.png'), 'http://www.cyrusinnovation.com/'
+		%div.logo-container
+			%div.image-with-margin
+				= link_to image_tag( 'images/occom.png'), 'http://occom.co/'
+
+:javascript
+	var Infograph = {};
+	Infograph.animating = false;
+	Infograph.intervalId = null;
+	Infograph.current_date_index = 0;
+	Infograph.line_charts = {};
+= javascript_include_tag "google_analytics", "mobilecheck"
+= javascript_include_tag "jquery-2.1.1.min", "d3", "queue.v1.min", "topojson.v1.min", "events", "animation_controls", "ebola_chart", "line_chart"
+
+:javascript
+	new LINE_CHART.line_chart("United_States.csv", '[1] Search activity for “ebola” in the United States', 
+		['us_infection', 'us_imported'], 'united_states_graph', 300, {resize: true});
+	new LINE_CHART.line_chart("taylor_swift.csv", '[2] Google search activity for a variety of terms in the USA',
+		['taylor_swift'], 'taylor_swift_graph', 300, {});
+	new LINE_CHART.line_chart("West_Africa.csv", '[3] Search activity: West Africa vs USA',
+		[], 'west_africa_graph', 300, {});
+	new LINE_CHART.line_chart("Spain.csv", '[4] Search activity: Spain vs USA',
+		['spain'], 'spain_graph', 300, {});
+	new LINE_CHART.line_chart("Chile.csv", '[5] Search activity: Chile vs USA',
+		['chile'], 'chile_graph', 300, {});
+	new LINE_CHART.line_chart("Sweden.csv", '[6] Search activity: Sweden vs USA',
+		['sweden'], 'sweden_graph', 300, {});
+	new LINE_CHART.line_chart("Mexico_Canada.csv", '[7] Search activity: Mexico, Canda, USA',
+		['mexico'], 'mexico_canada_graph', 300, {});
+	new LINE_CHART.line_chart("Brazil_Paraguay.csv", '[8] Search activity: Brazil vs Paraguay',
+		['brazil_paraguay'], 'brazil_paraguay_graph', 300, {});
+	new LINE_CHART.line_chart("US_Policy.csv", '[9] Ebola search activity and American Ebola policy decisions',
+		['us_policy'], 'us_policy_graph', 300, {tick_count: 8});
+	new LINE_CHART.line_chart("Australia.csv", '[10] Search activity: Australia vs USA',
+		['australia'], 'australia_graph', 300, {max_range: 100});
+	new LINE_CHART.line_chart("Cuba.csv", '[11] Search activity: Cuba vs USA',
+		['cuba'], 'cuba_graph', 300, {});
+	new LINE_CHART.line_chart("Nigeria.csv", '[12] Search activity: Nigeria vs USA',
+		['nigeria'], 'nigeria_graph', 300, {tick_count: 4});

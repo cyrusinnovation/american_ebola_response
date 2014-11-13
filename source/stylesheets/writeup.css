@@ -1,0 +1,146 @@
+.writeup {
+	margin-left: 10%;
+	margin-right: 10%;
+
+	font-family: serif;
+	font-size: 15px;
+}
+
+.large-line-graph {
+	margin-bottom: 10px;
+	min-width: 480px;
+	height: 300px;
+}
+
+.small-line-graph {
+	width: 480px;
+	height: 300px;
+}
+
+.spacing {
+	margin: 25px 0px;
+}
+
+.separator {
+	border: 1px dashed;
+	width: 100%;
+}
+
+.writeup-section {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
+	min-width: 600px;
+	position: relative;
+	clear: both;
+}
+
+.section-content {
+	font-size: 17px;
+	font-weight: 400;
+	margin: 0% 1%;
+}
+
+.section-title {
+	font-weight: bold;
+	margin: 0px 0px 0px 0px;
+	/*margin: 0px 10px;*/
+}
+
+.quotation-container {
+	border-radius: 3px;
+	border: 1px solid;
+	display: inline-block;
+	margin: 0px 1%;
+	vertical-align: top;
+}
+
+.quotation-contents {
+	margin: 0px;
+	padding: 5px 15px;
+	/*background: rgb(238,247,255);*/
+}
+
+.quotation-citation {
+	font-size: 13px;
+	padding: 7px 15px 5px 15px;
+	/*background: rgb(222,235,247);*/
+	background: rgb(198,219,239);
+	/*background: rgb(158,202,225);*/
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.two-thirds {
+	width: 63.5%;
+}
+
+.one-third {
+	width: 31.75%;
+}
+
+.one-half {
+	width: 47.6%;
+}
+
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+@media (max-width: 750px) {
+  .left {
+    float: none;
+    margin: 0 auto;
+  }
+  .right {
+    float: none;
+    margin: 0 auto;
+  }
+}
+/*http://www.codeitpretty.com/2012/05/you-cant-float-center.html*/
+.center {
+	margin: 0 auto;
+}
+
+.no-margin {
+	margin: 0px 0px;
+}
+
+.quotation-author {
+	
+}
+
+.quotation-title a {
+	font-weight: bold;
+	color: #000;
+}
+
+.quotation-source {
+	font-style: italic;
+	font-size: 14px;
+}
+
+.quotation-date {
+
+}
+
+.logo-container {
+	width: 49.5%;
+	display: inline-block;
+	min-width: 300px;
+/*	margin-top: -40px;
+	margin-bottom: -40px;
+*/}
+
+.image-with-margin {
+	display: block;
+	width: 50%;
+	margin: 0 auto;
+}
