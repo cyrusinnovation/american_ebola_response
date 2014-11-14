@@ -17,7 +17,7 @@ Event.events = {
 		],
 
 		canada: [
-			{date: '2014-08-09', description: 'A man in Canada is tested for Ebola'}
+			{date: '2014-08-09', description: 'A man in Canada is tested for Ebola'} // http://www.ctvnews.ca/health/doctors-expect-brampton-test-results-sunday-say-ebola-is-unlikely-1.1952714
 		],
 
 		taylor_swift: [
