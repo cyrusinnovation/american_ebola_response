@@ -33,6 +33,7 @@ function EbolaChart() {
 
 	this.pointer_offset_pixels = 4;
 	this.text_height_pixels = 10;
+	this.animation_duration_millis = 125;
 
 	this.projection_height_ratio = 1.53
 	this.projection = d3.geo.mercator()
@@ -270,7 +271,7 @@ function EbolaChart() {
 			.attr('transform', this.axis_position())
 			.call(this.current_axis);
 
-		this.update_tracker_totals(date_index, current_date, tracker_axis);
+		// this.update_tracker_totals(date_index, current_date, tracker_axis);
 	}
 
 	this.update_tracker_totals = function(date_index, current_date, tracker_axis) {
@@ -318,7 +319,7 @@ function EbolaChart() {
 	this.choropleth_map = function(date_index) {
 		var self = this;
 		this.svg.selectAll(".country").transition()
-			.duration(250)
+			.duration(this.animation_duration_millis)
 			.style("fill", function(d) { return self.color_for_country(d.id, date_index); })
 	}
 
@@ -468,7 +469,7 @@ function EbolaChart() {
 		this.set_date(current_date_index);
 		this.choropleth_map(current_date_index);
 		this.draw_labels(this.text_date_at(current_date_index));
-		this.update_headlines(current_date_index);
+		// this.update_headlines(current_date_index);
 		this.set_country_text(this.hover_country);
 	}
 
@@ -490,7 +491,7 @@ function EbolaChart() {
 			else {
 				self.increment_current_date(1);
 			}
-		}, 250)
+		}, this.animation_duration_millis)
 	}
 
 	this.update_headlines = function(current_date_index) {
@@ -639,7 +640,7 @@ function EbolaChart() {
 	    this.svg.selectAll(".country").each(function(d) { self.calculate_centroid(d); });
 	    this.draw_labels(this.text_date_at(Infograph.current_date_index));
 
-	    this.update_headlines(Infograph.current_date_index);
+	    // this.update_headlines(Infograph.current_date_index);
 	}
 
 	var queued_self = this;
