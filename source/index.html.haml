@@ -22,12 +22,12 @@
 				.btn-group
 					%button#play-button{class: 'btn btn-sm btn-default', style: 'padding: 15px 60px; background: rgba(255,255,255,0.4)'}
 						%i#play_pause_image{class: 'fa fa-play fa-4x'}
-			%div#legend
-				%div.legend-title Google search activity for the term “ebola”
-			%div.global_tracker
-				%div.tracker_date
+			%div.tracker_date
+			%div.ebola_tracker
 				%div.tracker_cases
 				%div.tracker_deaths
+			%div#legend
+				%div.legend-title Google search activity for the term “ebola”
 			%div.headlines
 			%div.tooltip
 				%div.tooltip-country
@@ -37,19 +37,29 @@
 	%div.writeup-section{style: 'clear: both'}
 		%div.spacing
 		%div.section-content{style: 'padding-top: 20px'}
-			%h3.section-title Canada
 			:markdown
-				On March 31, shortly after Ebola was first detected in West Africa, [Senegal closed its borders to neighboring Guinea](http://www.bbc.com/news/world-africa-26816438). And in a moment noted for its irony, Mexico and Belize [denied an American cruise ship permission to dock](http://www.washingtonpost.com/news/morning-mix/wp/2014/10/17/cruise-ship-carrying-texas-ebola-nurse-refused-entry-in-belize/) for fear of Ebola.
-		%div.section-content{style: 'clear: both'}
-		#canada_graph.large-line-graph
-		%div.section-content
-			%h4.section-title Spain
-			:markdown
-				As of this writing, Spain is the only other non-African nation to report an Ebola case contracted within its borders. On October 6, a [Spanish nurse contracted the disease](http://www.ibtimes.com/ebola-virus-spreads-spain-nurse-first-ebola-case-outside-west-africa-1699974) from a man brought to Spain for hospitalization after becoming sick with Ebola in Sierra Leone.
+				Media criticisms, both foreign and domestic, of the American response to Ebola have ranged from calling it an “[epic, epidemic overreaction](http://www.cnn.com/2014/10/20/health/ebola-overreaction/)” to labelling it as “[disease-provoked hysteria](http://www.washingtonpost.com/blogs/worldviews/wp/2014/10/22/what-the-world-thinks-of-the-american-ebola-panic/)”. But these judgements are not reflected in the data about search activity when comparing America's response to those of other nations. The charts below illustrate this fallacy by contrasting several nations' Ebola search activity with the United States.
 
-				And on October 16, Spain had another Ebola scare when [several patients who later tested negative were hospitalized with potential Ebola symptoms](http://www.reuters.com/article/2014/10/16/health-ebola-spain-idUSL6N0SB42620141016). Figure **[4]** illustrates these events.
+				Many nations had more pronounced responses than the United States when Ebola emerged as a threat either within their borders or just nearby, whether the threat was real or imagined. Of the nations charted below, only those in West Africa, Spain, and the United States confirmed a case of Ebola within their borders.
+		%div.spacing
+		%div.section-content{style: 'padding-top: 20px'}
+			%h3.section-title Canada and Mexico
+		#mexico_canada_graph.large-line-graph
 		%div.section-content{style: 'clear: both'}
+			%h4.section-title Spain
 		#spain_graph.large-line-graph
+		%div.section-content{style: 'clear: both'}
+			%h3.section-title Chile
+		#chile_graph.large-line-graph
+		%div.section-content{style: 'clear: both'}
+			%h4.section-title Sweden
+		#sweden_graph.large-line-graph
+		%div.section-content{style: 'clear: both'}
+			%h4.section-title Brazil and Paraguay
+		#brazil_paraguay_graph.large-line-graph
+		%div.section-content{style: 'clear: both'}
+			%h4.section-title West Africa
+		#west_africa_graph.large-line-graph
 
 .writeup
 	%div.writeup-section{style: 'clear: both'}
@@ -57,6 +67,8 @@
 		%div.section-content
 			%h3.section-title Data and Methods
 			:markdown
+				See [this article](http://cyrusinnovation.github.io/ebola_search_analysis/) for a more detailed analysis of global search patterns.
+
 				Data about the spread of the ebola virus were gathered from the World Health Organization [Global Alert and Response](http://www.who.int/csr/don/archive/disease/ebola/en/) and [Situation Report](http://www.who.int/csr/disease/ebola/situation-reports/en/) listings. Ebola case and death numbers reported above are the combined confirmed, suspected, and probable numbers issued by the CDC.
 
 				Data about ebola searches were gathered using [Google Trends](http://www.google.com/trends/). All data were normalized against the United States, with the peak US search activity for the period under study fixed at a value of 100. For an explanation of the Google Trends data, visit the [about page](https://support.google.com/trends/answer/4355164?hl=en&rd=1). Search data prior to July 30th was obtained at a weekly sampling interval and interpolated. Search data on and after July 30th was sampled at a daily interval.
@@ -86,8 +98,16 @@
 = javascript_include_tag "jquery-2.1.1.min", "d3", "queue.v1.min", "topojson.v1.min", "events", "animation_controls", "ebola_chart", "line_chart"
 
 :javascript
-	new LINE_CHART.line_chart("Spain.csv", '[4] Search activity: Spain vs USA',
+	new LINE_CHART.line_chart("Mexico_Canada.csv", 'Search activity: Mexico, Canda, USA',
+		['us_infection', 'us_imported', 'canada', 'mexico'], 'mexico_canada_graph', 300, {resize: true});
+	new LINE_CHART.line_chart("Spain.csv", 'Search activity: Spain, USA',
 		['spain'], 'spain_graph', 300, {resize: true});
-	new LINE_CHART.line_chart("Canada.csv", 'Search activity: Canda vs USA',
-		['us_infection', 'us_imported', 'canada'], 'canada_graph', 300, {resize: true});
+	new LINE_CHART.line_chart("Chile.csv", 'Search activity: Chile, USA',
+		['chile'], 'chile_graph', 300, {resize: true});
+	new LINE_CHART.line_chart("Sweden.csv", 'Search activity: Sweden, USA',
+		['sweden'], 'sweden_graph', 300, {resize: true});
+	new LINE_CHART.line_chart("Brazil_Paraguay.csv", 'Search activity: Brazil, Paraguay, USA',
+		['brazil_paraguay'], 'brazil_paraguay_graph', 300, {resize: true});
+	new LINE_CHART.line_chart("West_Africa.csv", 'Search activity: West Africa vs USA',
+		[], 'west_africa_graph', 300, {resize: true});
 

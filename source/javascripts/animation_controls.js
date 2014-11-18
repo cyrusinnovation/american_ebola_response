@@ -84,9 +84,6 @@ function AnimationControls(ebola_chart_object)
 		var button = this.play_button;
 		var BtnW = button.outerWidth(true);
 		var BtnH = button.outerHeight(true);
-		console.log(button);
-		console.log(BtnW);
-		console.log(BtnH);
 		var LeftOff = (W / 2) - (BtnW / 2);
 		var TopOff = (H / 2) - (BtnH /2);
 		d3.select('#play-button').style('left', LeftOff + 'px');

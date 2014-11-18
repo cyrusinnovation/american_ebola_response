@@ -134,7 +134,7 @@ class EbolaDataParser
 
 	def parse_line_chart_data
 		@places_of_interest = [
-			{ title: 'Brazil_Paraguay', places: ['Brazil', 'Paraguay'] },
+			{ title: 'Brazil_Paraguay', places: ['Brazil', 'Paraguay', 'United States'] },
 			{ title: 'Chile',  places: ['Chile', 'United States'] },
 			{ title: 'Spain',  places: ['Spain', 'United States'] },
 			{ title: 'Panama',  places: ['Panama', 'United States'] },
