@@ -166,6 +166,8 @@ h2 {
 @media (max-width: 1200px) {
   .tracker_date {
     font-size: 1.6em;
+    margin-top: -2px;
+    margin-bottom: -10px;
   }
 
   .ebola_tracker {
@@ -176,6 +178,8 @@ h2 {
 @media (max-width: 1000px) {
   .tracker_date {
     font-size: 1.4em;
+    margin-top: 0px;
+    margin-bottom: -8px;
   }
 
   .ebola_tracker {
