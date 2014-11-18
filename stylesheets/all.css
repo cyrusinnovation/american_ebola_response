@@ -142,15 +142,25 @@ h2 {
 .tracker_date {
   font-size: 1.8em;
   font-weight: bold;
-  position: absolute;
-  width: 100%;
-  text-align: center;
+  margin-top: -5px;
+  margin-bottom: -14px;
+}
+
+.tracker_cases {
+  margin-top: -8px;
+  margin-bottom: -8px;
+}
+
+.tracker_deaths {
+  margin-top: -8px;
+  margin-bottom: -8px;
 }
 
 .ebola_tracker {
   font-size: 1.4em;
   position: absolute;
-  padding-left: 10px;
+  width: 100%;
+  text-align: center;
 }
 
 @media (max-width: 1200px) {
@@ -164,7 +174,7 @@ h2 {
 }
 
 @media (max-width: 1000px) {
-  .tracker_date .ebola_tracker {
+  .tracker_date {
     font-size: 1.4em;
   }
 
@@ -174,7 +184,7 @@ h2 {
 }
 
 @media (max-width: 800px) {
-  .tracker_date .ebola_tracker {
+  .tracker_date {
     font-size: 1.2em;
   }
 
@@ -184,7 +194,7 @@ h2 {
 }
 
 @media (max-width: 600px) {
-  .tracker_date .ebola_tracker {
+  .tracker_date {
     font-size: 1em;
   }
 

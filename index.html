@@ -42,8 +42,8 @@
 </button>
 </div>
 </div>
-<div class='tracker_date'></div>
 <div class='ebola_tracker'>
+<div class='tracker_date'></div>
 <div class='tracker_cases'></div>
 <div class='tracker_deaths'></div>
 </div>
@@ -62,9 +62,9 @@
 <div class='writeup-section' style='clear: both'>
 <div class='spacing'></div>
 <div class='section-content' style='padding-top: 20px'>
-<p>Media criticisms, both foreign and domestic, of the American response to Ebola have ranged from calling it an “<a href="http://www.cnn.com/2014/10/20/health/ebola-overreaction/">epic, epidemic overreaction</a>” to labelling it as “<a href="http://www.washingtonpost.com/blogs/worldviews/wp/2014/10/22/what-the-world-thinks-of-the-american-ebola-panic/">disease-provoked hysteria</a>”. But these judgements are not reflected in the data about search activity when comparing America's response to those of other nations. The charts below illustrate this fallacy by contrasting several nations' Ebola search activity with the United States.</p>
+<p>Media criticisms, both foreign and domestic, of the American response to Ebola ranged from calling it an “<a href="http://www.cnn.com/2014/10/20/health/ebola-overreaction/">epic, epidemic overreaction</a>” to labelling it as “<a href="http://www.washingtonpost.com/blogs/worldviews/wp/2014/10/22/what-the-world-thinks-of-the-american-ebola-panic/">disease-provoked hysteria</a>”. But these judgements are not reflected in the data about search activity when comparing America's response to those of other nations.</p>
 
-<p>Many nations had more pronounced responses than the United States when Ebola emerged as a threat either within their borders or just nearby, whether the threat was real or imagined. Of the nations charted below, only those in West Africa, Spain, and the United States confirmed a case of Ebola within their borders.</p>
+<p>Many nations had more pronounced responses than the United States when Ebola emerged as a threat either within their borders or nearby, whether the threat was real or imagined. The charts below contrast the Ebola search activity of several nations with the United States. Only the nations in West Africa, Spain, and the United States confirmed a case of Ebola within their borders.</p>
 </div>
 <div class='spacing'></div>
 <div class='section-content' style='padding-top: 20px'>
@@ -83,6 +83,10 @@
 <h4 class='section-title'>Sweden</h4>
 </div>
 <div class='large-line-graph' id='sweden_graph'></div>
+<div class='section-content' style='clear: both'>
+<h4 class='section-title'>Australia</h4>
+</div>
+<div class='large-line-graph' id='australia_graph'></div>
 <div class='section-content' style='clear: both'>
 <h4 class='section-title'>Brazil and Paraguay</h4>
 </div>
@@ -143,6 +147,8 @@
   	['chile'], 'chile_graph', 300, {resize: true});
   new LINE_CHART.line_chart("Sweden.csv", 'Search activity: Sweden, USA',
   	['sweden'], 'sweden_graph', 300, {resize: true});
+  new LINE_CHART.line_chart("Australia.csv", 'Search activity: Australia, USA',
+  	['australia'], 'australia_graph', 300, {max_range: 100, resize: true});		
   new LINE_CHART.line_chart("Brazil_Paraguay.csv", 'Search activity: Brazil, Paraguay, USA',
   	['brazil_paraguay'], 'brazil_paraguay_graph', 300, {resize: true});
   new LINE_CHART.line_chart("West_Africa.csv", 'Search activity: West Africa vs USA',
