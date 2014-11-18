@@ -140,7 +140,57 @@ h2 {
 }
 
 .tracker_date {
+  font-size: 1.8em;
   font-weight: bold;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+.ebola_tracker {
+  font-size: 1.4em;
+  position: absolute;
+  padding-left: 10px;
+}
+
+@media (max-width: 1200px) {
+  .tracker_date {
+    font-size: 1.6em;
+  }
+
+  .ebola_tracker {
+    font-size: 1.25em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .tracker_date .ebola_tracker {
+    font-size: 1.4em;
+  }
+
+  .ebola_tracker {
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 800px) {
+  .tracker_date .ebola_tracker {
+    font-size: 1.2em;
+  }
+
+  .ebola_tracker {
+    font-size: 1em;
+  }  
+}
+
+@media (max-width: 600px) {
+  .tracker_date .ebola_tracker {
+    font-size: 1em;
+  }
+
+  .ebola_tracker {
+    font-size: 0.9em;
+  }  
 }
 
 div.tooltip {   
@@ -157,10 +207,4 @@ div.tooltip {
 
 .tooltip-country {
   font-weight: normal;
-}
-
-iframe.line_graph {
-  border: none;
-  width: 600px;
-  height: 300px;
 }
